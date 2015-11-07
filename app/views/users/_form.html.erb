@@ -1,0 +1,59 @@
+<%= form_for(@user, :validate => true, :multipart => true) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+<!-- pluralize函数根据数量为单词添加复数形式-->
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :email, "邮件：" %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div> 
+
+  <div class="field">
+    性别：<%= f.select :user_type, "<option value=1>男</option><option value=0>女</option>".html_safe %>
+  </div>
+
+  <div class="field">
+    <%= f.label :age, "年龄：" %>
+    <%= f.text_field :age, :value=> @user.age %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name, "真实姓名：" %>
+    <%= f.text_field :name, :value=> @user.name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number, "手机号：" %>
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="field">
+    用户类型：<%= f.select :user_type, "<option value=2>志愿者</option><option value=1>管理员</option>".html_safe %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :avatar %><br />
+    <%= f.file_field :avatar %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

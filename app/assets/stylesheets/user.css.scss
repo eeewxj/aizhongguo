@@ -1,0 +1,103 @@
+// Place all the styles related to the user controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+////#通用样式，以后放在style.css中，style.css中的样式分离到各个页面或者控制器的css中
+//圆角
+@mixin rounded($radius: 10px){
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+}
+//输入框周围蓝色阴影
+input
+{
+  &:focus
+  {
+    box-shadow: 0 0 20px #aaeeff;
+    -moz-box-shadow: 0 0 20px #aaeeff;
+    -webkit-box-shadow:inset 0 0 20px #aaeeff;
+  }
+}
+//数据库文本展示格式
+pre{white-space: pre-wrap;}
+//分享到
+div#ckepop{padding:10px 0px;}
+
+//提示信息
+p.error,p.success,p.alert,p.notice
+{
+  padding-top:10px;
+  color:black;
+  line-height:30px;
+  font:17px bold;
+  text-align:center;
+  vertical-align:middle;
+
+  position: absolute;
+  height:30px;
+  width:30%;
+  margin-top:50px;
+  margin-left:30%;
+  @include rounded(6px);
+
+  cursor:pointer;
+  z-index: 10;
+  *filter:alpha(opacity=50);
+  box-shadow: 0 1px 5px #666666;
+}
+p.error,p.alert 
+{
+  border:1px solid red;
+  background-color:#F2DCE0;
+}
+p.notice,p.success 
+{
+  border:1px solid green;
+  background-color: #ECF9FF;
+}
+
+//当前页面的链接
+a#current
+{
+  color: white;
+  background: #65944A; 
+}
+
+////#用户首页
+//grid1为header
+#grid1{clear:both;}
+//grid2为indexbanner
+#grid2{clear:both;}
+//grid3为footer
+#grid3{clear:both;}
+
+////#用户注册页面
+div.message_of_user_register
+{
+  p.error,p.success,p.alert,p.notice{margin-left:33%;}
+}
+form.new_user,form.edit_user
+{
+  div.field
+  {
+    height:100px;
+    label,input
+    {
+      display:block;
+      clear:left;
+    }
+  }
+  div.field_with_errors
+  {
+    color:#A73E1F;
+    label.message{float:left;}
+  }
+}
+
+
+
+
+
+
+
+

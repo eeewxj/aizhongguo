@@ -1,0 +1,8 @@
+<div style="float: right; margin: 20px; right: 50px; position: relative;">
+<p>
+  <span><%#= link_to "我的收藏", user_collections_path(current_user.id) %> </span>
+  <span><%#= link_to "我的发布", "/articles/my_posted" %> </span>
+  <span> <%= current_user.name %> </span>
+  <span> <a href="/user/logout">注销</a> </span>
+</p>
+</div>

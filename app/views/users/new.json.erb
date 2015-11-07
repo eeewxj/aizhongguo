@@ -1,0 +1,8 @@
+<% json =
+  Jbuilder.encode do |json| 
+    json.array!(School.all) do |json, school|
+      json.(school, :id, :name)
+    end
+  end  
+%>
+<%= json.to_s.html_safe %>

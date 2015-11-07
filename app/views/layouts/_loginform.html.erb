@@ -1,0 +1,26 @@
+<div id="login">
+  <%= form_tag "/user/login", :method => :post do %>
+    <table cellspacing="0" cellpadding="0">
+      <tr>
+        <td><label>用户名：</label></td>
+        <td>
+           <%= text_field_tag "name",nil, :style => 'width:150px;font-size:12px;', :placeholder => '输入用户名' %>
+        </td>
+        <td>
+           <%= check_box_tag 'rmbUser', true  %>
+           <%= label_tag 'rmbUser', "记住我" %>
+        </td>
+        <td>&nbsp;<a href="/users/new">注册</a></td>
+      </tr>
+      <tr>
+        <td style="text-align:right"><label>密码：</label></td>
+        <td> 
+          <%= password_field_tag "password", nil, :style => 'width:150px;font-size:12px;', :placeholder => '输入密码' %>
+        </td>
+        <td>
+           <%= submit_tag '登录', :style => "font-size: 12px;", :class => :button %>
+        </td>               
+      </tr>
+    </table>
+  <% end %>
+</div>	

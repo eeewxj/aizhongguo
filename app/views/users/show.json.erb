@@ -1,0 +1,22 @@
+<% json =
+  Jbuilder.encode do |json| 
+    if current_user.admin? || current_user.id == @user.id   
+      json.(@user,:id,:name,:email,:usertype,:status,:phone_number,:last_logintime,:created_at,:updated_at)
+      if @user.usertype != 1
+        json.personal_user_info(@user.personal_user_info, :sex) unless @user.personal_user_info.nil?
+      else
+        json.group_user_info(@user.group_user_info, :contactor, :contactor_position, :contactor_mobile)
+      end
+    else
+      json.(@user,:id,:name,:usertype,:created_at)
+      json.followers_count @user.followers.count
+    end
+    json.thumb(@user.avatar.url(:thumb))    
+    json.schools do |json|
+      json.array! @user.schools do |json, school|
+        json.(school, :id, :name)
+      end
+    end  
+  end  
+%>
+<%= json.to_s.html_safe %>

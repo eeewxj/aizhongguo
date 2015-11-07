@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aizhongguo</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% unless flash.keys[0].blank? %>
+  <div class=message_of_<%= params[:controller]+'_'+params[:action] %>>
+    <p class="<%= flash.keys[0] %>"><%= flash[flash.keys[0]] %></p>
+  </div>
+<% end %>
+<%= render "layouts/header"  %>
+<%= yield %>
+</body>
+</html>

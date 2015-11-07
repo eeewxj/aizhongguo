@@ -1,0 +1,8 @@
+<% json =
+  Jbuilder.encode do |json| 
+    json.array!(@users) do |json, user|
+      json.(user, :name)
+    end
+  end  
+%>
+<%= json.to_s.html_safe %>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @resident.name %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @resident.gender %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @resident.birthday %>
+</p>
+
+<p>
+  <strong>Home address:</strong>
+  <%= @resident.home_address %>
+</p>
+
+<p>
+  <strong>Condition:</strong>
+  <%= @resident.condition %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @resident.phone_number %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @resident.contact %>
+</p>
+
+<p>
+  <strong>Contact phone number:</strong>
+  <%= @resident.contact_phone_number %>
+</p>
+
+<%= link_to 'Edit', edit_resident_path(@resident) %> |
+<%= link_to 'Back', residents_path %>
