@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  before_action :validate_director_login, only: [:new]
+  before_action :validate_set_rights, only: [:edit, :create, :update, :destroy]
   # GET /projects
   # GET /projects.json
   def index
@@ -77,4 +78,23 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :nursing_home_id, :description, :start_at, :end_at, :staff_number, :contact_id)
     end
+
+    def validate_set_rights
+      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id.to_s==(@project.nil?? params[:project][:nursing_home_id] : @project.nursing_home_id.to_s)) || current_user.admin?))
+          respond_to do |format|
+            format.html do
+              if request.xhr?
+                flash.now[:error]="抱歉，您权限不够！"
+                render :text => "error_message_return:#{flash.now[:error]}"
+              else
+                flash[:error]="抱歉，您权限不够！"
+                #binding.pry
+                redirect_back_or_default
+              end
+            end
+           format.json {render :text => ({:error=>flash[:error]}).to_json}
+         end
+       end
+    end
+
 end

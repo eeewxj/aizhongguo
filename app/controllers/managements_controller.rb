@@ -1,6 +1,6 @@
 class ManagementsController < ApplicationController
   before_action :set_management, only: [:show, :edit, :update, :destroy]
-
+  before_action :validate_admin_login
   # GET /managements
   # GET /managements.json
   def index

@@ -80,4 +80,7 @@ zh:
       hour:   "时"
       minute: "分"
       second: "秒"
+  gender:
+    male: "男"
+    female: "女"
 

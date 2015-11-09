@@ -14,7 +14,7 @@ class UserController < ApplicationController
       session[:current_user_id]=@user.id
       flash[:success] = "登录成功"
       respond_to do |format|
-        format.html {redirect_to :back}
+        format.html {redirect_back_or_default}
         format.json {render 'user/index'}
       end
     else

@@ -1,6 +1,8 @@
 class ResidentsController < ApplicationController
   before_action :set_resident, only: [:show, :edit, :update, :destroy]
-
+  before_action :validate_user_login
+  before_action :validate_director_login, only: [:new]
+  before_action :validate_set_rights, only: [:create, :destroy]
   # GET /residents
   # GET /residents.json
   def index
@@ -81,4 +83,22 @@ class ResidentsController < ApplicationController
     def resident_params
       params.require(:resident).permit(:name, :gender, :birthday, :condition, :phone_number, :contact, :contact_phone_number, :room_id)
     end
+
+    def validate_set_rights
+      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id.to_s==(@resident.nil?? Room.find(params[:resident][:room_id]).nursing_home_id.to_s : @room.nursing_home_id.to_s)) || current_user.admin?))
+          respond_to do |format|
+            format.html do
+              if request.xhr?
+                flash.now[:error]="抱歉，您权限不够！"
+                render :text => "error_message_return:#{flash.now[:error]}"
+              else
+                flash[:error]="抱歉，您权限不够！"
+                redirect_back_or_default
+              end
+            end
+           format.json {render :text => ({:error=>flash[:error]}).to_json}
+         end
+       end
+    end
+
 end

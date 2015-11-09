@@ -1,6 +1,7 @@
 class NursingHomesController < ApplicationController
   before_action :set_nursing_home, only: [:show, :edit, :update, :destroy]
-
+  before_action :validate_set_rights, only: [:edit, :update]
+  before_action :validate_admin_login, only: [:new, :create, :destroy]
   # GET /nursing_homes
   # GET /nursing_homes.json
   def index
@@ -71,4 +72,22 @@ class NursingHomesController < ApplicationController
     def nursing_home_params
       params.require(:nursing_home).permit(:name, :address, :contact, :phone_number, :description, :website)
     end
+
+    def validate_set_rights
+      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id.to_s==params[:id]) || current_user.admin?))
+          respond_to do |format|
+            format.html do
+              if request.xhr?
+                flash.now[:error]="抱歉，您权限不够！"
+                render :text => "error_message_return:#{flash.now[:error]}"
+              else
+                flash[:error]="抱歉，您权限不够！"
+                redirect_back_or_default
+              end
+            end
+           format.json {render :text => ({:error=>flash[:error]}).to_json}
+         end
+       end
+    end
+
 end

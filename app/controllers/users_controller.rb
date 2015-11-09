@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-before_action :validate_admin_login, only: [:settype]
+before_action :validate_user_login, only: [:show, :edit, :update]
+before_action :validate_admin_login, only: [:settype, :destroy]
 before_action :validate_set_rights, only: [:show, :edit, :update]
   def index
     @users = User.where('user_type>?',User::TYPE_ADMIN)
@@ -134,11 +135,17 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
     end
 
     def validate_set_rights
-       validate_user_login
-       unless (current_user.id.to_s==params[:id] || current_user.user_type<User.find(params[:id]).user_type)
-         flash.now[:error]="抱歉，您权限不够！"
-         respond_to do |format|
-           format.html {render :text => "error_message_return:#{flash.now[:error]}"}
+      unless (!current_user.nil? && (current_user.id.to_s==params[:id] || current_user.user_type<User.find(params[:id]).user_type))
+          respond_to do |format|
+            format.html do
+              if request.xhr?
+                flash.now[:error]="抱歉，您权限不够！"
+                render :text => "error_message_return:#{flash.now[:error]}"
+              else
+                flash[:error]="抱歉，您权限不够！"
+                redirect_back_or_default
+              end
+            end
            format.json {render :text => ({:error=>flash[:error]}).to_json}
          end
        end

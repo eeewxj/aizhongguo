@@ -19,13 +19,13 @@
     <% @residents.each do |resident| %>
       <tr>
         <td><%= resident.name %></td>
-        <td><%= resident.gender %></td>
+        <td><%= get_gender(resident.gender) %></td>
         <td><%= resident.birthday %></td>
         <td><%= resident.condition %></td>
         <td><%= resident.phone_number %></td>
         <td><%= resident.contact %></td>
         <td><%= resident.contact_phone_number %></td>
-        <td><%= resident.room_id %></td>
+        <td><%= resident.room.room_number %></td>
         <td><%= link_to 'Show', resident %></td>
         <td><%= link_to 'Edit', edit_resident_path(resident) %></td>
         <td><%= link_to 'Destroy', resident, method: :delete, data: { confirm: 'Are you sure?' } %></td>

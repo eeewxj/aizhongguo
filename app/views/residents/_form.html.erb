@@ -17,11 +17,12 @@
   </div>
   <div class="field">
     <%= f.label :gender %><br>
-    <%= f.check_box :gender %>
+    <%= f.select :gender, get_genders_as_options %>
+
   </div>
   <div class="field">
     <%= f.label :birthday %><br>
-    <%= f.date_select :birthday %>
+    <%= f.date_select :birthday, start_year: Date.today.year-120, end_year: Date.today.year-45 %>
   </div>
   <div class="field">
     <%= f.label :condition %><br>
@@ -39,10 +40,12 @@
     <%= f.label :contact_phone_number %><br>
     <%= f.text_field :contact_phone_number %>
   </div>
+
   <div class="field">
-    <%= f.label :room_id %><br>
-    <%= f.number_field :room_id %>
+    <%= f.label :room_id, "选择房间号：" %><br />
+    <%= f.select :room_id, get_all_rooms_as_options(current_user) %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

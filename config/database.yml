@@ -50,5 +50,3 @@ test:
 production:
   <<: *default
   database: aizhongguo_production
-  username: aizhongguo
-  password: <%= ENV['AIZHONGGUO_DATABASE_PASSWORD'] %>

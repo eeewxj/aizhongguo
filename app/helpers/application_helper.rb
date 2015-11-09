@@ -40,4 +40,26 @@ module ApplicationHelper
     options.html_safe
   end
 
+  def get_all_rooms_as_options(director)
+    @rooms=director.nursing_home.rooms
+    options=''
+    @rooms.each do |room| 
+      options=options + "<option value=#{room.id}>#{room.room_number}</option>"
+    end
+    options.html_safe
+  end
+
+  def get_genders_as_options
+    "<option value=false>男</option><option value=true>女</option>".html_safe
+  end
+
+  def get_gender(gender)
+    case gender
+      when false
+        return "男"
+      else
+        return "女"
+    end
+  end
+
 end

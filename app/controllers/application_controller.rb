@@ -5,47 +5,73 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def redirect_back_or_default(default = root_path, options = {})
+    #binding.pry
+    redirect_to (request.referer.present? ? :back : default), options
+  end
+
   def validate_user_login
     if current_user.nil?
       flash[:error]="抱歉，您尚未登录。"
       respond_to do |format|
-        format.html {redirect_to :back}
+        format.html {redirect_back_or_default}
         format.json {render :text => ({:error=>flash[:error]}).to_json}
       end
     end
   end
 
   def validate_admin_login
-    validate_user_login
-    unless current_user.admin?
-      flash.now[:error]="抱歉，您不是管理员！"
+    unless !current_user.nil? && current_user.admin?
       respond_to do |format|
-        format.html {render :text => "error_message_return:#{flash.now[:error]}"}
+        format.html do
+          if request.xhr?
+            flash.now[:error]="抱歉，您不是管理员！"
+            render :text => "error_message_return:#{flash.now[:error]}"
+          else
+            flash[:error]="抱歉，您不是管理员！"
+            redirect_back_or_default
+          end
+        end
         format.json {render :text => ({:error=>flash[:error]}).to_json}
       end
     end
   end
 
   def validate_director_login
-    validate_user_login
-    unless current_user.director?
-      flash.now[:error]="抱歉，您不是组长！"
+    unless !current_user.nil? && current_user.director?
       respond_to do |format|
-        format.html {render :text => "error_message_return:#{flash.now[:error]}"}
+        format.html do
+          if request.xhr?
+            flash.now[:error]="抱歉，您不是组长！"
+            render :text => "error_message_return:#{flash.now[:error]}"
+          else
+            flash[:error]="抱歉，您不是组长！"
+            redirect_back_or_default
+          end
+        end
         format.json {render :text => ({:error=>flash[:error]}).to_json}
       end
     end
   end
 
   def validate_volunteer_login
-    unless current_user.volunteer?
-      flash.now[:error]="抱歉，您不是普通志愿者！"
+    unless !current_user.nil? && current_user.volunteer?
       respond_to do |format|
-        format.html {render :text => "error_message_return:#{flash.now[:error]}"}
+        format.html do
+          if request.xhr?
+            flash.now[:error]="抱歉，您不是普通志愿者！"
+            render :text => "error_message_return:#{flash.now[:error]}"
+          else
+            flash[:error]="抱歉，您不是管理员！"
+            redirect_back_or_default
+          end
+        end
         format.json {render :text => ({:error=>flash[:error]}).to_json}
       end
     end
   end
+
+
   
   private
  
