@@ -17,9 +17,9 @@
         <td><%= application.project.name %></td>
         <td><%= application.volunteer.name %></td>
         <% if application.verified == false %>
-          <td><%= link_to '未通过，点击审核通过', "/applications/setverified/#{application.id}", :remote => true, :class => "remote-setverified" %></td>
+          <td><%= link_to '未通过，点击审核通过', "/applications/setverified/#{application.id}", :remote => true, :class => "remote-setverified-#{application.id}" %></td>
         <% else %>
-          <td><%= link_to '已通过，点击取消通过', "/applications/setverified/#{application.id}", :remote => true, :class => "remote-setverified" %></td>
+          <td><%= link_to '已通过，点击取消通过', "/applications/setverified/#{application.id}", :remote => true, :class => "remote-setverified-#{application.id}" %></td>
         <% end %>
 
         <% if application.attended == false %>

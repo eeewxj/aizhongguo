@@ -26,19 +26,10 @@ jQuery ->
   $(document).ajaxComplete((event,xhr,settings)->
     arr = settings.url.split('/')
     if xhr.responseText.match("error_message_return:") == null
-      $("a.remote-"+arr[arr.length-2]+",form[data-remote='true']").replaceWith(xhr.responseText)
+      $("a.remote-"+arr[arr.length-2]+"-"+arr[arr.length-1]+",form[data-remote='true']").replaceWith(xhr.responseText)
       $("a.remote_all-"+arr[arr.length-2]).parent().replaceWith(xhr.responseText)
     else
       alert((xhr.responseText).substr(21)))
-
-#ajax返回结果替代原来的块及其父块
-  $("a.remote_all").on('ajax:complete', (status,xhr)->  
-    if xhr.responseText.match("error_message_return:") == null
-      $(this).parent().replaceWith(xhr.responseText)
-    else
-      alert(xhr.responseText).substr(21))
-
-
 
 
 #自动填写表单

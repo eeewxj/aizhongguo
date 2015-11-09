@@ -2,7 +2,9 @@
 
 <table>
   <tr>
-    <th>Name</th>
+    <th>姓名</th>
+    <th>头像</th>
+    <th>设置</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,6 +14,11 @@
   <tr>
     <td><%= user.name %></td>
     <td><%= image_tag user.avatar.url(:thumb) %></td>
+    <% if user.user_type == User::VOLUNTEER %>
+      <td><%= link_to '志愿者，点击设为组长', "/users/settype/#{user.id}", :remote => true, :class => "remote-settype-#{user.id}" %></td>
+    <% else %>
+      <td><%= link_to '组长，点击设为志愿者', "/users/settype/#{user.id}", :remote => true, :class => "remote-settype-#{user.id}" %></td>
+    <% end %>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>

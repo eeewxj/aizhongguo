@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
+before_action :validate_admin_login, only: [:settype]
+before_action :validate_set_rights, only: [:show, :edit, :update]
   def index
-    @users = User.all
+    @users = User.where('user_type>?',User::TYPE_ADMIN)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -99,6 +101,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def settype
+    @user = User.find(params[:id])
+    if @user.update_attributes(:user_type => 3-@user.user_type)
+      flash.now[:success] = 'user user_type set successfully!'
+      if @user.user_type == User::VOLUNTEER
+        @user.clean_management
+        render :text => "<a href=\"/users/settype/#{@user.id}\" data-remote=\"true\" class = \"remote-settype-#{@user.id}\">志愿者，点击设为组长</a>"
+      else
+        render :text => "<a href=\"/users/settype/#{@user.id}\" data-remote=\"true\" class = \"remote-settype-#{@user.id}\">组长，点击设为志愿者</a>"
+      end
+    else  
+      flash.now[:error] = 'fail to change user_type'
+      render :text => "error_message_return:#{flash.now[:error]}"
+    end
+  end
+
+
   private
     def create_user_params
       params.require(:user).permit(
@@ -113,4 +132,16 @@ class UsersController < ApplicationController
         :work_unit, :crop_x, :crop_y, :crop_w, :crop_h
       )
     end
+
+    def validate_set_rights
+       validate_user_login
+       unless (current_user.id.to_s==params[:id] || current_user.user_type<User.find(params[:id]).user_type)
+         flash.now[:error]="抱歉，您权限不够！"
+         respond_to do |format|
+           format.html {render :text => "error_message_return:#{flash.now[:error]}"}
+           format.json {render :text => ({:error=>flash[:error]}).to_json}
+         end
+       end
+    end
+
 end

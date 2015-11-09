@@ -1,6 +1,8 @@
 module ApplicationHelper
 
-
+  User::ADMIN = 0
+  User::DIRECTOR = 1
+  User::VOLUNTEER = 2
   def link_to_current(name, options = {}, html_options = {}, &block)
       link_to(name, options, html_options.merge((current_page?(options))? {:id => 'current'}:{}), &block)
   end
@@ -21,7 +23,7 @@ module ApplicationHelper
 
 
   def get_all_directors_as_options
-    @directors=User.where("user_type = ?", 1)
+    @directors=User.where("user_type = ?", User::DIRECTOR)
     options=''
     @directors.each do |director| 
       options=options + "<option value=#{director.id}>#{director.name}</option>"

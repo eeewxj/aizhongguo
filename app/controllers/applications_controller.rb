@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
   before_action :set_application, only: [:show, :edit, :update, :destroy]
-
+  before_filter :validate_user_login
   # GET /applications
   # GET /applications.json
   def index
@@ -73,9 +73,9 @@ class ApplicationsController < ApplicationController
     if @application.update_attributes(:verified => !@application.verified)
       flash.now[:success] = 'application verified set successfully!'
       if @application.verified
-        render :text => "<a href=\"/applications/setverified/#{@application.id}\" data-remote=\"true\" class = \"remote-setverified\">已通过，点击取消通过</a>"
+        render :text => "<a href=\"/applications/setverified/#{@application.id}\" data-remote=\"true\" class = \"remote-setverified-#{@application.id}\">已通过，点击取消通过</a>"
       else
-        render :text => "<a href=\"/applications/setverified/#{@application.id}\" data-remote=\"true\" class = \"remote-setverified\">未通过，点击审核通过</a>"
+        render :text => "<a href=\"/applications/setverified/#{@application.id}\" data-remote=\"true\" class = \"remote-setverified-#{@application.id}\">未通过，点击审核通过</a>"
       end
     else  
       flash.now[:error] = 'fail to verify'
@@ -89,9 +89,9 @@ class ApplicationsController < ApplicationController
     if @application.update_attributes(:attended => !@application.attended)
       flash.now[:success] = 'application attended set successfully!'
       if @application.attended
-        render :text => "<a href=\"/applications/setattended/#{@application.id}\" data-remote=\"true\" class = \"remote-setattended\">已签到，点击取消签到</a>"
+        render :text => "<a href=\"/applications/setattended/#{@application.id}\" data-remote=\"true\" class = \"remote-setattended-#{@application.id}\">已签到，点击取消签到</a>"
       else
-        render :text => "<a href=\"/applications/setattended/#{@application.id}\" data-remote=\"true\" class = \"remote-setattended\">未签到，点击完成签到</a>"
+        render :text => "<a href=\"/applications/setattended/#{@application.id}\" data-remote=\"true\" class = \"remote-setattended-#{@application.id}\">未签到，点击完成签到</a>"
       end
     else  
       flash.now[:error] = 'fail to change attended'

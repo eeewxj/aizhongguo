@@ -15,6 +15,38 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def validate_admin_login
+    validate_user_login
+    unless current_user.admin?
+      flash.now[:error]="抱歉，您不是管理员！"
+      respond_to do |format|
+        format.html {render :text => "error_message_return:#{flash.now[:error]}"}
+        format.json {render :text => ({:error=>flash[:error]}).to_json}
+      end
+    end
+  end
+
+  def validate_director_login
+    validate_user_login
+    unless current_user.director?
+      flash.now[:error]="抱歉，您不是组长！"
+      respond_to do |format|
+        format.html {render :text => "error_message_return:#{flash.now[:error]}"}
+        format.json {render :text => ({:error=>flash[:error]}).to_json}
+      end
+    end
+  end
+
+  def validate_volunteer_login
+    unless current_user.volunteer?
+      flash.now[:error]="抱歉，您不是普通志愿者！"
+      respond_to do |format|
+        format.html {render :text => "error_message_return:#{flash.now[:error]}"}
+        format.json {render :text => ({:error=>flash[:error]}).to_json}
+      end
+    end
+  end
+  
   private
  
   # Finds the User with the ID stored in the session with the key

@@ -78,6 +78,7 @@ Rails.application.routes.draw do
 
   get 'applications/setverified/:id' => 'applications#setverified'
   get 'applications/setattended/:id' => 'applications#setattended'
+  get 'users/settype/:id' => 'users#settype'
 
   post '/user/login' => 'user#login'
   get '/user/logout' => 'user#logout'

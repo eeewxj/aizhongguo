@@ -1,4 +1,18 @@
 class User < ActiveRecord::Base
+##常量定义##
+#定义用户类型
+  TYPE_ADMIN = 0
+  TYPE_DIRECTOR = 1
+  TYPE_VOLUNTEER = 2
+#定义用户头像的小图和中图最大宽高
+  AVATAR_SW = 100
+  AVATAR_SH = 100
+  AVATAR_NW = 300
+  AVATAR_NH = 300
+##可用参数##
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
+##模型关系##
 #for the admin user_type==0
 
 #for directors user_type==1
@@ -11,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :absent_applications, -> {where verified: true, attended: false}, class_name: "application"
   has_many :absent_projects, through: :absent_applications, source: :project
 
+##数据验证##
   #binding.pry
   validates :email, :presence => { :message => '亲，邮箱可不能为空' },
             :uniqueness =>{:message => "亲，这个邮箱已经注册过了" },
@@ -24,12 +39,7 @@ class User < ActiveRecord::Base
 
 
 
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-#定义用户头像的小图和中图最大宽高
-  AVATAR_SW = 100
-  AVATAR_SH = 100
-  AVATAR_NW = 300
-  AVATAR_NH = 300
+
   has_attached_file :avatar,
     :default_url => "/images/default_avatar.png", 
     :hash_secret => "efb40e6f2783c6d6641db8f1accdce15", 
@@ -40,6 +50,7 @@ class User < ActiveRecord::Base
     :content_type => { :content_type => /\Aimage\/.*\Z/ },
     :size => { :in => 0..4096.kilobytes }
 
+##公共方法##
 
 #是否有要求的裁剪参数  
   def cropping?
@@ -60,7 +71,20 @@ class User < ActiveRecord::Base
 
 #是否管理员
   def admin?
-    usertype==0
+    user_type==TYPE_ADMIN
+  end
+#是否组长
+  def director?
+    user_type==TYPE_DIRECTOR
+  end
+#是否志愿者
+  def volunteer?
+    user_type==TYPE_VOLUNTEER
+  end
+
+#设置为志愿者后清理管理关系
+  def clean_management
+    Management.find_by_user_id(id).destroy
   end
 
 end
