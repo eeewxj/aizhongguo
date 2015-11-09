@@ -11,7 +11,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107054321) do
+ActiveRecord::Schema.define(version: 20151108085001) do
+
+  create_table "applications", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "verified",   default: false
+    t.boolean  "attended",   default: false
+  end
+
+  create_table "managements", force: true do |t|
+    t.integer  "nursing_home_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "nursing_homes", force: true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "contact"
+    t.string   "phone_number"
+    t.text     "description"
+    t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", force: true do |t|
+    t.string   "name"
+    t.integer  "nursing_home_id"
+    t.text     "description"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer  "staff_number"
+    t.integer  "contact_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "residents", force: true do |t|
+    t.string   "name"
+    t.boolean  "gender"
+    t.date     "birthday"
+    t.text     "condition"
+    t.string   "phone_number"
+    t.string   "contact"
+    t.string   "contact_phone_number"
+    t.integer  "room_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rooms", force: true do |t|
+    t.string   "room_number"
+    t.text     "description"
+    t.integer  "nursing_home_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",               default: "", null: false

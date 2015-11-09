@@ -34,14 +34,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(create_user_params)
+    #binding.pry
     if @user.save
-      flash[:notice] = 'User was successfully created.'
+      flash[:success] = 'User was successfully created.'
       reset_session
       session[:current_user_id]=@user.id
       respond_to do |format|
         format.html {
           if params[:user][:avatar].blank?
-            redirect_to @user
+            redirect_to user_url(@user)
           else
             render :action => 'cropping'
           end
@@ -49,9 +50,10 @@ class UsersController < ApplicationController
         format.json {render '/user/index'}
       end
     else
+      flash[:error] = 'Fail to create user!'
       @user = User.new
       respond_to do |format|
-        format.html { render '/user/new'}
+        format.html { render '/users/new'}
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -100,14 +102,14 @@ class UsersController < ApplicationController
   private
     def create_user_params
       params.require(:user).permit(
-        :email, :password, :name, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address, 
+        :email, :password, :password_confirmation, :name, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address, 
         :work_unit, :crop_x, :crop_y, :crop_w, :crop_h
       )
     end
 
     def update_user_params
       params.require(:user).permit(
-        :email, :password, :name, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address, 
+        :email, :password, :password_confirmation, :name, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address, 
         :work_unit, :crop_x, :crop_y, :crop_w, :crop_h
       )
     end

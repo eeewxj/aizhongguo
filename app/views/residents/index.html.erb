@@ -6,11 +6,11 @@
       <th>Name</th>
       <th>Gender</th>
       <th>Birthday</th>
-      <th>Home address</th>
       <th>Condition</th>
       <th>Phone number</th>
       <th>Contact</th>
       <th>Contact phone number</th>
+      <th>Room</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,11 +21,11 @@
         <td><%= resident.name %></td>
         <td><%= resident.gender %></td>
         <td><%= resident.birthday %></td>
-        <td><%= resident.home_address %></td>
         <td><%= resident.condition %></td>
         <td><%= resident.phone_number %></td>
         <td><%= resident.contact %></td>
         <td><%= resident.contact_phone_number %></td>
+        <td><%= resident.room_id %></td>
         <td><%= link_to 'Show', resident %></td>
         <td><%= link_to 'Edit', edit_resident_path(resident) %></td>
         <td><%= link_to 'Destroy', resident, method: :delete, data: { confirm: 'Are you sure?' } %></td>

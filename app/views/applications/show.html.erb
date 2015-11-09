@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @application.project.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @application.volunteer.name %>
+</p>
+
+<p>
+  <strong>Verified:</strong>
+  <%= @application.verified %>
+</p>
+
+<p>
+  <strong>Attended:</strong>
+  <%= @application.attended %>
+</p>
+
+<%= link_to 'Edit', edit_application_path(@application) %> |
+<%= link_to 'Back', applications_path %>

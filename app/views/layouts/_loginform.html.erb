@@ -2,9 +2,9 @@
   <%= form_tag "/user/login", :method => :post do %>
     <table cellspacing="0" cellpadding="0">
       <tr>
-        <td><label>用户名：</label></td>
+        <td><label>邮箱：</label></td>
         <td>
-           <%= text_field_tag "name",nil, :style => 'width:150px;font-size:12px;', :placeholder => '输入用户名' %>
+           <%= text_field_tag "email",nil, :style => 'width:150px;font-size:12px;', :placeholder => '输入邮箱' %>
         </td>
         <td>
            <%= check_box_tag 'rmbUser', true  %>

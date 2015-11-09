@@ -1,0 +1,43 @@
+<h1>Listing applications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>活动名称</th>
+      <th>申请人</th>
+      <th>是否通过</th>
+      <th>是否参加</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @applications.each do |application| %>
+      <tr>
+        <td><%= application.project.name %></td>
+        <td><%= application.volunteer.name %></td>
+        <% if application.verified == false %>
+          <td><%= link_to '未通过，点击审核通过', "/applications/setverified/#{application.id}", :remote => true, :class => "remote-setverified" %></td>
+        <% else %>
+          <td><%= link_to '已通过，点击取消通过', "/applications/setverified/#{application.id}", :remote => true, :class => "remote-setverified" %></td>
+        <% end %>
+
+        <% if application.attended == false %>
+          <td><%= link_to '未签到，点击完成签到', "/applications/setattended/#{application.id}", :remote => true, :class => "remote-setattended" %></td>
+        <% else %>
+          <td><%= link_to '已签到，点击取消签到', "/applications/setattended/#{application.id}", :remote => true, :class => "remote-setattended" %></td>
+        <% end %>
+
+        <td><%= link_to 'Show', application %></td>
+        <td><%= link_to 'Edit', edit_application_path(application) %></td>
+        <td><%= link_to 'Destroy', application, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Application', new_application_path %>

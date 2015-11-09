@@ -4,18 +4,18 @@ one:
   name: MyString
   gender: false
   birthday: 2015-11-07
-  home_address: MyString
   condition: MyText
   phone_number: MyString
   contact: MyString
   contact_phone_number: MyString
+  room_id: 1
 
 two:
   name: MyString
   gender: false
   birthday: 2015-11-07
-  home_address: MyString
   condition: MyText
   phone_number: MyString
   contact: MyString
   contact_phone_number: MyString
+  room_id: 1

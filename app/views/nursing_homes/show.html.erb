@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @nursing_home.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @nursing_home.address %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @nursing_home.contact %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @nursing_home.phone_number %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @nursing_home.description %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @nursing_home.website %>
+</p>
+
+<%= link_to 'Edit', edit_nursing_home_path(@nursing_home) %> |
+<%= link_to 'Back', nursing_homes_path %>

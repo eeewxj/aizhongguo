@@ -16,11 +16,6 @@
 </p>
 
 <p>
-  <strong>Home address:</strong>
-  <%= @resident.home_address %>
-</p>
-
-<p>
   <strong>Condition:</strong>
   <%= @resident.condition %>
 </p>
@@ -38,6 +33,11 @@
 <p>
   <strong>Contact phone number:</strong>
   <%= @resident.contact_phone_number %>
+</p>
+
+<p>
+  <strong>Room:</strong>
+  <%= @resident.room_id %>
 </p>
 
 <%= link_to 'Edit', edit_resident_path(@resident) %> |

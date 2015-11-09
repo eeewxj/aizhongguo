@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nursing home:</strong>
+  <%= @management.nursing_home_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @management.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_management_path(@management) %> |
+<%= link_to 'Back', managements_path %>

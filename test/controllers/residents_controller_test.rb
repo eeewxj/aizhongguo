@@ -18,7 +18,7 @@ class ResidentsControllerTest < ActionController::TestCase
 
   test "should create resident" do
     assert_difference('Resident.count') do
-      post :create, resident: { birthday: @resident.birthday, condition: @resident.condition, contact: @resident.contact, contact_phone_number: @resident.contact_phone_number, gender: @resident.gender, home_address: @resident.home_address, name: @resident.name, phone_number: @resident.phone_number }
+      post :create, resident: { birthday: @resident.birthday, condition: @resident.condition, contact: @resident.contact, contact_phone_number: @resident.contact_phone_number, gender: @resident.gender, name: @resident.name, phone_number: @resident.phone_number, room_id: @resident.room_id }
     end
 
     assert_redirected_to resident_path(assigns(:resident))
@@ -35,7 +35,7 @@ class ResidentsControllerTest < ActionController::TestCase
   end
 
   test "should update resident" do
-    patch :update, id: @resident, resident: { birthday: @resident.birthday, condition: @resident.condition, contact: @resident.contact, contact_phone_number: @resident.contact_phone_number, gender: @resident.gender, home_address: @resident.home_address, name: @resident.name, phone_number: @resident.phone_number }
+    patch :update, id: @resident, resident: { birthday: @resident.birthday, condition: @resident.condition, contact: @resident.contact, contact_phone_number: @resident.contact_phone_number, gender: @resident.gender, name: @resident.name, phone_number: @resident.phone_number, room_id: @resident.room_id }
     assert_redirected_to resident_path(assigns(:resident))
   end
 

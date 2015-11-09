@@ -22,12 +22,15 @@ jQuery ->
 
 #为删除动作添加确认
   $("a.delete").click(-> return confirm('确认删除？'))
-#ajax返回结果替代原来的块
-  $("a.remote,form[data-remote='true']").on('ajax:complete', (status,xhr)->  
+#ajax返回结果替代原来的块或父块
+  $(document).ajaxComplete((event,xhr,settings)->
+    arr = settings.url.split('/')
     if xhr.responseText.match("error_message_return:") == null
-      $(this).replaceWith(xhr.responseText)
+      $("a.remote-"+arr[arr.length-2]+",form[data-remote='true']").replaceWith(xhr.responseText)
+      $("a.remote_all-"+arr[arr.length-2]).parent().replaceWith(xhr.responseText)
     else
       alert((xhr.responseText).substr(21)))
+
 #ajax返回结果替代原来的块及其父块
   $("a.remote_all").on('ajax:complete', (status,xhr)->  
     if xhr.responseText.match("error_message_return:") == null

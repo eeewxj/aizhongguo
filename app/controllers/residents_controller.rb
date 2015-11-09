@@ -4,7 +4,17 @@ class ResidentsController < ApplicationController
   # GET /residents
   # GET /residents.json
   def index
-    @residents = Resident.all
+    if params[:room_id].nil?
+      @residents = Resident.all
+    else
+      params[:offset] ||= 0
+      params[:limit] ||= 1000
+      if params[:nursing_home_id].nil?
+        @residents = Room.find_by_id(params[:room_id]).residents.order("id desc").offset(params[:offset]).limit(params[:count])
+      else
+        @residents = NursingHome.find_by_id(params[:nursing_home_id]).rooms.find_by_id(params[:room_id]).residents.order("id desc").offset(params[:offset]).limit(params[:count])
+      end
+    end
   end
 
   # GET /residents/1
@@ -69,6 +79,6 @@ class ResidentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resident_params
-      params.require(:resident).permit(:name, :gender, :birthday, :home_address, :condition, :phone_number, :contact, :contact_phone_number)
+      params.require(:resident).permit(:name, :gender, :birthday, :condition, :phone_number, :contact, :contact_phone_number, :room_id)
     end
 end

@@ -1,0 +1,26 @@
+<%= form_for(@management) do |f| %>
+  <% if @management.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@management.errors.count, "error") %> prohibited this management from being saved:</h2>
+
+      <ul>
+      <% @management.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nursing_home_id, "选择养老院：" %><br />
+    <%= f.select :nursing_home_id, get_all_nursing_homes_as_options %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id, "选择管理员" %><br>
+    <%= f.select :user_id, get_all_directors_as_options %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

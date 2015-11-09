@@ -8,10 +8,11 @@ class UserController < ApplicationController
   end
 
   def login
-    @user = User.authenticate(params[:name], params[:password])
+    @user = User.authenticate(params[:email], params[:password])
     unless @user.nil?
       reset_session
       session[:current_user_id]=@user.id
+      flash[:success] = "登录成功"
       respond_to do |format|
         format.html {redirect_to :back}
         format.json {render 'user/index'}

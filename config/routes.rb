@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :residents
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -56,10 +55,29 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  resources :applications 
+  resources :projects do
+    resources :applications
+  end
+  resources :managements
+  resources :nursing_homes do
+    resources :managements
+    resources :projects
+    resources :rooms do
+      resources :residents
+    end
+  end
+  resources :residents
+  resources :rooms do
+    resources :residents
+  end
+  resources :users do
+    resources :applications
+  end
 
-  resources :users
 
-
+  get 'applications/setverified/:id' => 'applications#setverified'
+  get 'applications/setattended/:id' => 'applications#setattended'
 
   post '/user/login' => 'user#login'
   get '/user/logout' => 'user#logout'

@@ -1,0 +1,33 @@
+<%= form_for(@application) do |f| %>
+  <% if @application.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h2>
+
+      <ul>
+      <% @application.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :project_id, "选择活动：" %><br />
+    <%= f.select :project_id, get_all_projects_as_options %>
+  </div>
+
+<!--
+  <div class="field">
+    <%#= f.label :verified %><br>
+    <%#= f.check_box :verified %>
+  </div>
+  <div class="field">
+    <%#= f.label :attended %><br>
+    <%#= f.check_box :attended %>
+  </div>
+-->
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
