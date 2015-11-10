@@ -78,7 +78,7 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
             render :action => 'cropping'
           end
         }
-        format.json {render '/user/index'}
+        format.json {render 'user/index'}
       end
     else
       render :action => "edit"
