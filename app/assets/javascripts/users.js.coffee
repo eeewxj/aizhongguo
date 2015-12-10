@@ -1,4 +1,4 @@
-jQuery ->
+$(document).on "page:change", ->
 #图片裁剪测试
   showCoords = (c) ->
     $('#x1').val(c.x)

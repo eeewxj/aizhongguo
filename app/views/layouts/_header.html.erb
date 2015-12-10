@@ -4,8 +4,9 @@
 <%= link_to_current "老人", residents_path %>
 <%= link_to_current "活动", projects_path %>
 <%= link_to_current "申请", applications_path %>
+<%= link_to_current "分配", assignments_path %>
+<%= link_to_current "关怀记录", records_path %>
 <%= link_to_current "管理关系", managements_path %>
-
 <% unless current_user.nil?%>
   <%#= link_to "我的消息", user_messages_path(current_user) %>
 <% end %>

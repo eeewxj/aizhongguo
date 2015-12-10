@@ -31,9 +31,10 @@
   </div>
 
   <div class="field">
-    <%= f.label :age, "年龄：" %>
-    <%= f.text_field :age, :value=> @user.age %>
+    <%= f.label :birthday, "出生日期：" %><br>
+    <%= f.date_select :birthday, start_year: Date.today.year-45, end_year: Date.today.year-14 %>
   </div>
+
 
   <div class="field">
     <%= f.label :name, "真实姓名：" %>

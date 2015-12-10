@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109052255) do
+ActiveRecord::Schema.define(version: 20151208123236) do
 
   create_table "applications", force: true do |t|
     t.integer  "project_id"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20151109052255) do
     t.datetime "updated_at"
     t.boolean  "verified",   default: false
     t.boolean  "attended",   default: false
+  end
+
+  create_table "assignments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "resident_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "managements", force: true do |t|
@@ -52,6 +60,15 @@ ActiveRecord::Schema.define(version: 20151109052255) do
     t.datetime "updated_at"
   end
 
+  create_table "records", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "resident_id"
+    t.integer  "project_id"
+    t.text     "desc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "residents", force: true do |t|
     t.string   "name"
     t.boolean  "gender"
@@ -79,7 +96,6 @@ ActiveRecord::Schema.define(version: 20151109052255) do
     t.string   "name"
     t.string   "phone_number"
     t.boolean  "gender"
-    t.integer  "age"
     t.string   "address"
     t.string   "work_unit"
     t.text     "self_description"
@@ -90,6 +106,7 @@ ActiveRecord::Schema.define(version: 20151109052255) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "user_type",           default: 2
+    t.date     "birthday"
   end
 
 end

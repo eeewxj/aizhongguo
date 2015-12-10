@@ -26,7 +26,7 @@ div#ckepop{padding:10px 0px;}
 //提示信息
 p.error,p.success,p.alert,p.notice
 {
-  padding-top:10px;
+  padding-top:12px;
   color:black;
   line-height:30px;
   font:17px bold;
@@ -34,10 +34,10 @@ p.error,p.success,p.alert,p.notice
   vertical-align:middle;
 
   position: absolute;
-  height:30px;
-  width:30%;
+  height:50px;
+  width:33%;
   margin-top:50px;
-  margin-left:30%;
+  margin-left:33%;
   @include rounded(6px);
 
   cursor:pointer;

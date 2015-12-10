@@ -1,15 +1,15 @@
-jQuery ->
+$(document).on "page:change", ->
 #格式化button
   $('.button').button();
 #延时动作
-#淡出
+#flash淡出
   $(->setTimeout(->
     $("div[class^='message_of_']").fadeOut(1200)
-  ,2000))
+  ,2500))
 #flash提示在淡出后删除
   $(->setTimeout(->
     $("div[class^='message_of_']").remove()
-  ,3200))
+  ,3700))
 #滑入
   $(->setTimeout(->
     $("div.ui-state-error").slideUp(1000)

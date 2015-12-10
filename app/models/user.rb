@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   has_one :nursing_home, through: :management
 #for volunteers user_type==2
   has_many :applications, dependent: :destroy
+  has_many :assignments, dependent: :destroy
+  has_many :records
   has_many :attended_applications, -> {where verified: true, attended: true}, class_name: "application"
   has_many :attended_projects, through: :attended_applications, source: :project
   has_many :absent_applications, -> {where verified: true, attended: false}, class_name: "application"
