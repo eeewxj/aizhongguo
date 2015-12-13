@@ -2,12 +2,13 @@
 <html>
 <head>
   <title>Aizhongguo2014</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<div class="container-fluid">
 <% unless flash.keys[0].blank? %>
   <div class=message_of_<%= params[:controller]+'_'+params[:action] %>>
     <p class="<%= flash.keys[0] %>"><%= flash[flash.keys[0]] %></p>
@@ -15,5 +16,6 @@
 <% end %>
 <%= render "layouts/header"  %>
 <%= yield %>
+</div>
 </body>
 </html>

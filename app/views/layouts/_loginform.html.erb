@@ -1,24 +1,31 @@
-<div id="login">
+<div id="login" class="row">
   <%= form_tag "/user/login", :method => :post do %>
+
+
+
     <table cellspacing="0" cellpadding="0">
       <tr>
-        <td><label>邮箱：</label></td>
         <td>
-           <%= text_field_tag "email",nil, :style => 'width:150px;font-size:12px;', :placeholder => '输入邮箱' %>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">邮箱</span>
+            <input id="email" name="email" type="text" class="form-control" placeholder="请输入邮箱" aria-describedby="basic-addon1">
+          </div>
         </td>
-        <td>
-           <%= check_box_tag 'rmbUser', true  %>
-           <%= label_tag 'rmbUser', "记住我" %>
+        <td>&nbsp;
+          <%= check_box_tag 'rmbUser', true  %>
+          <%= label_tag 'rmbUser', "记住我" %>
         </td>
-        <td>&nbsp;<a href="/users/new">注册</a></td>
+        <td>&nbsp;<a href="/users/new" class="btn btn-default">注册</a></td>
       </tr>
       <tr>
-        <td style="text-align:right"><label>密码：</label></td>
         <td> 
-          <%= password_field_tag "password", nil, :style => 'width:150px;font-size:12px;', :placeholder => '输入密码' %>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">密码</span>
+            <input id="password" name="password" type="password" class="form-control" placeholder="请输入密码" aria-describedby="basic-addon1">
+          </div>
         </td>
-        <td>
-           <%= submit_tag '登录', :style => "font-size: 12px;", :class => :button %>
+        <td>&nbsp;
+           <%= submit_tag '登录', class: "btn btn-primary" %>
         </td>               
       </tr>
     </table>

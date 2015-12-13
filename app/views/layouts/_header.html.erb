@@ -1,13 +1,43 @@
-<%= link_to_current "志愿者", users_path %>
-<%= link_to_current "养老院", nursing_homes_path %>
-<%= link_to_current "房间", rooms_path %>
-<%= link_to_current "老人", residents_path %>
-<%= link_to_current "活动", projects_path %>
-<%= link_to_current "申请", applications_path %>
-<%= link_to_current "分配", assignments_path %>
-<%= link_to_current "关怀记录", records_path %>
-<%= link_to_current "管理关系", managements_path %>
-<% unless current_user.nil?%>
-  <%#= link_to "我的消息", user_messages_path(current_user) %>
-<% end %>
-<%= render current_user.nil?? 'layouts/loginform':'layouts/userinfo' %>
+<div class="row">
+  <ul class="nav nav-tabs text-center" style="font-size:16px">
+    <li role="presentation">
+      <%= link_to_current "志愿者", users_path %>
+    </li>
+    <li role="presentation">
+      <%= link_to_current "养老院", nursing_homes_path %>
+    </li>
+    <li role="presentation">
+      <%= link_to_current "区域", zones_path %>
+    </li>
+
+    <li role="presentation">
+      <%= link_to_current "房间", rooms_path %>
+    </li>
+
+    <li role="presentation">
+      <%= link_to_current "老人", residents_path %>
+    </li>
+
+    <li role="presentation">
+      <%= link_to_current "活动", projects_path %>
+    </li>
+    <li role="presentation">
+      <%= link_to_current "申请", applications_path %>
+    </li>
+    <li role="presentation">
+      <%= link_to_current "分配", assignments_path %>
+    </li>
+    <li role="presentation">
+      <%= link_to_current "关怀记录", records_path %>
+    </li>
+    <li role="presentation">
+      <%= link_to_current "管理关系", managements_path %>
+    </li>
+      <% unless current_user.nil?%>
+        <%#= link_to "我的消息", user_messages_path(current_user) %>
+      <% end %>
+  </ul>
+</div>
+<div>
+  <%= render current_user.nil?? 'layouts/loginform':'layouts/userinfo' %>
+</div>

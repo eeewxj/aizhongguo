@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
   before_action :validate_user_login
-  before_action :validate_set_rights, only: [:new, :create, :destroy]
+  before_action :validate_set_rights, only: [:create, :destroy, :edit]
   # GET /rooms
   # GET /rooms.json
   def index
@@ -22,10 +22,18 @@ class RoomsController < ApplicationController
   # GET /rooms/new
   def new
     @room = Room.new
+    if current_user.director?
+      @nursing_home = current_user.nursing_home
+    else
+      if current_user.admin?
+        @nursing_home = NursingHome.find_by_id(params[:nursing_home_id])
+      end
+    end
   end
 
   # GET /rooms/1/edit
   def edit
+    @nursing_home = @room.zone.nursing_home
   end
 
   # POST /rooms
@@ -76,11 +84,11 @@ class RoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
-      params.require(:room).permit(:room_number, :description, :nursing_home_id)
+      params.require(:room).permit(:room_number, :description, :zone_id)
     end
 
     def validate_set_rights
-      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id.to_s==(@room.nil?? params[:room][:nursing_home_id] : @room.nursing_home_id.to_s)) || current_user.admin?))
+      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id==(@room.nil?? Zone.find_by_id(params[:room][:zone_id]).nursing_home_id : @room.zone.nursing_home_id )) || current_user.admin?))
           respond_to do |format|
             format.html do
               if request.xhr?

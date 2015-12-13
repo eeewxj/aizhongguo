@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
 ##常量定义##
 #定义用户类型
-  TYPE_ADMIN = 0
-  TYPE_DIRECTOR = 1
-  TYPE_VOLUNTEER = 2
+  TYPE_ADMIN = 0 #超级管理员
+  TYPE_DIRECTOR = 1 #组长，管理单个养老院
+  TYPE_VOLUNTEER = 2 #志愿者，权限最低
 #定义用户头像的小图和中图最大宽高
   AVATAR_SW = 100
   AVATAR_SH = 100

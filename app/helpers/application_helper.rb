@@ -4,7 +4,7 @@ module ApplicationHelper
   User::DIRECTOR = 1
   User::VOLUNTEER = 2
   def link_to_current(name, options = {}, html_options = {}, &block)
-      link_to(name, options, html_options.merge((current_page?(options))? {:id => 'current'}:{}), &block)
+      link_to(name, options, html_options.merge((current_page?(options))? {id: 'current'}:{}), &block)
   end
 
   def current_user
@@ -36,6 +36,15 @@ module ApplicationHelper
     options=''
     @projects.each do |project| 
       options=options + "<option value=#{project.id}>#{project.name}</option>"
+    end
+    options.html_safe
+  end
+
+  def get_all_zones_as_options(nursing_home)
+    @zones=nursing_home.s
+    options=''
+    @zones.each do |zone| 
+      options=options + "<option value=#{zone.id}>#{zone.name}</option>"
     end
     options.html_safe
   end

@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>User</th>
-      <th>Resident</th>
+      <th>Zone</th>
       <th>Project</th>
       <th colspan="3"></th>
     </tr>
@@ -14,7 +14,7 @@
     <% @assignments.each do |assignment| %>
       <tr>
         <td><%= assignment.user_id %></td>
-        <td><%= assignment.resident_id %></td>
+        <td><%= assignment.zone_id %></td>
         <td><%= assignment.project_id %></td>
         <td><%= link_to 'Show', assignment %></td>
         <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>

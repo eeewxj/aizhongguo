@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :nursing_home_id, "选择养老院：" %><br />
-    <%= f.select :nursing_home_id, get_all_nursing_homes_as_options %>
+    <%= f.label :zone_id, "选择区域：" %><br />
+    <%= f.select :zone_id, get_all_zones_as_options(@nursing_home) %>
   </div>
 
   <div class="field">

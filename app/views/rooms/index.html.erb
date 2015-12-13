@@ -6,6 +6,7 @@
       <th>Room number</th>
       <th>Description</th>
       <th>Nursing home</th>
+      <th>区域</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +16,8 @@
       <tr>
         <td><%= room.room_number %></td>
         <td><%= room.description %></td>
-        <td><%= room.nursing_home.name %></td>
+        <td><%= room.zone.nursing_home.name %></td>
+        <td><%= room.zone.name %></td>
         <td><%= link_to 'Show', room %></td>
         <td><%= link_to 'Edit', edit_room_path(room) %></td>
         <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>

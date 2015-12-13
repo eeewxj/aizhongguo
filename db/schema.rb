@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208123236) do
+ActiveRecord::Schema.define(version: 20151213002129) do
 
   create_table "applications", force: true do |t|
     t.integer  "project_id"
@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20151208123236) do
 
   create_table "assignments", force: true do |t|
     t.integer  "user_id"
-    t.integer  "resident_id"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "zone_id"
   end
 
   create_table "managements", force: true do |t|
@@ -85,9 +85,9 @@ ActiveRecord::Schema.define(version: 20151208123236) do
   create_table "rooms", force: true do |t|
     t.string   "room_number"
     t.text     "description"
-    t.integer  "nursing_home_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "zone_id"
   end
 
   create_table "users", force: true do |t|
@@ -107,6 +107,14 @@ ActiveRecord::Schema.define(version: 20151208123236) do
     t.datetime "avatar_updated_at"
     t.integer  "user_type",           default: 2
     t.date     "birthday"
+  end
+
+  create_table "zones", force: true do |t|
+    t.string   "name"
+    t.integer  "nursing_home_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
