@@ -41,7 +41,7 @@ module ApplicationHelper
   end
 
   def get_all_zones_as_options(nursing_home)
-    @zones=nursing_home.s
+    @zones=nursing_home.zones
     options=''
     @zones.each do |zone| 
       options=options + "<option value=#{zone.id}>#{zone.name}</option>"

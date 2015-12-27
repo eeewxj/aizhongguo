@@ -1,6 +1,7 @@
 class RecordsController < ApplicationController
   before_action :set_record, only: [:show, :edit, :update, :destroy]
-
+  before_action :validate_user_login, only: [:new, :create, :show]
+  before_action :validate_set_rights, only: [:edit, :update, :destroy]
   # GET /records
   # GET /records.json
   def index
@@ -15,6 +16,7 @@ class RecordsController < ApplicationController
   # GET /records/new
   def new
     @record = Record.new
+    @record.user_id = current_user.id
   end
 
   # GET /records/1/edit
@@ -69,6 +71,24 @@ class RecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def record_params
-      params.require(:record).permit(:user_id, :resident_id, :project_id, :desc)
+      params.require(:record).permit( :resident_id, :project_id, :desc)
+    end
+
+    def validate_set_rights
+      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id==@record.project.nursing_home_id) || current_user.admin?))
+          respond_to do |format|
+            format.html do
+              if request.xhr?
+                flash.now[:error]="抱歉，您权限不够！"
+                render :text => "error_message_return:#{flash.now[:error]}"
+              else
+                flash[:error]="抱歉，您权限不够！"
+                #binding.pry
+                redirect_back_or_default
+              end
+            end
+           format.json {render :text => ({:error=>flash[:error]}).to_json}
+         end
+       end
     end
 end

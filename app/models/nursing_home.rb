@@ -6,5 +6,5 @@ class NursingHome < ActiveRecord::Base
   has_many :rooms, through: :zones
   has_many :residents, through: :rooms
   has_many :projects, inverse_of: :nursing_home
-
+  has_many :records, through: :projects
 end
