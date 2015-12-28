@@ -1,33 +1,26 @@
-<div id="login" class="row">
+<div id="login" class="container-fluid row">
+  <div id="login_logo" class="col-xs-6">
+    <img src="../images/logo.png" class="img-responsive" alt="ichina logo">
+  </div>
   <%= form_tag "/user/login", :method => :post do %>
+    <div id="login_email" class="col-xs-9 input-group">
+      <input id="email" name="email" type="text" class="form-control" placeholder="请输入邮箱帐号" aria-describedby="basic-addon1">
+    </div>
 
+    <div class="clear-fix"></div>
 
-
-    <table cellspacing="0" cellpadding="0">
-      <tr>
-        <td>
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">邮箱</span>
-            <input id="email" name="email" type="text" class="form-control" placeholder="请输入邮箱" aria-describedby="basic-addon1">
-          </div>
-        </td>
-        <td>&nbsp;
-          <%= check_box_tag 'rmbUser', true  %>
-          <%= label_tag 'rmbUser', "记住我" %>
-        </td>
-        <td>&nbsp;<a href="/users/new" class="btn btn-default">注册</a></td>
-      </tr>
-      <tr>
-        <td> 
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">密码</span>
-            <input id="password" name="password" type="password" class="form-control" placeholder="请输入密码" aria-describedby="basic-addon1">
-          </div>
-        </td>
-        <td>&nbsp;
-           <%= submit_tag '登录', class: "btn btn-primary" %>
-        </td>               
-      </tr>
-    </table>
+    <div id="login_password" class="col-xs-9 input-group">
+      <input id="password" name="password" type="password" class="form-control" placeholder="请输入密码" aria-describedby="basic-addon1">
+    </div>
+    <div id="login_login">
+       <%= submit_tag "登 录", class: "btn btn-primary col-xs-4" %>
+    </div>
+    <div class="col-xs-1 smallspace"></div>
+    <div id="login_reg">
+      <a href="/users/new" class="btn btn-danger col-xs-4">注 册</a>
+    </div>
   <% end %>
-</div>	
+
+  <p class="col-xs-12">[爱中国志愿者微信公众平台] aizhongguozhiyuanzhe</p>
+  <p class="col-xs-12">联系人 崔力旋 13501136046</p>
+</div>
