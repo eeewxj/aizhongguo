@@ -4,10 +4,14 @@ $(document).on "page:change", ->
     message: 'The field is not valid'
     feedbackIcons:
       valid: 'glyphicon glyphicon-ok'
-      invalid: ''
+      invalid: 'glyphicon glyphicon-remove'
       validating: 'glyphicon glyphicon-refresh'
 
-  $('#login form').bootstrapValidator
+  $('#user_login').bootstrapValidator
+    feedbackIcons:
+      valid: 'glyphicon glyphicon-ok'
+      invalid: 'glyphicon glyphicon-remove'
+      validating: 'glyphicon glyphicon-refresh'
     fields:
       'email':
         validators:

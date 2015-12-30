@@ -66,8 +66,19 @@ a#current
 
 ////通用颜色定义
 .background_pink{ background-color: #FDF6EE;}
-.help-block{color: #a94442;}
+.help-block
+{
+  color: #a94442;
+}
+.has-feedback .form-control-feedback
+{
+  position: absolute;
+}
 
+.glyphicon
+{
+  top: 17px;
+}
 ////#用户首页
 //grid1为header
 #grid1{clear:both;}
