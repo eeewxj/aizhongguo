@@ -65,6 +65,10 @@ class User < ActiveRecord::Base
     @geometry[style] ||= Paperclip::Geometry.from_file avatar.path(style)
   end
 
+#注册邮箱查重
+  def self.check_email_available(checked_email)
+    self.where("email = '#{checked_email}'").empty?
+  end
 #用户登录验证
   def self.authenticate(email, password)
     user = find_by_email(email)

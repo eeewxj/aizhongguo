@@ -5,9 +5,13 @@ class UserController < ApplicationController
 
   def index
     @user = current_user
-    respond_to do |format|
-      format.html #{render "index.html.erb" }
-      format.json #{ render json: @users }
+    if @user.nil?
+      respond_to do |format|
+        format.html #{render "index.html.erb" }
+        format.json #{ render json: @users }
+      end
+    else
+      redirect_to users_path
     end
   end
 
@@ -38,5 +42,4 @@ class UserController < ApplicationController
       format.json {render :text => ({:success=>flash[:success]}).to_json}
     end
   end
-
 end

@@ -8,10 +8,6 @@ $(document).on "page:change", ->
       validating: 'glyphicon glyphicon-refresh'
 
   $('#user_login').bootstrapValidator
-    feedbackIcons:
-      valid: 'glyphicon glyphicon-ok'
-      invalid: 'glyphicon glyphicon-remove'
-      validating: 'glyphicon glyphicon-refresh'
     fields:
       'email':
         validators:
@@ -28,16 +24,15 @@ $(document).on "page:change", ->
             max: 128
             message: '长度不对'
 
-  $('#sign_up form#new_user').bootstrapValidator
+
+
+
+  $('#new_user').bootstrapValidator
     fields:
-      'user[type]':
-        validators:
-          notEmpty:
-            message: '请选择用户类型'
       'user[email]':
         validators:
           notEmpty:
-            message: '请填写邮箱'
+            message: '请输入邮箱帐号'
           emailAddress:
             message: '请填写格式正确的邮箱'
           remote:
@@ -47,6 +42,28 @@ $(document).on "page:change", ->
         validators:
           notEmpty:
             message: '请填写密码'
+          stringLength:
+            min: 8
+            max: 128
+            message: '密码长度需大于8位'
+      'user[password_confirmation]':
+        validators:
+          notEmpty:
+            message: '请再次输入以确认密码'
+          identical:
+            field: 'user[password]'
+            message: '两次输入的密码不一致，请重新输入'
+
+
+  $('#sign_up form#new_user').bootstrapValidator
+    fields:
+      'user[email]':
+        validators:
+          remote:
+            message: '该邮箱已被注册！'
+            url: 'users/check_available'
+      'user[password]':
+        validators:
           stringLength:
             min: 8
             max: 128

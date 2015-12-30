@@ -3,7 +3,6 @@
     <div id="error_explanation">
 <!-- pluralize函数根据数量为单词添加复数形式-->
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -12,49 +11,56 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :email, "邮件：" %>
-    <%= f.text_field :email %>
+  <div class="field col-xs-9 input-group form-group">
+    <%= f.text_field :email, placeholder: "邮箱帐号", class: "form-control"%>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+  <div class="field col-xs-9 input-group form-group">
+    <%= f.password_field :password, placeholder: "密码", class: "form-control"%>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+  <div class="field col-xs-9 input-group form-group">
+    <%= f.password_field :password_confirmation, placeholder: "确认密码", class: "form-control" %>
   </div> 
+  <hr style="border:1 dashed #987cb9;margin: 10px 0" width="100%" color=#987cb9 size=1>
 
-  <div class="field">
-    性别：<%= f.select :user_type, "<option value=1>男</option><option value=0>女</option>".html_safe %>
+  <div class="field col-xs-9 input-group form-group">
+    <%= f.text_field :name, :value=> @user.name, placeholder: "真实姓名", class: "form-control"%>
   </div>
 
-  <div class="field">
-    <%= f.label :birthday, "出生日期：" %><br>
-    <%= f.date_select :birthday, start_year: Date.today.year-45, end_year: Date.today.year-14 %>
+  <div class="field col-xs-9 input-group form-group">
+      <%= f.date_select(:birthday, start_year: Date.today.year-100, end_year: Date.today.year-8, prompt: { year: '出生年份' }, default: :prompt).gsub('<select','<select class="form-control sp-sel"' ).html_safe%>
+
+      <%= f.select( :gender, "<option value=1>男</option><option value=0>女</option>".html_safe).sub('<select','<select class="form-control sp-sel"' ).html_safe %>
   </div>
 
-
-  <div class="field">
-    <%= f.label :name, "真实姓名：" %>
-    <%= f.text_field :name, :value=> @user.name %>
+  <div class="field col-xs-9 input-group form-group">
+    <%= f.telephone_field :phone_number, placeholder: "手机号", class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :phone_number, "手机号：" %>
-    <%= f.text_field :phone_number %>
-  </div>
-  <div class="field">
-    用户类型：<%= f.select :user_type, "<option value=2>志愿者</option><option value=1>管理员</option>".html_safe %>
+  <div class="field col-xs-9 input-group form-group">
+    <%= f.text_field :address, placeholder: "现居住地（如故宫..）", class: "form-control" %>
   </div>
 
-
-  <div class="field">
-    <%= f.label :avatar %><br />
-    <%= f.file_field :avatar %>
+  <div class="field col-xs-9 input-group form-group">
+    <%= f.text_field :work_unit, placeholder: "工作单位", class: "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+<!--
+  <div class="field col-xs-9 input-group form-group">
+    <%= f.select( :user_type, "<option value=2>志愿者</option><option value=1>管理员</option>".html_safe).sub('<select','<select class="form-control"' ).html_safe%>
+  </div>
+-->
+
+  <div class="col-xs-9 input-group form-group">
+    <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
+    <%= f.file_field :avatar, class: "form-control" %>
+  </div>
+
+  <div class="field col-xs-9 input-group form-group">
+    <%= f.text_area :self_description, placeholder: "自我描述...", class: "form-control" %>
+  </div>
+
+  <div class="actions col-xs-9 input-group form-group">
+    <%= f.submit "提 交", class: "btn btn-primary"%>
   </div>
 <% end %>

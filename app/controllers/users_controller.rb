@@ -5,14 +5,19 @@ before_action :validate_admin_login, only: [:settype, :destroy]
 before_action :validate_set_rights, only: [:show, :edit, :update]
   def index
     @users = User.where('user_type>?',User::TYPE_ADMIN)
-
     respond_to do |format|
       format.html # index.html.erb
       format.json #{ render json: @users }
     end
   end
 
+  def check_available
+    #binding.pry
+    render json: {valid: User.check_email_available(params[:user][:email])}
+  end
+
   def show
+    #binding.pry
     @user = User.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
@@ -64,7 +69,7 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
 
   def update
     @user = User.find(params[:id])
-    #binding.pry
+    
     if @user.update(update_user_params)
       flash[:notice] = 'User was successfully updated.'
       if (!@user.crop_x.blank? && !@user.crop_y.blank? && !@user.crop_w.blank? && !@user.crop_h.blank?)
@@ -117,6 +122,7 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
       render :text => "error_message_return:#{flash.now[:error]}"
     end
   end
+
 
 
   private

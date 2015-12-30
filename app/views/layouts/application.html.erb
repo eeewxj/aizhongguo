@@ -10,7 +10,7 @@
 <body>
 <div class="container-fluid">
 <% unless flash.keys[0].blank? %>
-  <div class=message_of_<%= params[:controller]+'_'+params[:action] %>>
+  <div class="message_of_<%= params[:controller]+'_'+params[:action] %> row"">
     <p class="<%= flash.keys[0] %>"><%= flash[flash.keys[0]] %></p>
   </div>
 <% end %>
