@@ -5,6 +5,10 @@ class UserController < ApplicationController
 
   def index
     @user = current_user
+    respond_to do |format|
+      format.html #{render "index.html.erb" }
+      format.json #{ render json: @users }
+    end
   end
 
   def login

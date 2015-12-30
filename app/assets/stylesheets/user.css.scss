@@ -79,13 +79,17 @@ a#current
 {
   top: 17px;
 }
-////#用户首页
-//grid1为header
-#grid1{clear:both;}
-//grid2为indexbanner
-#grid2{clear:both;}
-//grid3为footer
-#grid3{clear:both;}
+
+
+////layout : footer
+
+p.footer
+{
+  text-align: center;
+  margin-bottom:0px;
+  color: #777;
+}
+
 
 ////#用户注册页面
 .message_of_user_register
@@ -113,7 +117,6 @@ form.new_user,form.edit_user
 ////#用户登录页面
 #login
 {
-  //background-color: #FDF6EE;
   input.form-control
   {
     height: 45px;

@@ -88,6 +88,6 @@ Rails.application.routes.draw do
 
   post '/user/login' => 'user#login'
   get '/user/logout' => 'user#logout'
-  root :to => 'users#index'
+  root :to => 'user#index'
 
 end
