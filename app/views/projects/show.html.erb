@@ -1,3 +1,4 @@
+<!--
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -37,3 +38,40 @@
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+-->
+
+<div id="project_show" class="row">
+  <div id="reg_projects" class="col-xs-10 row">
+    <div class="bookmark">
+      <p>正在</p>
+      <p>报名</p>
+      <span class="glyphicon glyphicon-bookmark"></span>
+    </div>
+    <div class="desc">
+      <p>
+        <%= l(@project.start_at,format: :date_week) %>
+      </p>
+      <p>
+        <%= @project.name %>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

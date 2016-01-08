@@ -1,13 +1,14 @@
 // Place all the styles related to the user controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-////#通用样式，以后放在style.css中，style.css中的样式分离到各个页面或者控制器的css中
 //圆角
 @mixin rounded($radius: 10px){
   border-radius: $radius;
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
 }
+//框阴影
+
 //输入框周围蓝色阴影
 input
 {
@@ -79,9 +80,20 @@ a#current
   top: 17px;
 }
 
+////#col-xs-9/10为最大块，两侧边距12.5%/8.333%，直接位于container-fluid->row块内
+.col-xs-9
+{
+  margin: 0px 12.5%;
+  padding:0px;
+}
+.col-xs-10
+{
+  margin: 0px 8.333%;
+  padding:0px;
+}
 
-////layout : footer
-
+////#layout : footer页脚
+//页脚宽度为100%，两行文字均居中，颜色淡灰色，底部不再留边距
 p.footer
 {
   text-align: center;
@@ -99,6 +111,7 @@ p.footer
   input.form-control
   {
     height: 45px;
+    border-radius:0px;
   }
   .btn
   {
@@ -231,7 +244,44 @@ p.footer
 }
 
 
+////#正在报名活动显示
+#reg_projects
+{
+  margin-top:20px;
+  border: 1px solid #C4C4C4;
+  .glyphicon-bookmark
+  {
+    z-index:2;
+    font-size:80px;
+    color:#EB8A68;
+    position:absolute;
+    top:-6px;
+    text-shadow: #999 3px 1px 3px;
+  }
+  .bookmark
+  {
+    float:left;
+    width:30%;
+    padding-left:3%;
+    p
+    {
+      color:white;
+      font-weight:bold;
+      font-size:18px;
+      left: 25px;
+      position:relative;
+      z-index:3;
+    }
+  }
+  .desc
+  {
+    float:left;
+    width:70%;
+    //margin: 10px 0 0px 25%;
+  }
 
+
+}
 
 
 

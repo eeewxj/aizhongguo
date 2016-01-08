@@ -63,6 +63,7 @@ zh:
   time:
     formats:
       default: "%Y年%b%d日 %A %H:%M:%S %Z"
+      date_week: "%Y年%b%d日   %A"
       short: "%b%d日 %H:%M"
       long: "%Y年%b%d日 %H:%M"
     am: "上午"
