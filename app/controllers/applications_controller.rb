@@ -30,12 +30,15 @@ class ApplicationsController < ApplicationController
   # POST /applications
   # POST /applications.json
   def create
+    #binding.pry
     @application = Application.new(application_params.merge({:user_id=>current_user.id}))
 
     respond_to do |format|
       if @application.save
-        format.html { redirect_to @application, notice: 'Application was successfully created.' }
-        format.json { render :show, status: :created, location: @application }
+        #format.html { redirect_to @application, notice: 'Application was successfully created.' }
+        format.json { 
+          render :text => "<a rel=\"nofollow\" href=\"/applications/#{@application.id}\" data-method=\"delete\" data-remote=\"true\" class=\"remote-applications-#{@application.id} btn btn-primary\">取消报名</a>" 
+        }
       else
         format.html { render :new }
         format.json { render json: @application.errors, status: :unprocessable_entity }
@@ -62,7 +65,7 @@ class ApplicationsController < ApplicationController
   def destroy
     @application.destroy
     respond_to do |format|
-      format.html { redirect_to applications_url, notice: 'Application was successfully destroyed.' }
+      #format.html { redirect_to applications_url, notice: 'Application was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -109,6 +112,6 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:project_id)
+      params.permit(:project_id)
     end
 end

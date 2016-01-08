@@ -62,6 +62,10 @@ zh:
       - :day
   time:
     formats:
+      date: "%Y-%m-%d"
+      week: "%A"
+      am_pm: "%p"
+      day_time: "%H:%M"
       default: "%Y年%b%d日 %A %H:%M:%S %Z"
       date_week: "%Y年%b%d日   %A"
       short: "%b%d日 %H:%M"

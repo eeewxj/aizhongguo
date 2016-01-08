@@ -26,7 +26,9 @@ $(document).on "page:change", ->
   $(document).ajaxComplete((event,xhr,settings)->
     arr = settings.url.split('/')
     if xhr.responseText.match("error_message_return:") == null
-      $("a.remote-"+arr[arr.length-2]+"-"+arr[arr.length-1].substring(0,arr[arr.length-1].indexOf('?'))+",form[data-remote='true']").replaceWith(xhr.responseText)
+      if arr[arr.length-1].indexOf('?') != -1
+        arr[arr.length-1] = arr[arr.length-1].substring(0,arr[arr.length-1].indexOf('?'))
+      $("a.remote-"+arr[arr.length-2]+"-"+arr[arr.length-1]+",form[data-remote='true']").replaceWith(xhr.responseText)
       $("a.remote_all-"+arr[arr.length-2]).parent().replaceWith(xhr.responseText)
     else
       alert((xhr.responseText).substr(21)))

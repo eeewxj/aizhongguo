@@ -42,19 +42,42 @@
 
 <div id="project_show" class="row">
   <div id="reg_projects" class="col-xs-10 row">
-    <div class="bookmark">
-      <p>正在</p>
-      <p>报名</p>
-      <span class="glyphicon glyphicon-bookmark"></span>
+    <div class="tag">
+      <img src="../images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
+      <div class=tag-label>
+        <p>正在</p>
+        <p>报名</p>
+      </div>
     </div>
     <div class="desc">
       <p>
-        <%= l(@project.start_at,format: :date_week) %>
+        <%= l(@project.start_at,format: :date) %>
+        <%= l(@project.start_at,format: :week) %>
+      </p>
+      <p>
+        <%=  l(@project.start_at,format: :am_pm)+"："+l(@project.start_at,format: :day_time)+"-"+l(@project.end_at,format: :day_time) %>
       </p>
       <p>
         <%= @project.name %>
       </p>
+      <div class="toggle_btn">
+        <span class="rotate glyphicon glyphicon-backward" aria-hidden="true"></span>
+      </div>
     </div>
+    <div class="text" style="display:none">
+      <hr class="division">
+      <p>
+        <%= @project.description %>
+      </p>
+    </div>
+    <div class="operations">
+      <div>
+        <%= link_to '报名', "/projects/#{@project.id}/applications", method: :post, :remote => true, :class => "remote-#{@project.id}-applications btn btn-primary" %>
+      </div>
+      <div class="btn btn-primary">222</div>
+      <div class="btn btn-primary">333</div>
+    </div>
+
   </div>
 </div>
 

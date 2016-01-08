@@ -54,7 +54,11 @@ $(document).on "page:change", ->
       $(this).find("input[type='password']").attr("value", encrypted_password)
   )
 
-
+  $(".toggle_btn").click(->
+    $(this).children(".glyphicon").toggleClass("glyphicon-backward")
+    $(this).children(".glyphicon").toggleClass("glyphicon-forward")
+    $(this).parent().next(".text").animate({height: 'toggle', opacity: 'toggle'}, "fast")
+  )
 
 
   return
