@@ -1,3 +1,6 @@
+<!--
+
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -42,3 +45,38 @@
 
 <%= link_to 'Edit', edit_resident_path(@resident) %> |
 <%= link_to 'Back', residents_path %>
+-->
+
+<div>
+  <div id="show_resident" class="col-xs-11 row">
+    <div class="tag">
+      <img src="../images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
+      <div class=tag-label>
+        <p><%= @resident.zone.name %></p>
+        <p><%= @resident.room.room_number %></p>
+      </div>
+    </div>
+    <div class="desc">
+      <p>
+        <%= @resident.nursing_home.name %>
+        <%= @resident.zone.name+"-"+@resident.room.room_number %>
+      </p>
+      <p class="black">
+        <%= @resident.name %>
+      </p>
+      <p class="grey pre"><%= get_gender(@resident.gender)+"   " + l(@resident.birthday,format: :date) + "   " + @resident.age.to_s+"岁" %></p>
+    </div>
+    <div class="text">
+      <hr class="division">
+      <p>
+        <strong>身体状况：</strong>
+      </p>
+      <p>
+        <%= @resident.condition %>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+

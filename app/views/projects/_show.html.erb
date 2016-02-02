@@ -1,0 +1,88 @@
+<% @project ||= project %>
+<div id="project_show" class="">
+  <div id="reg_project" class="col-xs-11 row">
+    <div class="tag">
+      <img src="../images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
+      <div class=tag-label>
+        <p>正在</p>
+        <p>报名</p>
+      </div>
+    </div>
+    <div class="desc">
+      <p>
+        <%= l(@project.start_at,format: :date) %>
+        <%= l(@project.start_at,format: :week) %>
+      </p>
+      <p>
+        <%=  l(@project.start_at,format: :am_pm)+"："+l(@project.start_at,format: :day_time)+"-"+l(@project.end_at,format: :day_time) %>
+      </p>
+      <p>
+        <%= @project.name %>
+      </p>
+      <div class="toggle_btn">
+        <span class="rotate glyphicon glyphicon-backward" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="text" style="display:none">
+      <hr class="division">
+      <p><关怀活动报名></p>
+      <p>时间: <%= l(@project.start_at,format: :date_week) %>
+      <p>
+        <%=  l(@project.start_at,format: :am_pm)+"："+l(@project.start_at,format: :day_time)+"-"+l(@project.end_at,format: :day_time) %>
+      </p>
+
+      <p>地点: <%= @project.nursing_home.name %></p>
+      <p>报名方式:点击下方按钮报名</p>
+      <p>报名截止时间: <%= l(@project.start_at.beginning_of_day.ago(7200) ,format: :short)%></p>
+
+
+      <p>联络人: <%= @project.contact.name+' '+@project.contact.phone_number %> </p>
+      <p>
+        <%= @project.description %>
+      </p>
+    </div>
+    <div class="operations">
+      <div>
+        <% unless (current_user && current_user.has_applied?(@project)) %>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            报名
+          </button>
+        <% else %>
+          <% @application = current_user.application_of(@project) %>
+          <%= link_to '取消报名', "/applications/#{@application.id}", method: :delete, :remote => true, :class => "remote-applications-#{@application.id} btn btn-primary" %>
+          <%= link_to '查看报名信息', "/projects/#{@project.id}/direction", class: "btn btn-danger" %>
+        <% end %>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">请选择接车地点：</h4>
+              </div>
+              <%= form_for @project.applications.build, remote: false do |f| %>
+                <div class="modal-body">
+                  <div class="field">
+                    <%= f.hidden_field :project_id, value: @project.id%>
+                    <%= f.select :pickup_site_id, get_all_pickup_sites_as_options(@project) %>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                  <%= f.submit "报名", class: "btn btn-primary"%>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="btn btn-primary">222</div>
+      <div class="btn btn-primary">333</div>
+
+      <div> </div>
+
+    </div>
+
+  </div>
+</div>

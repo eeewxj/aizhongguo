@@ -93,4 +93,34 @@ class User < ActiveRecord::Base
     Management.find_by_user_id(id).destroy
   end
 
+#查询是否已经申请某个活动
+  def has_applied?(project)
+    Application.where(user_id: id, project_id: project.id).any?
+  end
+
+#返回对某个活动的申请
+  def application_of(project)
+    Application.where(user_id: id, project_id: project.id)[0]
+  end
+#可以报名的活动(包括已经报名和尚未报名的活动)
+  def regable_projects
+    if Time.now < Time.now.end_of_day.ago(7199)
+      Project.where("start_at > ?", Time.now.end_of_day)
+    else
+      Project.where("start_at > ?", (Time.now.end_of_day+1.day))
+    end
+  end
+#已经报名、报名结束、尚未完成的活动
+  def ongoing_projects
+    Project.joins(:applications).where(applications: {user_id: id, verified: true})
+  end
+
+#已经报名、已经完成、尚未填写关怀记录的活动 unfinished projects
+  def unfinished_projects
+    Project.joins(:applications).where("end_at < ?", Time.now).where(applications: {user_id: id, verified: true, attended: true})
+  end
+
+#
+
+
 end

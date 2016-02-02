@@ -36,6 +36,7 @@ hr.division
 
 //数据库文本展示格式
 pre{white-space: pre-wrap;}
+.pre{white-space: pre-wrap;}
 //分享到
 div#ckepop{padding:10px 0px;}
 
@@ -78,8 +79,14 @@ a#current
   background: #65944A; 
 }
 
+//btn式链接、按钮字体颜色为白色
+a.btn{color:white;}
+//button.btn{color:white;}
 ////#通用颜色定义
 .background_pink{ background-color: #FDF6EE;}
+.black{color: #000;}
+.grey{color: #777;}
+////#notice显示
 .help-block
 {
   color: #a94442;
@@ -100,9 +107,9 @@ a#current
   margin: 0px 12.5%;
   padding:0px;
 }
-.col-xs-10
+.col-xs-11
 {
-  margin: 0px 8.333%;
+  margin: 0px 4.167%;
   padding:0px;
 }
 
@@ -256,8 +263,8 @@ p.footer
 }
 
 
-////#正在报名活动显示
-#reg_projects
+////#正在报名活动、老人信息显示
+#reg_project,#show_resident
 {
   margin-top:20px;
   border: 1px solid #C4C4C4;
@@ -303,10 +310,13 @@ p.footer
       font-size:18px;
       color:#9E8778;
     }
+    p.black{color:black;}
+    p.grey{color:#777;font-size:14px;}
     .toggle_btn
     {
       position:relative;
       left:25%;
+      width:50%;
     }
     span.rotate
     {
@@ -315,26 +325,29 @@ p.footer
     }
   }
 
-  .text
+  .text,.operations
   {
     float:left;
     position:relative;
     left:7%;
     width:86%;
   }
-  .operations
+}
+
+////#活动创建页面
+#new_project
+{
+  .field.multiupload
   {
-    float:left;
-    position:relative;
-    width:86%;
-    left:7%;
-  
+    span.glyphicon-remove-circle
+    {
+      font-size: 20px;
+      vertical-align:middle;
+      color: #E0969D;
+    }
   }
 
 }
-
-
-
 
 
 

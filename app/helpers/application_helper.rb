@@ -40,6 +40,15 @@ module ApplicationHelper
     options.html_safe
   end
 
+  def get_all_pickup_sites_as_options(project)
+    @pickup_sites = project.pickup_sites
+    options=''
+    @pickup_sites.each do |pickup_site|
+      options=options + "<option value=#{pickup_site.id}>#{pickup_site.name}</option>"
+    end
+    options.html_safe
+  end
+
   def get_all_zones_as_options(nursing_home)
     @zones=nursing_home.zones
     options=''

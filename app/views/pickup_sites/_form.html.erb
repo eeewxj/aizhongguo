@@ -1,0 +1,37 @@
+<%= form_for(@pickup_site) do |f| %>
+  <% if @pickup_site.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pickup_site.errors.count, "error") %> prohibited this pickup_site from being saved:</h2>
+
+      <ul>
+      <% @pickup_site.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :project_id %><br>
+    <%= f.number_field :project_id %>
+  </div>
+  <div class="field">
+    <%= f.label :liaison %><br>
+    <%= f.text_field :liaison %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number %><br>
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="field">
+    <%= f.label :meeting_time %><br>
+    <%= f.datetime_select :meeting_time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

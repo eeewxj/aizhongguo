@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pickup_site.name %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @pickup_site.project_id %>
+</p>
+
+<p>
+  <strong>Liaison:</strong>
+  <%= @pickup_site.liaison %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @pickup_site.phone_number %>
+</p>
+
+<p>
+  <strong>Meeting time:</strong>
+  <%= @pickup_site.meeting_time %>
+</p>
+
+<%= link_to 'Edit', edit_pickup_site_path(@pickup_site) %> |
+<%= link_to 'Back', pickup_sites_path %>

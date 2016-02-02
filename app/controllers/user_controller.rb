@@ -11,7 +11,8 @@ class UserController < ApplicationController
         format.json #{ render json: @users }
       end
     else
-      redirect_to users_path
+    #用户已经登录的情况下跳转到活动中心
+      redirect_to projects_path
     end
   end
 

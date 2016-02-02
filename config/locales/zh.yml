@@ -10,6 +10,7 @@ zh:
   date:
     formats:
       default: "%Y-%m-%d"
+      date: "%Y.%m.%d"
       short: "%b%d日"
       long: "%Y年%b%d日"
     day_names:
@@ -63,11 +64,12 @@ zh:
   time:
     formats:
       date: "%Y-%m-%d"
+      day: "%b%d日"
       week: "%A"
       am_pm: "%p"
       day_time: "%H:%M"
       default: "%Y年%b%d日 %A %H:%M:%S %Z"
-      date_week: "%Y年%b%d日   %A"
+      date_week: "%b%d日   %A"
       short: "%b%d日 %H:%M"
       long: "%Y年%b%d日 %H:%M"
     am: "上午"

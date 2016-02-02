@@ -1,38 +1,70 @@
-<h1>Listing residents</h1>
+<div id="project_show" class="row">
+  <div id="reg_projects" class="col-xs-10 row">
+    <div class="tag">
+      <img src="/images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
+      <div class=tag-label>
+        <p>关怀</p>
+        <p>信息</p>
+      </div>
+    </div>
+    <div class="desc">
+      <p>
+        <%= l(@project.start_at,format: :date) %>
+        <%= l(@project.start_at,format: :week) %>
+      </p>
+      <p>
+        <%=  l(@project.start_at,format: :am_pm)+"："+l(@project.start_at,format: :day_time)+"-"+l(@project.end_at,format: :day_time) %>
+      </p>
+      <p>
+        <%= @project.name %>
+      </p>
+      <div class="toggle_btn">
+        <span class="rotate glyphicon glyphicon-backward" aria-hidden="true"></span>
+      </div>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Gender</th>
-      <th>Birthday</th>
-      <th>Condition</th>
-      <th>Phone number</th>
-      <th>Contact</th>
-      <th>Contact phone number</th>
-      <th>Room</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+    <div class="text">
+    <% zone = nil %>
     <% @residents.each do |resident| %>
-      <tr>
-        <td><%= resident.name %></td>
-        <td><%= get_gender(resident.gender) %></td>
-        <td><%= resident.birthday %></td>
-        <td><%= resident.condition %></td>
-        <td><%= resident.phone_number %></td>
-        <td><%= resident.contact %></td>
-        <td><%= resident.contact_phone_number %></td>
-        <td><%= resident.room.room_number %></td>
-        <td><%= link_to 'Show', resident %></td>
-        <td><%= link_to 'Edit', edit_resident_path(resident) %></td>
-        <td><%= link_to 'Destroy', resident, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% if zone != resident.zone %>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="">
+              <th>区域</th>
+              <th>房间</th>
+              <th>姓名</th>
+              <th>性别</th>
+              <th>年龄</th>
+              <th>信息</th>
+            </tr>
+          </thead>
+
+          <tbody>
+      <% end %>
+              <tr>
+                <td><%= resident.room.zone.name %></td>
+                <td><%= resident.room.room_number %></td>
+                <td><%= resident.name %></td>
+                <td><%= get_gender(resident.gender) %></td>
+                <td><%= resident.age %></td>
+                <td><%= link_to '详情', resident %></td>
+              </tr>
+      <% if zone != resident.zone %>
+        <% zone = resident.zone %>
+          </tbody>
+        </table>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
+    </div>
+
+
+
+
+  </div>
+</div>
+
+
+
 
 <br>
 

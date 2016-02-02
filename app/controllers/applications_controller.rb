@@ -36,8 +36,9 @@ class ApplicationsController < ApplicationController
     respond_to do |format|
       if @application.save
         #format.html { redirect_to @application, notice: 'Application was successfully created.' }
+        format.html { redirect_to controller: "projects", action: "direction", id: @application.project_id }
         format.json { 
-          render :text => "<a rel=\"nofollow\" href=\"/applications/#{@application.id}\" data-method=\"delete\" data-remote=\"true\" class=\"remote-applications-#{@application.id} btn btn-primary\">取消报名</a>" 
+          #render :text => "<a rel=\"nofollow\" href=\"/applications/#{@application.id}\" data-method=\"delete\" data-remote=\"true\" class=\"remote-applications-#{@application.id} btn btn-primary\">取消报名</a>" 
         }
       else
         format.html { render :new }
@@ -66,7 +67,10 @@ class ApplicationsController < ApplicationController
     @application.destroy
     respond_to do |format|
       #format.html { redirect_to applications_url, notice: 'Application was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { 
+        render :text =>"<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\">报名</button>"
+        #render :text => "<a rel=\"nofollow\" href=\"/projects/#{@application.project.id}/applications\" data-method=\"post\" data-remote=\"true\" class=\"remote-#{@application.project.id}-applications btn btn-primary\">报名</a>" 
+      }
     end
   end
 
@@ -112,6 +116,6 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.permit(:project_id)
+      (params.permit(:project_id).empty?)? params.require(:application).permit(:project_id, :pickup_site_id) : params.permit(:project_id, :pickup_site_id)
     end
 end

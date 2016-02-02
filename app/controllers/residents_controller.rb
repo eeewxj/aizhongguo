@@ -6,17 +6,16 @@ class ResidentsController < ApplicationController
   # GET /residents
   # GET /residents.json
   def index
-    if params[:room_id].nil?
-      @residents = Resident.all
-    else
-      params[:offset] ||= 0
-      params[:limit] ||= 1000
-      if params[:nursing_home_id].nil?
-        @residents = Room.find_by_id(params[:room_id]).residents.order("id desc").offset(params[:offset]).limit(params[:count])
-      else
-        @residents = NursingHome.find_by_id(params[:nursing_home_id]).rooms.find_by_id(params[:room_id]).residents.order("id desc").offset(params[:offset]).limit(params[:count])
-      end
-    end
+    params[:offset] ||= 0
+    params[:limit] ||= 1000
+    @nursing_homes = NursingHome.find(params[:nursing_home_id]) if params[:nursing_home_id]
+    @nursing_homes ||= NursingHome.all
+    @zones = Zone.find(params[:zone_id]) if params[:zone_id]
+    @zones ||= Zone.where(nursing_home_id: @nursing_homes)
+    @rooms = Room.find(params[:room_id]) if params[:room_id]
+    @rooms ||= Room.where(zone_id: @zones)
+    @residents = Resident.where(room_id: @rooms).offset(params[:offset]).limit(params[:count])
+    @project = Project.find(params[:project_id]) if params[:project_id]
   end
 
   # GET /residents/1
@@ -85,7 +84,7 @@ class ResidentsController < ApplicationController
     end
 
     def validate_set_rights
-      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id.to_s==(@resident.nil?? Room.find(params[:resident][:room_id]).nursing_home_id.to_s : @room.nursing_home_id.to_s)) || current_user.admin?))
+      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id.to_s==(@resident.nil?? Room.find(params[:resident][:room_id]).zone.nursing_home_id.to_s : @room.nursing_home_id.to_s)) || current_user.admin?))
           respond_to do |format|
             format.html do
               if request.xhr?

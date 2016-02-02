@@ -1,0 +1,33 @@
+<h1>Listing pickup_sites</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Project</th>
+      <th>Liaison</th>
+      <th>Phone number</th>
+      <th>Meeting time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pickup_sites.each do |pickup_site| %>
+      <tr>
+        <td><%= pickup_site.name %></td>
+        <td><%= pickup_site.project_id %></td>
+        <td><%= pickup_site.liaison %></td>
+        <td><%= pickup_site.phone_number %></td>
+        <td><%= pickup_site.meeting_time %></td>
+        <td><%= link_to 'Show', pickup_site %></td>
+        <td><%= link_to 'Edit', edit_pickup_site_path(pickup_site) %></td>
+        <td><%= link_to 'Destroy', pickup_site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pickup site', new_pickup_site_path %>

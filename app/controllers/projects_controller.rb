@@ -1,7 +1,8 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :direction,:notice]
   before_action :validate_director_login, only: [:new]
   before_action :validate_set_rights, only: [:edit, :create, :update, :destroy]
+
   # GET /projects
   # GET /projects.json
   def index
@@ -68,6 +69,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+
+  def direction
+  end
+
+  def notice
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -76,7 +85,7 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :nursing_home_id, :description, :start_at, :end_at, :staff_number, :contact_id)
+      params.require(:project).permit(:name, :nursing_home_id, :description, :start_at, :end_at, :staff_number, :contact_id, pickup_sites_attributes: [:name, :project_id, :liaison, :phone_number, :meeting_time])
     end
 
     def validate_set_rights

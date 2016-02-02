@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213002129) do
+ActiveRecord::Schema.define(version: 20160126093912) do
 
   create_table "applications", force: true do |t|
     t.integer  "project_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "verified",   default: false
-    t.boolean  "attended",   default: false
+    t.boolean  "verified",       default: false
+    t.boolean  "attended",       default: false
+    t.integer  "pickup_site_id"
   end
 
   create_table "assignments", force: true do |t|
@@ -48,6 +49,16 @@ ActiveRecord::Schema.define(version: 20151213002129) do
     t.datetime "updated_at"
   end
 
+  create_table "pickup_sites", force: true do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.string   "liaison"
+    t.string   "phone_number"
+    t.datetime "meeting_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "projects", force: true do |t|
     t.string   "name"
     t.integer  "nursing_home_id"
@@ -67,6 +78,12 @@ ActiveRecord::Schema.define(version: 20151213002129) do
     t.text     "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "eye"
+    t.string   "ear"
+    t.string   "nose"
+    t.string   "tongue"
+    t.string   "body"
+    t.string   "mind"
   end
 
   create_table "residents", force: true do |t|
