@@ -22,9 +22,9 @@ class User < ActiveRecord::Base
   has_many :applications, dependent: :destroy
   has_many :assignments, dependent: :destroy
   has_many :records
-  has_many :attended_applications, -> {where verified: true, attended: true}, class_name: "application"
+  has_many :attended_applications, -> {where(verified: true, attended: true)}, class_name: "Application"
   has_many :attended_projects, through: :attended_applications, source: :project
-  has_many :absent_applications, -> {where verified: true, attended: false}, class_name: "application"
+  has_many :absent_applications, -> {where(verified: true, attended: false)}, class_name: "Application"
   has_many :absent_projects, through: :absent_applications, source: :project
 
 ##数据验证##
@@ -102,25 +102,34 @@ class User < ActiveRecord::Base
   def application_of(project)
     Application.where(user_id: id, project_id: project.id)[0]
   end
-#可以报名的活动(包括已经报名和尚未报名的活动)
+#可以报名的活动(包括已经报名和尚未报名的活动)，即Project.published
   def regable_projects
-    if Time.now < Time.now.end_of_day.ago(7199)
-      Project.where("start_at > ?", Time.now.end_of_day)
-    else
-      Project.where("start_at > ?", (Time.now.end_of_day+1.day))
-    end
+    Project.published
   end
-#已经报名、报名结束、尚未完成的活动
+#已经报名、报名结束、尚未开始的活动,即user参加的Project.upcoming
+  def upcoming_projects
+    Project.upcoming.joins(:applications).where(applications: {user_id: id, verified: true})
+  end
+
+#已经报名、报名结束、正在进行的活动,即user参加的Project.ongoing
   def ongoing_projects
-    Project.joins(:applications).where(applications: {user_id: id, verified: true})
+    Project.ongoing.joins(:applications).where(applications: {user_id: id, verified: true, attended: true})
   end
 
-#已经报名、已经完成、尚未填写关怀记录的活动 unfinished projects
+#已经报名、已经完成、尚未填写关怀记录的活动
   def unfinished_projects
-    Project.joins(:applications).where("end_at < ?", Time.now).where(applications: {user_id: id, verified: true, attended: true})
+    #NOT EXISTS 和 LEFT JOIN WHERE IS NULL能达到同样的效果，后者运行速度更快
+    #Project.finished.joins(:applications).where(applications: {user_id: id, verified: true, attended: true}).where("NOT EXISTS (select * from records where records.user_id = applications.user_id AND records.project_id = applications.project_id)")
+
+    Project.finished.joins(:applications).where(applications: {user_id: id, verified: true, attended: true}).joins("LEFT JOIN records on records.user_id = applications.user_id AND records.project_id = applications.project_id").where("records.user_id IS NULL")
+
   end
-
-#
-
-
+#已经报名，已经参加，已经填写了关怀记录的活动
+  def finished_projects
+    Project.finished.joins(:applications).where(applications: {user_id: id, verified: true, attended: true}).joins("JOIN records on records.user_id = applications.user_id AND records.project_id = applications.project_id")
+  end
+#已经完成，但是尚处在修改期的活动
+  def modifiable_projects
+    finished_projects.where("end_at > ?", Time.now-3.days)
+  end
 end

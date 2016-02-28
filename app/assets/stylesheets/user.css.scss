@@ -32,6 +32,8 @@ hr.division
   border: 1px dashed #BCBCBC;
   margin: 10px 0;
   width: 100%;
+  float: left;
+  clear:both;
 }
 
 //数据库文本展示格式
@@ -72,18 +74,14 @@ p.notice,p.success
   background-color: #ECF9FF;
 }
 
-//当前页面的链接
-a#current
-{
-  color: white;
-  background: #65944A; 
-}
+
 
 //btn式链接、按钮字体颜色为白色
 a.btn{color:white;}
 //button.btn{color:white;}
 ////#通用颜色定义
 .background_pink{ background-color: #FDF6EE;}
+
 .black{color: #000;}
 .grey{color: #777;}
 ////#notice显示
@@ -113,6 +111,27 @@ a.btn{color:white;}
   padding:0px;
 }
 
+body
+{
+  background-color: #F4F4F4;
+}
+////#layout : header页眉
+//
+.header
+{
+  ul.nav li a{border-radius: 4px 40px 0 0;}
+  //当前页面的链接
+  ul.nav li a#current
+  {
+    color: white;
+    background: #65944A; 
+  }
+  //非当前页面链接
+  ul.nav li a:not(#current) 
+  {
+    border: 1px solid #ddd;
+  }
+}
 ////#layout : footer页脚
 //页脚宽度为100%，两行文字均居中，颜色淡灰色，底部不再留边距
 p.footer
@@ -264,8 +283,19 @@ p.footer
 
 
 ////#正在报名活动、老人信息显示
-#reg_project,#show_resident
+.reg_project,#show_resident
 {
+  &.background_grey
+  {
+    margin-top: 10px;
+    background-color: #F4F4F4;
+    border:none;
+  }
+  &.small_margin
+  {
+    margin-top: 10px;
+  }
+  background-color: #FFF;
   margin-top:20px;
   border: 1px solid #C4C4C4;
   .tag
@@ -296,6 +326,13 @@ p.footer
       width:70%;
       position:absolute;
     }
+    &.avatar
+    {
+      top:9px;
+      box-shadow: 4px 2px 10px #222;
+      -moz-box-shadow: 4px 2px 10px #222;
+      -webkit-box-shadow: 4px 2px 10px #222;
+    }
   }
   .desc
   {
@@ -325,12 +362,23 @@ p.footer
     }
   }
 
-  .text,.operations
+  .text,.operations,.count
   {
     float:left;
     position:relative;
     left:7%;
     width:86%;
+  }
+  .count
+  {
+    p
+    {
+      font-size: 18px;
+      line-height: 25px;
+      margin-bottom:0px;
+      text-align:center;
+      color:#9E8778;
+    }
   }
 }
 

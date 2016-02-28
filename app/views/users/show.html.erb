@@ -1,10 +1,125 @@
-<p id="notice"><%= notice %></p>
+  <div class="reg_project col-xs-11 row background_grey">
+    <!--<p id="notice"><%= notice %></p>-->
+    <div class="tag avatar">
+      <%= image_tag @user.avatar.url(:thumb) %>
+    </div>
+    <div class="desc">
+      <h4 class="grey" style="margin-top:0px;">
+        爱中国志愿者
+        <b><%= " "+@user.name %></b>
+      </h4>
+      <p class="grey">
+        <%= get_gender(@user.gender)+@user.work_unit.to_s %>
+      </p>
+      <p class="grey">
+        <%= @user.self_description.to_s %>
+      </p>
+    </div>
+    <div>
+      <hr class="division">
+    </div>
+    <div class="count">
+      <p>
+          <%= @user.name %>，您已参加爱中国志愿者关怀活动<%= @user.attended_projects.count %>次,
+      </p>
+      <p>
+          关怀老人<%= @user.records.count %>人次,
+      </p>
+      <p>
+          参加关怀活动累计<%= number_with_precision((@user.attended_projects.sum("end_at")-@user.attended_projects.sum("start_at"))/7200, precision: 1) %>小时
+      </p>
+      <p>
+          感恩您的爱心行动!
+      </p>
+    </div>
+  </div>
 
-<p>
-  <b>Username:</b>
-  <%= @user.name %>
-  <%= image_tag @user.avatar.url(:thumb) %>
-</p>
+  <div class="col-xs-11">
+    <hr class="division">
+  </div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+<% if !@user.unfinished_projects.empty? %>
+  <div class="col-xs-11">
+    <p>
+      <span class="glyphicon glyphicon-exclamation-sign" style="color: red;"></span>
+      您有以下参加完的活动还未填写关怀记录
+    </p>
+  </div>
+  <% @user.unfinished_projects.each do |project| %>
+    <div class="reg_project col-xs-11 row small_margin">
+      <div class="unfinished_projects">
+        <div class="text desc">
+          <p>
+            <%= l(project.start_at,format: :date) %>
+            <%= l(project.start_at,format: :week) %>
+          </p>
+          <p>
+            <%=  l(project.start_at,format: :am_pm)+"："+l(project.start_at,format: :day_time)+"-"+l(project.end_at,format: :day_time) %>
+          </p>
+          <p>
+            <%= project.name %>
+          </p>
+        </div>
+        <div class="operations">
+          <div>
+            <p><%= link_to '感谢您参加此次活动,请填写关怀记录!', "#", class: "btn btn-danger" %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if !@user.modifiable_projects.empty? %>
+  <div class="col-xs-11">
+    <p>
+      <span class="glyphicon glyphicon-info-sign" style="color: grey;"></span>
+      以下活动的关怀记录可以继续修改
+    </p>
+  </div>
+  <% @user.modifiable_projects.each do |project| %>
+    <div class="reg_project col-xs-11 row small_margin">
+      <div class="modifiable_projects">
+        <div class="text desc">
+          <p>
+            <%= l(project.start_at,format: :date) %>
+            <%= l(project.start_at,format: :week) %>
+          </p>
+          <p>
+            <%=  l(project.start_at,format: :am_pm)+"："+l(project.start_at,format: :day_time)+"-"+l(project.end_at,format: :day_time) %>
+          </p>
+          <p>
+            <%= project.name %>
+          </p>
+        </div>
+        <div class="text">
+          <p class="grey">本次活动中我关怀的对象:<p>
+          <p class="">一条条列出已填写的关怀记录<p>
+        </div>
+        <div class="operations">
+          <div>
+            <h4 style="margin-top:0px;">
+              <%= link_to "#" do %>
+                <span class="glyphicon glyphicon-plus-sign" style="font-size:24px;top:6px;color:#DAEBF2;"></span>
+                <span>点击继续添加关怀记录</span>
+              <% end %>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+
+
+
+
+
+  <!--
+  <%= link_to 'Edit', edit_user_path(@user) %>
+  <%= link_to 'Back', users_path %>
+  -->

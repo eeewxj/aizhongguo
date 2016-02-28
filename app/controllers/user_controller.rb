@@ -7,7 +7,7 @@ class UserController < ApplicationController
     @user = current_user
     if @user.nil?
       respond_to do |format|
-        format.html #{render "index.html.erb" }
+        format.html
         format.json #{ render json: @users }
       end
     else

@@ -1,0 +1,43 @@
+  <% @project = project if defined? project %>
+  <div class="reg_project col-xs-11 row">
+    <div class="tag">
+      <img src="../images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
+      <div class=tag-label>
+        <p>尚未</p>
+        <p>报名</p>
+      </div>
+    </div>
+    <div class="desc">
+      <p>
+        <%= l(@project.start_at,format: :date) %>
+        <%= l(@project.start_at,format: :week) %>
+      </p>
+      <p>
+        <%=  l(@project.start_at,format: :am_pm)+"："+l(@project.start_at,format: :day_time)+"-"+l(@project.end_at,format: :day_time) %>
+      </p>
+      <p>
+        <%= @project.name %>
+      </p>
+      <div class="toggle_btn">
+        <span class="rotate glyphicon glyphicon-backward" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="text" style="display:none">
+      <hr class="division">
+      <p><关怀活动报名></p>
+      <p>时间: <%= l(@project.start_at,format: :date_week) %>
+      <p>
+        <%=  l(@project.start_at,format: :am_pm)+"："+l(@project.start_at,format: :day_time)+"-"+l(@project.end_at,format: :day_time) %>
+      </p>
+
+      <p>地点: <%= @project.nursing_home.name %></p>
+      <p>报名开始时间: <%= l(@project.start_at-14.days ,format: :short)%></p>
+      <p>报名截止时间: <%= l(@project.reg_deadline ,format: :short)%></p>
+
+      <p>联络人: <%= @project.contact.name+' '+@project.contact.phone_number %> </p>
+      <p>
+        <%= @project.description %>
+      </p>
+    </div>
+  </div>
+

@@ -7,7 +7,11 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     if params[:nursing_home_id].nil?
-      @projects = Project.all
+      @draft_projects = Project.draft if !current_user.nil? && current_user.director?
+      @published_projects = Project.published
+      @upcoming_projects = current_user.upcoming_projects  unless current_user.nil?
+      @ongoing_projects = current_user.ongoing_projects  unless current_user.nil?
+      @unfinished_projects = current_user.unfinished_projects unless current_user.nil?
     else
       params[:offset] ||= 0
       params[:limit] ||= 1000

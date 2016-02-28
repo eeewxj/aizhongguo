@@ -1,3 +1,4 @@
+require 'open-uri'
 module ApplicationHelper
 
   User::ADMIN = 0

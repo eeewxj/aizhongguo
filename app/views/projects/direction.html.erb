@@ -1,9 +1,10 @@
+<div class="col-xs-11 row">
 <h1>欢迎参加爱中国志愿者关怀活动!</h1>
 <p>欢迎您报名参加<%= l(@project.start_at, format: :date_week)+l(@project.start_at,format: :am_pm)+@project.nursing_home.name %>的生命关怀志愿服务,请等待组长分配您在<%= @project.nursing_home.name %>的关怀区域和关怀对象,请在<%= l(@project.start_at.days_ago(2), format: :day) %>之后来此查看相关信息。</p>
 <p>以下信息帮助您做好关怀前的准备工作:</p>
 <h2>
   <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-  <a href="#">初次关怀指南</a>
+  <a href="http://mp.weixin.qq.com/s?__biz=MjM5OTQ1Mzg0Nw==&mid=209275422&idx=1&sn=6e36d067831847e183e0401e20b9ebbd&scene=18#wechat_redirect">初次关怀指南</a>
 </h2>
 <p>在每次参加关怀活动之前,请仔细阅读:</p>
 <h2>
@@ -20,4 +21,4 @@
   <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
   <a href="http://weixin.sogou.com/gzhwap?openid=oIWsFt_bZs7H1FvcTQeQePzDjZ2I">往期活动风采</a>
 </h2>
-
+</div>

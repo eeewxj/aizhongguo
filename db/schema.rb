@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126093912) do
+ActiveRecord::Schema.define(version: 20160228045717) do
 
   create_table "applications", force: true do |t|
     t.integer  "project_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "verified",       default: false
+    t.boolean  "verified",       default: true
     t.boolean  "attended",       default: false
     t.integer  "pickup_site_id"
   end
@@ -108,11 +108,11 @@ ActiveRecord::Schema.define(version: 20160126093912) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",               default: "", null: false
-    t.string   "password",            default: "", null: false
+    t.string   "email",               default: "",    null: false
+    t.string   "password",            default: "",    null: false
     t.string   "name"
     t.string   "phone_number"
-    t.boolean  "gender"
+    t.boolean  "gender",              default: false
     t.string   "address"
     t.string   "work_unit"
     t.text     "self_description"

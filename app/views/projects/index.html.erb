@@ -1,50 +1,33 @@
-<!--
-<h1>Listing projects</h1>
+<div id="project_show" class="">
 
-<table>
-  <thead>
-    <tr>
-      <th>活动名称</th>
-      <th>养老院</th>
-      <th>介绍</th>
-      <th>开始时间</th>
-      <th>结束时间</th>
-      <th>所需志愿者人数</th>
-      <th>活动联系人</th>
-      <th>联系人电话</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.nursing_home.name %></td>
-        <td><%= project.description %></td>
-        <td><%= l(project.start_at,format: :long) %></td>
-        <td><%= l(project.end_at,format: :long) %></td>
-        <td><%= project.staff_number %></td>
-        <td><%= project.contact.name %></td>
-        <td><%= project.contact.phone_number %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <% if defined? @draft_projects %>
+    <% @draft_projects.each do |project| %>
+      <%= render partial: "show_draft", locals: {project: project, type: "draft"} %>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
 
-<br>
-<%= link_to 'New Project', new_project_path %>
--->
-
-  <% @projects.each do |project| %>
-    <%= render partial: "show", locals: {project: project} %>
+  <% if defined? @published_projects %>
+    <% @published_projects.each do |project| %>
+      <%= render partial: "show", locals: {project: project, type: "published"} %>
+    <% end %>
   <% end %>
 
 
+  <% if defined? @upcoming_projects %>
+    <% @upcoming_projects.each do |project| %>
+      <%= render partial: "show_upcoming_and_ongoing", locals: {project: project, type: "upcoming"} %>
+    <% end %>
+  <% end %> 
 
+  <% if defined? @ongoing_projects %>
+    <% @ongoing_projects.each do |project| %>
+      <%= render partial: "show_upcoming_and_ongoing", locals: {project: project, type: "ongoing"} %>
+    <% end %>
+  <% end %>
 
-
-
+  <% if defined? @unfinished_projects %>
+    <% @unfinished_projects.each do |project| %>
+      <%= render partial: "show_unfinished", locals: {project: project, type: "unfinished"} %>
+    <% end %>
+  <% end %>
+</div>
