@@ -49,11 +49,14 @@
 
 <div>
   <div id="show_resident" class="col-xs-11 row">
-    <div class="tag">
+    <div class="tag room-tag">
       <img src="../images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
       <div class=tag-label>
         <p><%= @resident.zone.name %></p>
         <p><%= @resident.room.room_number %></p>
+      </div>
+      <div class="avatar">
+        <%= image_tag @resident.avatar.url(:medium) %>
       </div>
     </div>
     <div class="desc">
@@ -64,7 +67,10 @@
       <p class="black">
         <%= @resident.name %>
       </p>
-      <p class="grey pre"><%= get_gender(@resident.gender)+"   " + l(@resident.birthday,format: :date) + "   " + @resident.age.to_s+"岁" %></p>
+      <p class="grey pre"><%= @resident.show_gender+"   " + l(@resident.birthday,format: :date) + "   " + @resident.age.to_s+"岁" %></p>
+      <p class="grey pre"><%= @resident.ethnic.to_s+"   "+@resident.religion.to_s %></p>
+      <p class="grey pre"><%= @resident.show_education+"文化程度" %></p>
+      <p class="grey pre"><%= @resident.previous_job.to_s %></p>
     </div>
     <div class="text">
       <hr class="division">
@@ -73,6 +79,57 @@
       </p>
       <p>
         <%= @resident.condition %>
+      </p>
+      <p>
+        <strong>护理分类：</strong>
+      </p>
+      <p>
+        <%= @resident.show_nursing_type %>
+      </p>
+      <p>
+        <strong>性格特征：</strong>
+      </p>
+      <p>
+        <%= @resident.characters %>
+      </p>
+      <p>
+        <strong>喜好、禁忌食物：</strong>
+      </p>
+      <p>
+        <%= @resident.tastes %>
+      </p>
+      <p>
+        <strong>爱好、禁忌：</strong>
+      </p>
+      <p>
+        <%= @resident.interests %>
+      </p>
+      <p>
+        <strong>心理状态：</strong>
+      </p>
+      <p>
+        <%= @resident.mental_state %>
+      </p>
+      <p>
+        <strong>其他信息：</strong>
+      </p>
+      <p>
+        <%= @resident.remark %>
+      </p>
+      <hr class="division">
+      <p>
+        <strong>联系人：</strong>
+      </p>
+      <p>
+        <%= @resident.contact %>
+      </p>
+
+      <hr class="division">
+      <p>
+        <strong>护工：</strong><%= @resident.nurses.first.name %>
+      </p>
+      <p>
+        <%= @resident.nurses.first.home %>
       </p>
     </div>
   </div>

@@ -1,0 +1,69 @@
+<%= form_for(@nurse) do |f| %>
+  <% if @nurse.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@nurse.errors.count, "error") %> prohibited this nurse from being saved:</h2>
+
+      <ul>
+      <% @nurse.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :birthday %><br>
+    <%= f.date_select :birthday %>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.check_box :gender %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :hometown %><br>
+    <%= f.text_field :hometown %>
+  </div>
+  <div class="field">
+    <%= f.label :home %><br>
+    <%= f.text_field :home %>
+  </div>
+  <div class="field">
+    <%= f.label :education %><br>
+    <%= f.number_field :education %>
+  </div>
+  <div class="field">
+    <%= f.label :previous_job %><br>
+    <%= f.text_field :previous_job %>
+  </div>
+  <div class="field">
+    <%= f.label :religion %><br>
+    <%= f.text_field :religion %>
+  </div>
+  <div class="field">
+    <%= f.label :interests %><br>
+    <%= f.text_field :interests %>
+  </div>
+  <div class="field">
+    <%= f.label :background %><br>
+    <%= f.text_area :background %>
+  </div>
+  <div class="field">
+    <%= f.label :nursing %><br>
+    <%= f.text_area :nursing %>
+  </div>
+  <div class="field">
+    <%= f.label :nursing_home_id %><br>
+    <%= f.number_field :nursing_home_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

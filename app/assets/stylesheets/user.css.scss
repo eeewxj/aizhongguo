@@ -42,6 +42,8 @@ pre{white-space: pre-wrap;}
 //分享到
 div#ckepop{padding:10px 0px;}
 
+.text-center{text-align: center;}
+
 //提示信息
 p.error,p.success,p.alert,p.notice
 {
@@ -114,6 +116,23 @@ a.btn{color:white;}
 body
 {
   background-color: #F4F4F4;
+  font-size:14px;
+
+  .col-xs-1.back
+  {
+    margin-top:13px;
+    margin-left:-8.333%;
+    span
+    {
+      font-size:24px;
+      color:#E0969D;
+    }
+    a:hover
+    {
+      color:#666;
+      background:#fff;
+    }
+  }
 }
 ////#layout : header页眉
 //
@@ -285,6 +304,7 @@ p.footer
 ////#正在报名活动、老人信息显示
 .reg_project,#show_resident
 {
+  p{font-size:14px;}
   &.background_grey
   {
     margin-top: 10px;
@@ -310,7 +330,17 @@ p.footer
       width:100%;
       //position:relative;
       //z-index:2;
+      
     }
+    .avatar
+    {
+      img
+      {
+        width:100%;
+        margin-top:10px;
+      }
+    }
+
     .tag-label
     {
       p
@@ -380,6 +410,16 @@ p.footer
       color:#9E8778;
     }
   }
+
+  .text table
+  {
+    text-align: center;
+    th
+    {
+      text-align: center;
+      @include rounded(6px);
+    }
+  }
 }
 
 ////#活动创建页面
@@ -396,7 +436,6 @@ p.footer
   }
 
 }
-
 
 
 

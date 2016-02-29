@@ -96,7 +96,11 @@ $(document).on "page:change", ->
     $(this).parent().remove()
   )
 
-
+#卡片颜色切换
+  color_list = ["#D2F1E3", "#F8D4DC", "#F1EEB2", "#fff"]
+  $(".switch").each (index)->
+    color = color_list[index%color_list.length]
+    $(this).find("td:nth-child(1)").css('background-color', color)
 
   return
 

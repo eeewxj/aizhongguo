@@ -7,4 +7,5 @@ class NursingHome < ActiveRecord::Base
   has_many :residents, through: :rooms
   has_many :projects
   has_many :records, through: :projects
+  has_many :nurses
 end

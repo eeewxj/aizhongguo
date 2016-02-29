@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
   has_many :attended_projects, through: :attended_applications, source: :project
   has_many :absent_applications, -> {where(verified: true, attended: false)}, class_name: "Application"
   has_many :absent_projects, through: :absent_applications, source: :project
+  has_many :sent_messages, :foreign_key => "sender_id", :class_name => "Message"
+  has_many :received_messages, :class_name => "Message"
+
 
 ##数据验证##
   #binding.pry

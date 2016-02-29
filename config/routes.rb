@@ -69,6 +69,7 @@ Rails.application.routes.draw do
 
   resources :pickup_sites
   resources :residents
+  resources :nurses
   resources :rooms do
     resources :residents
   end
@@ -79,6 +80,7 @@ Rails.application.routes.draw do
   resources :assignments
   resources :records
   resources :managements
+  resources :nursings
 
   resources :applications 
   resources :projects do
@@ -94,10 +96,14 @@ Rails.application.routes.draw do
     resources :zones
     resources :rooms
     resources :residents
+    resources :nurses
   end
 
   resources :users do
     resources :applications
+    resources :messages
   end
+
+  resources :messages
 
 end

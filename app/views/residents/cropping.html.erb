@@ -1,0 +1,65 @@
+
+<script language="Javascript">
+
+function showPreview(coords)
+{
+	var rx = <%= User::AVATAR_SW %> / coords.w;
+	var ry = <%= User::AVATAR_SH %> / coords.h;
+	var ratio = <%= @resident.avatar_geometry(:original).width %> / <%= @resident.avatar_geometry(:medium).width %>; 
+
+	$('#preview').css({
+		width: Math.round(rx * <%= @resident.avatar_geometry(:medium).width.to_i %>) + 'px',
+		height: Math.round(ry * <%= @resident.avatar_geometry(:medium).height.to_i %>) + 'px',
+		marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+		marginTop: '-' + Math.round(ry * coords.y) + 'px'
+	});
+  $('#crop_x').val(Math.round(coords.x * ratio));
+  $('#crop_y').val(Math.round(coords.y * ratio));
+  $('#crop_w').val(Math.round(coords.w * ratio));
+  $('#crop_h').val(Math.round(coords.h * ratio));
+}
+
+$(function() {
+  $('#cropbox').Jcrop({
+      onSelect: showPreview,
+      onChange: showPreview,
+      setSelect:   [ 0, 0, 240, 240 ],
+      aspectRatio: <%= User::AVATAR_SW %>/<%= User::AVATAR_SH %>
+    });
+});
+
+</script>
+
+
+<p>
+  <b>Name:</b>
+  <%= @resident.name %>
+</p>
+
+  <b>Avatar:</b>
+  <%= image_tag @resident.avatar.url(:medium), :id => 'cropbox' %>
+<div style="width:<%= User::AVATAR_SW %>px;height:<%= User::AVATAR_SH %>px;overflow:hidden">
+  <%= image_tag @resident.avatar.url(:medium), :id => 'preview' %>
+</div>
+
+<div>
+<% if @resident.nil? %>
+<h2>@resident is nil</h2>
+<% else %>
+<h2>@resident is not nil</h2>
+<% end %>
+<%= form_for(@resident) do |f| %>
+  <%= f.label :crop_x, 'crop_x' %>
+  <%= f.text_field :crop_x, :id => 'crop_x' %><br />
+  <%= f.label :crop_x, 'crop_y' %>
+  <%= f.text_field :crop_y, :id => 'crop_y' %><br />
+  <%= f.label :crop_x, 'crop_w' %>
+  <%= f.text_field :crop_w, :id => 'crop_w' %><br />
+  <%= f.label :crop_x, 'crop_h' %>
+  <%= f.text_field :crop_h, :id => 'crop_h' %><br />
+  <%= f.submit "Crop!" %>
+<% end %>
+</div>
+<%= link_to 'Edit', edit_resident_path(@resident) %> |
+<%= link_to 'Back', residents_path %>
+

@@ -1,4 +1,4 @@
-<%= form_for(@resident) do |f| %>
+<%= form_for(@resident, :multipart => true) do |f| %>
   <% if @resident.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@resident.errors.count, "error") %> prohibited this resident from being saved:</h2>
@@ -44,6 +44,11 @@
   <div class="field">
     <%= f.label :room_id, "选择房间号：" %><br />
     <%= f.select :room_id, get_all_rooms_as_options(current_user) %>
+  </div>
+
+  <div class="col-xs-9 input-group form-group">
+    <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
+    <%= f.file_field :avatar, class: "form-control" %>
   </div>
 
   <div class="actions">

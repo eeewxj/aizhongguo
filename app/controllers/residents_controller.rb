@@ -36,10 +36,16 @@ class ResidentsController < ApplicationController
   # POST /residents.json
   def create
     @resident = Resident.new(resident_params)
-
     respond_to do |format|
+      flash[:success] = 'Resident was successfully created.'
       if @resident.save
-        format.html { redirect_to @resident, notice: 'Resident was successfully created.' }
+        format.html {
+          if params[:resident][:avatar].blank?
+            redirect_to resident_url(@resident), notice: 'Resident was successfully created.'
+          else
+            render :action => 'cropping'
+          end
+        }
         format.json { render :show, status: :created, location: @resident }
       else
         format.html { render :new }
@@ -51,14 +57,30 @@ class ResidentsController < ApplicationController
   # PATCH/PUT /residents/1
   # PATCH/PUT /residents/1.json
   def update
-    respond_to do |format|
-      if @resident.update(resident_params)
-        format.html { redirect_to @resident, notice: 'Resident was successfully updated.' }
-        format.json { render :show, status: :ok, location: @resident }
-      else
-        format.html { render :edit }
-        format.json { render json: @resident.errors, status: :unprocessable_entity }
+    if @resident.update(resident_params)
+      flash[:notice] = 'Resident was successfully updated.'
+      #binding.pry
+      if (!@resident.crop_x.blank? && !@resident.crop_y.blank? && !@resident.crop_w.blank? && !@resident.crop_h.blank?)
+        @resident.avatar.reprocess!
       end
+      respond_to do |format|
+        format.html {
+          if params[:resident][:avatar].blank?
+            redirect_to @resident
+          else
+            render :action => 'cropping'
+          end
+        }
+      end
+    else
+      format.html { render :edit }
+      format.json { render json: @resident.errors, status: :unprocessable_entity }
+    end
+  end
+
+  def cropping
+    respond_to do |format|
+      format.html
     end
   end
 
@@ -80,7 +102,7 @@ class ResidentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resident_params
-      params.require(:resident).permit(:name, :gender, :birthday, :condition, :phone_number, :contact, :contact_phone_number, :room_id)
+      params.require(:resident).permit(:name, :gender, :birthday, :condition, :phone_number, :contact, :contact_phone_number, :room_id, :avatar, :crop_x, :crop_y, :crop_w, :crop_h)
     end
 
     def validate_set_rights

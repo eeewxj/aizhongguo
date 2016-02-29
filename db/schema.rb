@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228045717) do
+ActiveRecord::Schema.define(version: 20160229081922) do
 
   create_table "applications", force: true do |t|
     t.integer  "project_id"
@@ -38,6 +38,33 @@ ActiveRecord::Schema.define(version: 20160228045717) do
     t.datetime "updated_at"
   end
 
+  create_table "messages", force: true do |t|
+    t.integer  "sender_id",              null: false
+    t.integer  "user_id",                null: false
+    t.text     "content",                null: false
+    t.integer  "status",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "nurses", force: true do |t|
+    t.string   "name"
+    t.date     "birthday"
+    t.boolean  "gender"
+    t.string   "phone"
+    t.string   "hometown"
+    t.string   "home"
+    t.integer  "education"
+    t.string   "previous_job"
+    t.string   "religion"
+    t.string   "interests"
+    t.text     "background"
+    t.text     "nursing"
+    t.integer  "nursing_home_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "nursing_homes", force: true do |t|
     t.string   "name"
     t.string   "address"
@@ -45,6 +72,13 @@ ActiveRecord::Schema.define(version: 20160228045717) do
     t.string   "phone_number"
     t.text     "description"
     t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "nursings", force: true do |t|
+    t.integer  "nurse_id"
+    t.integer  "resident_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -97,6 +131,20 @@ ActiveRecord::Schema.define(version: 20160228045717) do
     t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "religion"
+    t.integer  "nursing_type"
+    t.string   "mental_state"
+    t.string   "interests"
+    t.string   "tastes"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "ethnic"
+    t.integer  "education"
+    t.string   "previous_job"
+    t.string   "characters"
+    t.string   "remark"
   end
 
   create_table "rooms", force: true do |t|

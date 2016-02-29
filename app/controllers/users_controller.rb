@@ -29,7 +29,7 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
   def new
     @user = User.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.html {render layout: "user"}
       format.json 
     end
   end
@@ -129,14 +129,14 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
     def create_user_params
       params.require(:user).permit(
         :email, :password, :password_confirmation, :name, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address, 
-        :work_unit, :crop_x, :crop_y, :crop_w, :crop_h
+        :work_unit, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
       )
     end
 
     def update_user_params
       params.require(:user).permit(
         :email, :password, :password_confirmation, :name, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address, 
-        :work_unit, :crop_x, :crop_y, :crop_w, :crop_h
+        :work_unit, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
       )
     end
 

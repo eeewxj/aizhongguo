@@ -1,0 +1,27 @@
+<h1>Listing nursings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nurse</th>
+      <th>Resident</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nursings.each do |nursing| %>
+      <tr>
+        <td><%= nursing.nurse_id %></td>
+        <td><%= nursing.resident_id %></td>
+        <td><%= link_to 'Show', nursing %></td>
+        <td><%= link_to 'Edit', edit_nursing_path(nursing) %></td>
+        <td><%= link_to 'Destroy', nursing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Nursing', new_nursing_path %>

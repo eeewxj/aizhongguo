@@ -1,36 +1,37 @@
-<div id="project_show" class="">
-  <div class="col-xs-11 row reg_project">
-    <div class="tag">
-      <img src="/images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
-      <div class=tag-label>
-        <p>关怀</p>
-        <p>信息</p>
-      </div>
-    </div>
-    <div class="desc">
-      <p>
-        <%= l(@project.start_at,format: :date) %>
-        <%= l(@project.start_at,format: :week) %>
-      </p>
-      <p>
-        <%=  l(@project.start_at,format: :am_pm)+"："+l(@project.start_at,format: :day_time)+"-"+l(@project.end_at,format: :day_time) %>
-      </p>
-      <p>
-        <%= @project.name %>
-      </p>
-      <div class="toggle_btn">
-        <span class="rotate glyphicon glyphicon-backward" aria-hidden="true"></span>
-      </div>
-    </div>
+  <div id="project_show" class="">
+    <div class="col-xs-11 row reg_project">
 
-    <div class="text">
-    <% zone = nil %>
-    <% @residents.each do |resident| %>
-      <% if zone != resident.zone %>
+      <% unless @project.nil? %>
+        <div class="tag">
+          <img src="/images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
+          <div class=tag-label>
+            <p>关怀</p>
+            <p>信息</p>
+          </div>
+        </div>
+
+        <div class="desc">
+          <p>
+            <%= l(@project.start_at,format: :date) %>
+            <%= l(@project.start_at,format: :week) %>
+          </p>
+          <p>
+            <%=  l(@project.start_at,format: :am_pm)+"："+l(@project.start_at,format: :day_time)+"-"+l(@project.end_at,format: :day_time) %>
+          </p>
+          <p>
+            <%= @project.name %>
+          </p>
+          <div class="toggle_btn">
+            <span class="rotate glyphicon glyphicon-backward" aria-hidden="true"></span>
+          </div>
+        </div>
+      <% end %>
+      <div class="text" style="margin-top:5px;">
+      <% zone = nil %>
         <table class="table table-bordered">
           <thead>
-            <tr class="">
-              <th>区域</th>
+            <tr>
+              <th>区</th>
               <th>房间</th>
               <th>姓名</th>
               <th>性别</th>
@@ -38,34 +39,31 @@
               <th>信息</th>
             </tr>
           </thead>
-
-          <tbody>
-      <% end %>
-              <tr>
-                <td><%= resident.room.zone.name %></td>
-                <td><%= resident.room.room_number %></td>
-                <td><%= resident.name %></td>
-                <td><%= get_gender(resident.gender) %></td>
-                <td><%= resident.age %></td>
-                <td><%= link_to '详情', resident %></td>
-              </tr>
-      <% if zone != resident.zone %>
-        <% zone = resident.zone %>
-          </tbody>
         </table>
-      <% end %>
-    <% end %>
+          <% @residents.each do |resident| %>
+            <% if zone != resident.zone %>
+            <% unless zone.nil? %>
+              </table>
+            <% end %>
+              <table class="table table-bordered switch">
+            <% end %>
+                <tr>
+                  <td class=""><%= resident.room.zone.name %></td>
+                  <td><%= resident.room.room_number %></td>
+                  <td><%= resident.name %></td>
+                  <td><%= get_gender(resident.gender) %></td>
+                  <td><%= resident.age %></td>
+                  <td><%= link_to '详情', resident %></td>
+                 </tr>
+            <% if zone != resident.zone %>
+            <% zone = resident.zone %>
+            <% end %>
+          <% end %>
+              </table>
+      </div>
     </div>
-
-
-
-
   </div>
-</div>
-
-
-
-
-<br>
-
-<%= link_to 'New Resident', new_resident_path %>
+<!--
+  <br>
+  <%= link_to 'New Resident', new_resident_path %>
+-->
