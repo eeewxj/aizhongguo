@@ -43,13 +43,26 @@
     <%= f.select :contact_id, get_all_directors_as_options %>
   </div>
 
-  <div class="field multiupload"><!-- 此处代码需修改，当存在接车地点时显示接车地点及删除按钮 -->
-    <%= f.fields_for :pickup_sites, @project.pickup_sites.build do |pickup_site| %>
+    <%= f.fields_for :pickup_sites, @project.pickup_sites do |pickup_site| %>
+    <div class="field">
       接车地点: <%= pickup_site.text_field :name %>
-      接车时间: <%= pickup_site.datetime_select :meeting_time %>
-      接站人姓名: <%= pickup_site.text_field :liaison %>
-      接站人联系电话: <%= pickup_site.text_field :phone_number %>
+      时间: <%= pickup_site.datetime_select :meeting_time %>
+      接站人: <%= pickup_site.text_field :liaison %>
+      联系电话: <%= pickup_site.text_field :phone_number %>
+      <%= pickup_site.label :_destroy, '删除:' %>  
+      <%= pickup_site.check_box :_destroy %>  
+    </div>
     <% end %>
+
+  <div class="field multiupload">
+    <%= f.fields_for :pickup_sites, @project.pickup_sites.build do |pickup_site| %>
+      <%= pickup_site.hidden_field :id %>
+      接车地点: <%= pickup_site.text_field :name %>
+      时间: <%= pickup_site.datetime_select :meeting_time %>
+      接站人: <%= pickup_site.text_field :liaison %>
+      联系电话: <%= pickup_site.text_field :phone_number %>
+    <% end %>
+    <span class="glyphicon glyphicon-remove-circle"></span>
   </div>
 
 

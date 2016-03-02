@@ -51,7 +51,8 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
-  def update
+  # 代码存在bug，有待修复
+  def update 
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -89,7 +90,7 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :nursing_home_id, :description, :start_at, :end_at, :staff_number, :contact_id, pickup_sites_attributes: [:name, :project_id, :liaison, :phone_number, :meeting_time])
+      params.require(:project).permit(:name, :nursing_home_id, :description, :start_at, :end_at, :staff_number, :contact_id, pickup_sites_attributes: [:id, :name, :project_id, :liaison, :phone_number, :meeting_time, :_destroy])
     end
 
     def validate_set_rights
@@ -101,7 +102,6 @@ class ProjectsController < ApplicationController
                 render :text => "error_message_return:#{flash.now[:error]}"
               else
                 flash[:error]="抱歉，您权限不够！"
-                #binding.pry
                 redirect_back_or_default
               end
             end

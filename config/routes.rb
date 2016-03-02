@@ -67,9 +67,7 @@ Rails.application.routes.draw do
   root :to => 'user#index'
 
 
-  resources :pickup_sites
-  resources :residents
-  resources :nurses
+  resources :pickup_sites, :residents, :nurses
   resources :rooms do
     resources :residents
   end
@@ -77,31 +75,18 @@ Rails.application.routes.draw do
     resources :rooms
   end
 
-  resources :assignments
-  resources :records
-  resources :managements
-  resources :nursings
+  resources :assignments, :records, :managements, :nursings, :applications 
 
-  resources :applications 
   resources :projects do
-    resources :applications
+    resources :applications, :assignments
   end
 
-
-
-
   resources :nursing_homes do
-    resources :managements
-    resources :projects
-    resources :zones
-    resources :rooms
-    resources :residents
-    resources :nurses
+    resources :managements, :projects, :zones, :rooms, :residents, :nurses
   end
 
   resources :users do
-    resources :applications
-    resources :messages
+    resources :applications, :messages
   end
 
   resources :messages

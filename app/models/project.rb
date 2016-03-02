@@ -2,14 +2,15 @@ class Project < ActiveRecord::Base
 #活动报名截止时间为活动前一天晚上十点 project.start_at.beginning_of_day.ago(7200)
 
   belongs_to :nursing_home
-  has_many :pickup_sites
+
   has_many :applications
   has_many :assignments,  dependent: :destroy
   has_many :records
   has_many :attended_applications, -> {where verified: true, attended: true}, class_name: "Application"
   has_many :volunteers, through: :attended_applications, source: :user
   belongs_to :contact, class_name: "User", foreign_key: "contact_id"
-  accepts_nested_attributes_for :pickup_sites
+  has_many :pickup_sites
+  accepts_nested_attributes_for :pickup_sites, allow_destroy: true, reject_if: lambda { |attributes| attributes['name'].blank? }
 
 #活动状态定义（针对活动本身而言）
 #1、尚未开始报名。活动虽然被已经被创建但是还没有对外发布，默认两周以内开始的活动为可以报名活动，

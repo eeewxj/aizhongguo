@@ -2,17 +2,17 @@
 
 <p>
   <strong>User:</strong>
-  <%= @assignment.user_id %>
+  <%= @assignment.user.name %>
 </p>
 
 <p>
-  <strong>Resident:</strong>
-  <%= @assignment.resident_id %>
+  <strong>Zone:</strong>
+  <%= @assignment.zone.name %>
 </p>
 
 <p>
   <strong>Project:</strong>
-  <%= @assignment.project_id %>
+  <%= @assignment.project.name %>
 </p>
 
 <%= link_to 'Edit', edit_assignment_path(@assignment) %> |

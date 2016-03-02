@@ -15,6 +15,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/new
   def new
     @assignment = Assignment.new
+    @project = Project.find(params[:id])
   end
 
   # GET /assignments/1/edit
@@ -24,7 +25,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
-    @assignment = Assignment.new(assignment_params)
+    @assignment = Assignment.new(assignment_params.merge({:project_id=>params[:project_id]}))
 
     respond_to do |format|
       if @assignment.save
@@ -69,6 +70,6 @@ class AssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assignment_params
-      params.require(:assignment).permit(:user_id, :resident_id, :project_id)
+      params.require(:assignment).permit(:user_id, :zone_id, :project_id)
     end
 end

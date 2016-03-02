@@ -19,6 +19,12 @@
     <%= f.label :zone_id %><br>
     <%= f.number_field :zone_id %>
   </div>
+
+  <div class="field">
+    <%= f.label :zone_id, "选择区域：" %><br />
+    <%= f.select :zone_id, get_all_zones_as_options(@project.nursing_home) %>
+  </div>
+
   <div class="field">
     <%= f.label :project_id %><br>
     <%= f.number_field :project_id %>

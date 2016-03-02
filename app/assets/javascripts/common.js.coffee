@@ -79,8 +79,8 @@ $(document).on "page:change", ->
     if !$(this).next().hasClass("multiupload")
       next = $(this).html()
       next = next.replace(/_(\d+)_/g, '_'+(Number(next.match(/_(\d+)_/)[1])+1)+'_')
-      if Number(next.match(/_(\d+)_/)[1])==1
-        next = next+"<span class=\"glyphicon glyphicon-remove-circle\"></span>"
+      next = next.replace(/\[(\d+)\]/g, '['+(Number(next.match(/\[(\d+)\]/)[1])+1)+']')
+        
       $(this).after("<div class='field multiupload'>"+next+"</div>")
   )
 
