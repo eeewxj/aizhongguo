@@ -13,6 +13,14 @@ module ApplicationHelper
   end
 
 
+  def get_all_applicants_as_options(project)
+    options=''
+    project.applicants.each do |applicant|
+      options=options + "<option value=#{applicant.id}>#{applicant.name}</option>"
+    end
+    options.html_safe
+  end
+
   def get_all_nursing_homes_as_options
     @nursing_homes=NursingHome.all
     options=''

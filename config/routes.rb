@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   end
   resources :zones do
     resources :rooms
+    resources :residents
   end
 
   resources :assignments, :records, :managements, :nursings, :applications 

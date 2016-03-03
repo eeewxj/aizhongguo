@@ -14,8 +14,10 @@ class AssignmentsController < ApplicationController
 
   # GET /assignments/new
   def new
-    @assignment = Assignment.new
-    @project = Project.find(params[:id])
+    @assignment = Project.find(params[:project_id]).assignments.build
+    unless params[:user_id].nil?
+      @assignment.user_id = params[:user_id]
+    end
   end
 
   # GET /assignments/1/edit
@@ -25,7 +27,7 @@ class AssignmentsController < ApplicationController
   # POST /assignments
   # POST /assignments.json
   def create
-    @assignment = Assignment.new(assignment_params.merge({:project_id=>params[:project_id]}))
+    @assignment = Assignment.new(assignment_params)
 
     respond_to do |format|
       if @assignment.save

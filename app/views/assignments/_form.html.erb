@@ -11,21 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+
+  <div class="field" style="display: none">
     <%= f.label :user_id %><br>
     <%= f.number_field :user_id %>
   </div>
+<!--
   <div class="field">
-    <%= f.label :zone_id %><br>
-    <%= f.number_field :zone_id %>
+    <%= f.label :user_id, "选择志愿者：" %><br>
+    <%= f.select :user_id, get_all_applicants_as_options(@assignment.project) %>
   </div>
-
+-->
   <div class="field">
     <%= f.label :zone_id, "选择区域：" %><br />
-    <%= f.select :zone_id, get_all_zones_as_options(@project.nursing_home) %>
+    <%= f.select :zone_id, get_all_zones_as_options(@assignment.project.nursing_home) %>
   </div>
 
-  <div class="field">
+  <div class="field" style="display: none">
     <%= f.label :project_id %><br>
     <%= f.number_field :project_id %>
   </div>

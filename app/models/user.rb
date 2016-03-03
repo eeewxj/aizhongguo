@@ -105,6 +105,17 @@ class User < ActiveRecord::Base
   def application_of(project)
     Application.where(user_id: id, project_id: project.id)[0]
   end
+
+#查询对某个活动的申请是否已经被分配
+  def has_be_assigned?(project)
+    Assignment.where(user_id: id, project_id: project.id).any?
+  end
+
+#返回对某个活动的分配结果
+  def assignment_of(project)
+    Assignment.where(user_id: id, project_id: project.id)[0]
+  end
+
 #可以报名的活动(包括已经报名和尚未报名的活动)，即Project.published
   def regable_projects
     Project.published

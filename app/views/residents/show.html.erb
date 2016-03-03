@@ -50,7 +50,7 @@
 <div>
   <div id="show_resident" class="col-xs-11 row">
     <div class="tag room-tag">
-      <img src="../images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
+      <img src="/images/tag-orange.png" class="img-responsive" alt="ichina tag-orange">
       <div class=tag-label>
         <p><%= @resident.zone.name %></p>
         <p><%= @resident.room.room_number %></p>
@@ -126,10 +126,10 @@
 
       <hr class="division">
       <p>
-        <strong>护工：</strong><%= @resident.nurses.first.name %>
+        <strong>护工：</strong><%= @resident.nurses.first.name unless @resident.nurses.empty? %>
       </p>
       <p>
-        <%= @resident.nurses.first.home %>
+        <%= @resident.nurses.first.home unless @resident.nurses.empty?%>
       </p>
     </div>
   </div>
