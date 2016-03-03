@@ -14,6 +14,10 @@
   -moz-transform: rotate(-90deg);  
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); 
 }
+.rotated
+{
+  @include rotated;
+}
 
 //输入框周围蓝色阴影
 input
@@ -101,12 +105,8 @@ a.btn{color:white;}
   top: 17px;
 }
 
-////#col-xs-9/10为最大块，两侧边距12.5%/8.333%，直接位于container-fluid->row块内
-.col-xs-9
-{
-  margin: 0px 12.5%;
-  padding:0px;
-}
+////#col-xs-11为最大块，两侧边距12.5%/8.333%，直接位于container-fluid->row块内
+
 .col-xs-11
 {
   margin: 0px 4.167%;
@@ -398,6 +398,13 @@ p.footer
     position:relative;
     left:7%;
     width:86%;
+    .list-avatar
+    {
+      padding:0px;
+      img{width: 100%}
+    }
+
+ 
   }
   .count
   {

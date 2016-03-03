@@ -91,6 +91,15 @@ $(document).on "page:change", ->
     $(this).children(".glyphicon").toggleClass("glyphicon-forward")
     $(this).parent().next(".text").animate({height: 'toggle', opacity: 'toggle'}, 500)
   )
+
+#点击全部展示及部分展示
+  $(".extend_btn").click(->
+    $(this).children(".glyphicon").toggleClass("glyphicon-backward")
+    $(this).children(".glyphicon").toggleClass("glyphicon-forward")
+    $(this).parent().find(".simplified").animate({height: 'toggle', opacity: 'toggle'}, 500)
+    $(this).parent().find(".extended").animate({height: 'toggle', opacity: 'toggle'}, 500)
+  )
+
 #点击删除按钮删除父级div
   $(document).on("click", "span.glyphicon.glyphicon-remove-circle", ->
     $(this).parent().remove()

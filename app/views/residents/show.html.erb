@@ -131,6 +131,32 @@
       <p>
         <%= @resident.nurses.first.home unless @resident.nurses.empty?%>
       </p>
+
+      <hr class="division">
+      <p>
+        <strong>志愿者对<%= Constants::GENDERPRON.key(@resident.gender) %>的关怀感言</strong>
+      </p>
+      <% @resident.records.each do |record| %>
+        <div class="col-xs-2 list-avatar">
+          <%= image_tag record.user.avatar.url(:thumb) %>
+        </div>
+
+        <div class="col-xs-10 list-record row">
+          <div class="col-xs-9">
+            <div class="simplified">
+              <%= record.desc[0..Constants::MAX_NUMBER_OF_LIST_LINE] %>
+              <%= "..." if record.desc.length > Constants::MAX_NUMBER_OF_LIST_LINE  %>
+            </div>
+            <div class="extended" style="display:none">
+              <%= record.desc %>
+            </div>
+          </div>
+          <div class="extend_btn col-xs-3">
+            <%= l(record.created_at,format: :date) %>
+            <span class="rotated glyphicon glyphicon-backward" aria-hidden="true"></span>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

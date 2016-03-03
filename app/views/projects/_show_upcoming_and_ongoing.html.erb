@@ -41,7 +41,11 @@
     </div>
     <div class="operations">
       <div>
-        <%= link_to '查看组长分配关怀对象', zone_residents_path(current_user.assignment_of(@project).zone), class: "btn btn-danger" %>
+        <% if current_user.has_be_assigned?(@project) %>
+          <%= link_to '查看组长分配关怀对象', zone_residents_path(current_user.assignment_of(@project).zone), class: "btn btn-danger" %>
+        <% else %>
+          <%= link_to '查看报名信息', "/projects/#{@project.id}/direction", class: "btn btn-danger" %>
+        <% end %>
       </div>
     </div>
   </div>
