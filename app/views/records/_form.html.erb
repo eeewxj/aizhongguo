@@ -12,10 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :resident_id %><br>
-    <%= f.number_field :resident_id %>
+    <%= f.label :resident_id, "选择关怀对象" %><br>
+    <%= f.select :resident_id, get_all_residents_as_options(@record.project.nursing_home) %>
   </div>
-  <div class="field">
+  <div class="field" style="display:none">
     <%= f.label :project_id %><br>
     <%= f.number_field :project_id %>
   </div>
@@ -23,7 +23,68 @@
     <%= f.label :desc %><br>
     <%= f.text_area :desc %>
   </div>
+
+  <div class="field">
+    <%= f.label :eye, "眼："%><br>
+    <%= f.text_field :eye %>
+  </div>
+  <div class="field">
+    <%= f.label :ear, "耳："%><br>
+    <%= f.text_field :ear %>
+  </div>
+  <div class="field">
+    <%= f.label :nose, "鼻：" %><br>
+    <%= f.text_field :nose %>
+  </div>
+  <div class="field">
+    <%= f.label :tongue, "舌：" %><br>
+    <%= f.text_field :tongue %>
+  </div>
+  <div class="field">
+    <%= f.label :body, "身：" %><br>
+    <%= f.text_field :body %>
+  </div>
+  <div class="field">
+    <%= f.label :mind, "意：" %><br>
+    <%= f.text_field :mind %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<% @message=current_user.sent_messages.build %>
+<%= form_for(@message, remote: true) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field" style="display:none">
+    <%= f.label :sender_id %><br>
+    <%= f.number_field :sender_id %>
+  </div>
+  <div class="field" >
+    <%= f.label :user_id, "选择组长：" %><br>
+    <%= f.select :user_id, get_all_directors_as_options %>
+  </div>
+  <div class="field">
+    <%= f.label :content, "反馈："%><br>
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+

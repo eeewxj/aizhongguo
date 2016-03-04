@@ -31,8 +31,12 @@ module ApplicationHelper
   end
 
 
-  def get_all_directors_as_options
-    @directors=User.where("user_type = ?", User::DIRECTOR)
+  def get_all_directors_as_options(nursing_home = nil)
+    if nursing_home.nil?
+      @directors=User.where("user_type = ?", User::DIRECTOR)
+    else
+      @directors = User.where(user_type: User::DIRECTOR).joins(:managements).where(managements: { nursing_home_id: nursing_home.id })
+    end
     options=''
     @directors.each do |director| 
       options=options + "<option value=#{director.id}>#{director.name}</option>"
@@ -63,6 +67,15 @@ module ApplicationHelper
     options=''
     @zones.each do |zone| 
       options=options + "<option value=#{zone.id}>#{zone.name}</option>"
+    end
+    options.html_safe
+  end
+
+  def get_all_residents_as_options(nursing_home)
+    @residents=nursing_home.residents
+    options=''
+    @residents.each do |resident| 
+      options=options + "<option value=#{resident.id}>#{resident.name}</option>"
     end
     options.html_safe
   end

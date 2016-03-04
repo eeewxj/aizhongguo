@@ -95,12 +95,23 @@
         </div>
         <div class="text">
           <p class="grey">本次活动中我关怀的对象:<p>
-          <p class="">一条条列出已填写的关怀记录<p>
+          <% current_user.records_of(project).each do |record| %>
+            <table class="switch">
+              <tr>
+                <td><%= record.resident.room.zone.name %></td>
+                <td><%= record.resident.room.room_number %></td>
+                <td><%= record.resident.name %></td>
+                <td><%= get_gender(record.resident.gender) %></td>
+                <td><%= record.resident.age %></td>
+                <td><%= link_to '详情', record_path(record) %></td>
+              </tr>
+            </table>
+          <% end %>
         </div>
         <div class="operations">
           <div>
             <h4 style="margin-top:0px;">
-              <%= link_to "#" do %>
+              <%= link_to new_project_record_path(project) do %>
                 <span class="glyphicon glyphicon-plus-sign" style="font-size:24px;top:6px;color:#DAEBF2;"></span>
                 <span>点击继续添加关怀记录</span>
               <% end %>

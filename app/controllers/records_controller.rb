@@ -16,7 +16,7 @@ class RecordsController < ApplicationController
   # GET /records/new
   def new
     @record = Record.new
-    @record.user_id = current_user.id
+    @record.project_id = params[:project_id]
   end
 
   # GET /records/1/edit
@@ -26,7 +26,7 @@ class RecordsController < ApplicationController
   # POST /records
   # POST /records.json
   def create
-    @record = Record.new(record_params)
+    @record = Record.new(record_params.merge({user_id: current_user.id}))
 
     respond_to do |format|
       if @record.save
@@ -71,11 +71,11 @@ class RecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def record_params
-      params.require(:record).permit( :resident_id, :project_id, :desc)
+      params.require(:record).permit( :resident_id, :project_id, :desc, :eye, :ear, :nose, :tongue, :body, :mind)
     end
 
     def validate_set_rights
-      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id==@record.project.nursing_home_id) || current_user.admin?))
+      unless (!current_user.nil? && ((current_user.director? && current_user.nursing_homes.include?(@record.project.nursing_home)) || current_user.admin?))
           respond_to do |format|
             format.html do
               if request.xhr?

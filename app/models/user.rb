@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
 #for the admin user_type==0
 
 #for directors user_type==1
-  has_one :management, dependent: :destroy
-  has_one :nursing_home, through: :management
+  has_many :managements, dependent: :destroy
+  has_many :nursing_homes, through: :managements
 #for volunteers user_type==2
   has_many :applications, dependent: :destroy
   has_many :assignments, dependent: :destroy
@@ -140,10 +140,19 @@ class User < ActiveRecord::Base
   end
 #已经报名，已经参加，已经填写了关怀记录的活动
   def finished_projects
-    Project.finished.joins(:applications).where(applications: {user_id: id, verified: true, attended: true}).joins("JOIN records on records.user_id = applications.user_id AND records.project_id = applications.project_id")
+    Project.finished.joins(:applications).where(applications: {user_id: id, verified: true, attended: true}).joins("JOIN records on records.user_id = applications.user_id AND records.project_id = applications.project_id").distinct
   end
 #已经完成，但是尚处在修改期的活动
   def modifiable_projects
     finished_projects.where("end_at > ?", Time.now-3.days)
   end
+
+#参加某个活动的关怀记录
+  def records_of(project)
+    Record.where(user_id: id, project_id: project.id)
+  end
+
+
+
+
 end

@@ -79,7 +79,7 @@ Rails.application.routes.draw do
   resources :assignments, :records, :managements, :nursings, :applications 
 
   resources :projects do
-    resources :applications, :assignments
+    resources :applications, :assignments, :records
   end
 
   resources :nursing_homes do
