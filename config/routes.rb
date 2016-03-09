@@ -64,6 +64,11 @@ Rails.application.routes.draw do
   get 'users/check_available' => 'users#check_available'
   post '/user/login' => 'user#login'
   get '/user/logout' => 'user#logout'
+  get '/user/manage' => 'user#manage'
+  get '/residents/manage' => 'resident#manage'
+  get '/projects/manage' => 'project#manage'
+  get '/nurses/manage' => 'nurse#manage'
+  get '/users/manage' => 'user#manage'
   root :to => 'user#index'
 
 

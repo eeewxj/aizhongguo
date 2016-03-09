@@ -10,4 +10,5 @@ class Message < ActiveRecord::Base
       save
     end
   end
+
 end

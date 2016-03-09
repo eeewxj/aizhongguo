@@ -96,9 +96,9 @@
         <div class="text">
           <p class="grey">本次活动中我关怀的对象:<p>
           <% current_user.records_of(project).each do |record| %>
-            <table class="switch">
+            <table class="table switch">
               <tr>
-                <td><%= record.resident.room.zone.name %></td>
+                <td class="col-xs-2"><%= record.resident.room.zone.name %></td>
                 <td><%= record.resident.room.room_number %></td>
                 <td><%= record.resident.name %></td>
                 <td><%= get_gender(record.resident.gender) %></td>

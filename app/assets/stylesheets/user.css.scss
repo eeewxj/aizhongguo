@@ -150,6 +150,10 @@ body
   {
     border: 1px solid #ddd;
   }
+  ul.nav li 
+  {
+    padding: 0px;
+  }
 }
 ////#layout : footer页脚
 //页脚宽度为100%，两行文字均居中，颜色淡灰色，底部不再留边距
@@ -403,7 +407,29 @@ p.footer
       padding:0px;
       img{width: 100%}
     }
-
+    a
+    {
+      &.col-xs-12
+      {
+        margin: 10px 0px;
+        font-size: 20px;
+        height: 45px;
+      }
+    }
+    .circle.col-xs-1
+    {
+      padding: 0px;
+      height: 22px;
+      width: 22px;
+      @include rounded(11px);
+      background-color: red;
+      color:white;
+      position: relative;
+      left: 88%;
+      top: -45px;
+      text-align: center;
+      line-height:22px;
+    }
  
   }
   .count

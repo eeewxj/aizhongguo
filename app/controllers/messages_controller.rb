@@ -4,12 +4,20 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    @system_messages=current_user.system_messages
+    @received_messages=current_user.received_messages
+    @messages = current_user.received_messages
+    @sent_messages = current_user.sent_messages
+    respond_to do |format|
+      format.html 
+      format.json
+    end 
   end
 
   # GET /messages/1
   # GET /messages/1.json
   def show
+    @message.update_status(current_user.id)
   end
 
   # GET /messages/new

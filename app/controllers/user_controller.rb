@@ -43,4 +43,13 @@ class UserController < ApplicationController
       format.json {render :text => ({:success=>flash[:success]}).to_json}
     end
   end
+
+  def manage
+    @nursing_homes = current_user.nursing_homes
+    @feedbacks = current_user.received_messages
+    respond_to do |format|
+      format.html {render layout: "application"}
+    end
+  end
+
 end

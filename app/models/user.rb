@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   has_many :absent_projects, through: :absent_applications, source: :project
   has_many :sent_messages, :foreign_key => "sender_id", :class_name => "Message"
   has_many :received_messages, :class_name => "Message"
-
+  has_many :system_messages, -> { where(sender_id: 0) }, :class_name => "Message"
 
 ##数据验证##
   #binding.pry
@@ -41,14 +41,10 @@ class User < ActiveRecord::Base
   validates :phone_number, :presence => { :message => '电话一定要填的' }
 
 
-
-
-
-
   has_attached_file :avatar,
     :default_url => "/images/default_avatar.png", 
     :hash_secret => "efb40e6f2783c6d6641db8f1accdce15", 
-    :styles => { :medium => "#{AVATAR_NW}x#{AVATAR_NH}>", :thumb => "#{AVATAR_SW}x#{AVATAR_SH}>" },
+    :styles => { :medium => "#{Constants::AVATAR_NW}x#{Constants::AVATAR_NH}>", :thumb => "#{Constants::AVATAR_SW}x#{Constants::AVATAR_SH}>" },
     :processors => [:jcropper],
     :dependent => :destroy
   validates_attachment :avatar,
@@ -78,17 +74,23 @@ class User < ActiveRecord::Base
     (user && user.password == password)? user : nil
   end
 
+#计算年龄，周岁
+  def age
+    age = Time.now.year - birthday.year
+    (Time.now.month > birthday.month or (Time.now.month == birthday.month and Time.now.day >= birthday.day))? age : (age-1)
+  end
+
 #是否管理员
   def admin?
-    user_type==TYPE_ADMIN
+    user_type==Constants::TYPE_ADMIN
   end
 #是否组长
   def director?
-    user_type==TYPE_DIRECTOR
+    user_type==Constants::TYPE_DIRECTOR
   end
 #是否志愿者
   def volunteer?
-    user_type==TYPE_VOLUNTEER
+    user_type==Constants::TYPE_VOLUNTEER
   end
 
 #设置为志愿者后清理管理关系
@@ -142,14 +144,19 @@ class User < ActiveRecord::Base
   def finished_projects
     Project.finished.joins(:applications).where(applications: {user_id: id, verified: true, attended: true}).joins("JOIN records on records.user_id = applications.user_id AND records.project_id = applications.project_id").distinct
   end
-#已经完成，但是尚处在修改期的活动
+#已经完成，但是尚处在修改期的活动,即完成后三天之内
   def modifiable_projects
-    finished_projects.where("end_at > ?", Time.now-3.days)
+    #这段代码需要修改，效率极低 *TO DO*
+    Project.find_by_sql("select projects.* from projects left join (select * from records group by project_id) as records on projects.id = records.project_id where records.user_id = #{id} AND records.created_at > '#{Time.now-3.days}' ")
   end
 
 #参加某个活动的关怀记录
   def records_of(project)
     Record.where(user_id: id, project_id: project.id)
+  end
+
+  def unread_messages
+    received_messages.where(:status => [0,4] )
   end
 
 

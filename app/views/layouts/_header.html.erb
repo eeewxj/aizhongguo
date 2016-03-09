@@ -50,16 +50,27 @@
   <div class="col-xs-11"></div>
 
   <ul class="nav nav-tabs text-center" style="font-size:16px">
-    <li role="presentation" class="col-xs-6">
-      <%= link_to_current '活动中心', projects_path %>
-    </li>
-    <li role="presentation" class="col-xs-6">
-      <% unless current_user.nil? %>
+    <% if (!current_user.nil? && current_user.director?) %>
+      <li role="presentation" class="col-xs-4">
+        <%= link_to_current '管理中心', {controller: "user", action: "manage"} %>
+      <li role="presentation" class="col-xs-4">
+        <%= link_to_current '活动中心', projects_path %>
+      </li>
+      <li role="presentation" class="col-xs-4">
         <%= link_to_current '个人中心', user_path(current_user) %>
-      <% else %>
-        <%= link_to_current '个人中心', root_path %>
-      <% end %>
-    </li>
+      </li>
+    <% else %>
+      <li role="presentation" class="col-xs-6">
+        <%= link_to_current '活动中心', projects_path %>
+      </li>
+      <li role="presentation" class="col-xs-6">
+        <% unless current_user.nil? %>
+          <%= link_to_current '个人中心', user_path(current_user) %>
+        <% else %>
+          <%= link_to_current '个人中心', root_path %>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </div>
 
