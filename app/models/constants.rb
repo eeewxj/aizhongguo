@@ -18,5 +18,5 @@ module Constants
   AVATAR_SH = 100
   AVATAR_NW = 300
   AVATAR_NH = 300
-
+  MESSAGE_STATUS = { "未读" => 0, "已读" => 1, "未读接受方已删" => 2, "已读接受方已删" => 3, "未读发送方已删" => 4, "已读发送方已删" => 5, "未读双方已删" => 6, "已读双方已删" => 7, }
 end

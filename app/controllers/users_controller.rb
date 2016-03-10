@@ -124,6 +124,10 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
   end
 
 
+  def manage
+    @users = current_user.nursing_homes.map{ |n| n.projects.last.volunteers}.flatten
+  end
+
 
   private
     def create_user_params

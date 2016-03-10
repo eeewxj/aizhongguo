@@ -4,6 +4,10 @@ class Message < ActiveRecord::Base
 #一条消息初建的时候为000或者100，即0或4，系统消息会默认被系统删除
 #最后到达110或者111，一旦消息进入11*,即删除消息
 
+  belongs_to :sender, class_name: "User", foreign_key: "sender_id"
+  belongs_to :receiver, class_name: "User", foreign_key: "user_id"
+
+
   def update_status(current_user_id)
     if current_user_id==user_id
       write_attribute(:status, status+1-status[0])
