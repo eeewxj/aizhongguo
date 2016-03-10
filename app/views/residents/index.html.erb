@@ -51,7 +51,7 @@
                   <td class=""><%= resident.room.zone.name %></td>
                   <td><%= resident.room.room_number %></td>
                   <td><%= resident.name %></td>
-                  <td><%= get_gender(resident.gender) %></td>
+                  <td><%= Constants::GENDER.key(resident.gender) %></td>
                   <td><%= resident.age %></td>
                   <td><%= link_to '详情', resident %></td>
                  </tr>

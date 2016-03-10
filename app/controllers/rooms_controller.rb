@@ -23,10 +23,10 @@ class RoomsController < ApplicationController
   def new
     @room = Room.new
     if current_user.director?
-      @nursing_home = current_user.nursing_home
+      @nursing_homes = current_user.nursing_homes
     else
       if current_user.admin?
-        @nursing_home = NursingHome.find_by_id(params[:nursing_home_id])
+        @nursing_homes = NursingHome.all
       end
     end
   end

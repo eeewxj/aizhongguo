@@ -11,47 +11,106 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :name, "姓名："%><br>
+    <%= f.text_field :name, placeholder: "真实姓名" %>
   </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.select :gender, get_genders_as_options %>
 
-  </div>
-  <div class="field">
-    <%= f.label :birthday %><br>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :birthday, "出生日期：" %><br>
     <%= f.date_select :birthday, start_year: Date.today.year-120, end_year: Date.today.year-45 %>
+    <%= f.select :gender, get_constants_as_options(Constants::GENDER) %>
   </div>
-  <div class="field">
-    <%= f.label :condition %><br>
-    <%= f.text_area :condition %>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :phone_number, "电话号码：" %><br>
+    <%= f.text_field :phone_number, placeholder: "电话号码" %>
   </div>
-  <div class="field">
-    <%= f.label :phone_number %><br>
-    <%= f.text_field :phone_number %>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :ethnic, "民族：" %><br>
+    <%= f.text_field :ethnic, placeholder: "民族" %>
   </div>
-  <div class="field">
-    <%= f.label :contact %><br>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :hometown, "家乡：" %><br>
+    <%= f.text_field :hometown, placeholder: "家乡" %>
+  </div>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :home, "现居住地址：" %><br>
+    <%= f.text_field :home, placeholder: "居住地址" %>
+  </div>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :education, "学历：" %><br>
+    <%= f.select :education, get_constants_as_options(Constants::EDUCATION) %>
+  </div>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :previous_job, "曾从事职业：" %><br>
+    <%= f.text_field :previous_job, placeholder: "曾从事职业" %>
+  </div>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :religion, "信仰：" %><br>
+    <%= f.text_field :religion, placeholder: "信仰" %>
+  </div>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :interests, "爱好/禁忌：" %><br>
+    <%= f.text_field :interests, placeholder: "爱好/禁忌" %>
+  </div>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :tastes, "喜好/禁忌食品：" %><br>
+    <%= f.text_field :tastes, placeholder: "喜好/禁忌食品" %>
+  </div>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :condition, "身体状况：" %><br>
+    <%= f.text_area :condition, placeholder: "身体状况" %>
+  </div>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :mental_state, "心理状况：" %><br>
+    <%= f.text_area :mental_state, placeholder: "心理状况"%>
+  </div>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :nursing_type, "护理分类：" %><br>
+    <%= f.select :nursing_type, get_constants_as_options(Constants::NURSINGTYPE) %>
+  </div>
+
+  <div>
+    <hr class="division">
+  </div>
+
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :contact, "联系人：" %><br>
     <%= f.text_field :contact %>
   </div>
-  <div class="field">
-    <%= f.label :contact_phone_number %><br>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :contact_phone_number, "联系人电话：" %><br>
     <%= f.text_field :contact_phone_number %>
   </div>
 
-  <div class="field">
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :room_id, "选择房间号：" %><br />
-    <%= f.select :room_id, get_all_rooms_as_options(current_user) %>
+    <%= f.select :room_id, get_attrs_as_options(current_user.nursing_homes.map(&:rooms).flatten, "room_number") %>
+
+
   </div>
 
-  <div class="col-xs-9 input-group form-group">
+
+  <div class="col-xs-12 input-group form-group">
     <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
     <%= f.file_field :avatar, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <hr class="division">
+  </div>
+  <div class="actions col-xs-12 input-group form-group">
+    <%= f.submit "提 交"%>
   </div>
 <% end %>

@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :resident_id, "选择关怀对象" %><br>
-    <%= f.select :resident_id, get_all_residents_as_options(@record.project.nursing_home) %>
+    <%= f.select :resident_id, get_attrs_as_options(@record.project.nursing_home.residents, "name") %>
   </div>
   <div class="field" style="display:none">
     <%= f.label :project_id %><br>

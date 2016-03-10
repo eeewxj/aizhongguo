@@ -81,7 +81,7 @@ $(document).on "page:change", ->
       next = next.replace(/_(\d+)_/g, '_'+(Number(next.match(/_(\d+)_/)[1])+1)+'_')
       next = next.replace(/\[(\d+)\]/g, '['+(Number(next.match(/\[(\d+)\]/)[1])+1)+']')
         
-      $(this).after("<div class='field multiupload'>"+next+"</div>")
+      $(this).after("<div class='field multiupload col-xs-12 input-group form-group'>"+next+"</div>")
   )
 
 

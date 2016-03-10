@@ -13,6 +13,7 @@ module ApplicationHelper
   end
 
 
+##以下get_all_*类方法都可以替换为 get_attrs_as_options 或 get_constants_as_options
   def get_all_applicants_as_options(project)
     options=''
     project.applicants.each do |applicant|
@@ -22,7 +23,7 @@ module ApplicationHelper
   end
 
   def get_all_nursing_homes_as_options
-    @nursing_homes=NursingHome.all
+    @nursing_homes=current_user.nursing_homes
     options=''
     @nursing_homes.each do |nursing_home| 
       options=options + "<option value=#{nursing_home.id}>#{nursing_home.name}</option>"
@@ -71,35 +72,25 @@ module ApplicationHelper
     options.html_safe
   end
 
-  def get_all_residents_as_options(nursing_home)
-    @residents=nursing_home.residents
-    options=''
-    @residents.each do |resident| 
-      options=options + "<option value=#{resident.id}>#{resident.name}</option>"
+
+#接受hash类参数，转换为下拉选单选项
+  def get_constants_as_options(hash)
+    options = ''
+    hash.each do |key, value|
+      options = options + "<option value=#{value}>#{key}</option>"
     end
     options.html_safe
   end
 
-  def get_all_rooms_as_options(director)
-    @rooms=director.nursing_home.rooms
-    options=''
-    @rooms.each do |room| 
-      options=options + "<option value=#{room.id}>#{room.room_number}</option>"
+#该方法不安全，需要注意，arr 是对象数组，attr_name是要调用的对象方法，
+#输出结果将数组中所有对象的对应方法返回结果组成选单选项
+  def get_attrs_as_options(arr, attr_name)
+    options = ''
+    arr.each do |a|
+      options = options + "<option value=#{a.id}>#{a.send(attr_name)}</option>"
     end
     options.html_safe
   end
 
-  def get_genders_as_options
-    "<option value=false>男</option><option value=true>女</option>".html_safe
-  end
-
-  def get_gender(gender)
-    case gender
-      when false
-        return "男"
-      else
-        return "女"
-    end
-  end
 
 end

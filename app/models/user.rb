@@ -118,6 +118,9 @@ class User < ActiveRecord::Base
     Assignment.where(user_id: id, project_id: project.id)[0]
   end
 
+#对于志愿者而言的活动分类应该在applications表中添加status字段来表示，通过一次查询得到project_id数组
+#添加status的好处在于保存了查询计算结果，避免重复查询计算，用小空间来换取大量时间
+#现在采用的方法费时费力，查询速度慢，需要改进。* TO DO *
 #可以报名的活动(包括已经报名和尚未报名的活动)，即Project.published
   def regable_projects
     Project.published
@@ -146,7 +149,7 @@ class User < ActiveRecord::Base
   end
 #已经完成，但是尚处在修改期的活动,即完成后三天之内
   def modifiable_projects
-    #这段代码需要修改，效率极低 *TO DO*
+    #这段代码需要修改，效率低 *TO DO*
     Project.find_by_sql("select projects.* from projects left join (select * from records group by project_id) as records on projects.id = records.project_id where records.user_id = #{id} AND records.created_at > '#{Time.now-3.days}' ")
   end
 
@@ -158,8 +161,9 @@ class User < ActiveRecord::Base
   def unread_messages
     received_messages.where(:status => [0,4] )
   end
-
-
-
+#组长拥有的活动，即所管理的所有养老院的活动，
+  def projects
+    nursing_homes.map(&:projects).flatten
+  end
 
 end

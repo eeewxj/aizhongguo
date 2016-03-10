@@ -11,62 +11,62 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :name, "活动名称：" %><br>
     <%= f.text_field :name %>
   </div>
 
-  <div class="field">
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :nursing_home_id, "选择养老院：" %><br />
     <%= f.select :nursing_home_id, get_all_nursing_homes_as_options %>
   </div>
 
-  <div class="field"><!-- description中应该包含集合地点、注意事项、鼓励话语等-->
-    <%= f.label :description %><br>
+  <div class="field col-xs-12 input-group form-group"><!-- description中应该包含集合地点、注意事项、鼓励话语等-->
+    <%= f.label :description, "活动介绍：" %><br>
     <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :start_at %><br>
-    <%= f.datetime_select :start_at %>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :start_at, "开始时间：" %><br>
+    <%= f.datetime_select(:start_at) %>
   </div>
-  <div class="field">
-    <%= f.label :end_at %><br>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :end_at, "结束时间：" %><br>
     <%= f.datetime_select :end_at %>
   </div>
-  <div class="field">
-    <%= f.label :staff_number %><br>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :staff_number, "预计需要人数：" %><br>
     <%= f.number_field :staff_number %>
   </div>
 
-  <div class="field">
-    <%= f.label :contact_id, "选择联系人" %><br>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :contact_id, "选择联系人：" %><br>
     <%= f.select :contact_id, get_all_directors_as_options %>
   </div>
 
     <%= f.fields_for :pickup_sites, @project.pickup_sites do |pickup_site| %>
-    <div class="field">
-      接车地点: <%= pickup_site.text_field :name %>
-      时间: <%= pickup_site.datetime_select :meeting_time %>
-      接站人: <%= pickup_site.text_field :liaison %>
-      联系电话: <%= pickup_site.text_field :phone_number %>
+    <div class="field col-xs-12 input-group form-group">
+      接车地点:<br> <%= pickup_site.text_field :name %><br>
+      接车时间:<br> <%= pickup_site.datetime_select :meeting_time %><br>
+      接站人:<br> <%= pickup_site.text_field :liaison %><br>
+      联系电话:<br> <%= pickup_site.text_field :phone_number %><br>
       <%= pickup_site.label :_destroy, '删除:' %>  
       <%= pickup_site.check_box :_destroy %>  
     </div>
     <% end %>
 
-  <div class="field multiupload">
+  <div class="field multiupload col-xs-12 input-group form-group">
     <%= f.fields_for :pickup_sites, @project.pickup_sites.build do |pickup_site| %>
       <%= pickup_site.hidden_field :id %>
-      接车地点: <%= pickup_site.text_field :name %>
-      时间: <%= pickup_site.datetime_select :meeting_time %>
-      接站人: <%= pickup_site.text_field :liaison %>
-      联系电话: <%= pickup_site.text_field :phone_number %>
+      接车地点:<br> <%= pickup_site.text_field :name %><br>
+      接车时间:<br> <%= pickup_site.datetime_select :meeting_time %><br>
+      接站人:<br> <%= pickup_site.text_field :liaison %><br>
+      联系电话:<br> <%= pickup_site.text_field :phone_number %><br>
     <% end %>
-    <span class="glyphicon glyphicon-remove-circle"></span>
+    <span class="glyphicon glyphicon-remove-circle"></span>点击取消创建该接站点
   </div>
 
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions  col-xs-12 input-group form-group">
+    <%= f.submit "提 交"%>
   </div>
 <% end %>

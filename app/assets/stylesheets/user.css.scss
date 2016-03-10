@@ -230,7 +230,7 @@ p.footer
 }
 
 ////#用户注册页面
-#new_user
+#new_user, #new_project, .new_resident, .new_zone, .new_room, .new_nurse
 {
   .col-xs-1.back
   {
@@ -264,7 +264,22 @@ p.footer
     margin-top:13px;
   }
 
-  .form-group 
+  .col-xs-12.form-group 
+  {
+    input, textarea
+    {
+      height: 45px;
+      width:100%;
+      border-radius:0px;
+      &[type="file"]
+      {
+        height:45px;
+        padding:10px 50px;
+      }
+    }
+  }
+
+  .col-xs-9.form-group 
   {
     input,select
     {
@@ -460,6 +475,8 @@ p.footer
 {
   .field.multiupload
   {
+    background-color: #ddd;
+    border: 2px solid #aaa;
     span.glyphicon-remove-circle
     {
       font-size: 20px;

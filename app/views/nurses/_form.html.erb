@@ -11,59 +11,57 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :name, "护工姓名：" %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :birthday %><br>
-    <%= f.date_select :birthday %>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :birthday, "出生日期：" %><br>
+    <%= f.date_select :birthday, start_year: Date.today.year-120, end_year: Date.today.year-45 %>
+    <%= f.select :gender, get_constants_as_options(Constants::GENDER) %>
   </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.check_box :gender %>
-  </div>
-  <div class="field">
+
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :phone %><br>
     <%= f.text_field :phone %>
   </div>
-  <div class="field">
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :hometown %><br>
     <%= f.text_field :hometown %>
   </div>
-  <div class="field">
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :home %><br>
     <%= f.text_field :home %>
   </div>
-  <div class="field">
-    <%= f.label :education %><br>
-    <%= f.number_field :education %>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :education, "学历：" %><br>
+    <%= f.select :education, get_constants_as_options(Constants::EDUCATION) %>
   </div>
-  <div class="field">
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :previous_job %><br>
     <%= f.text_field :previous_job %>
   </div>
-  <div class="field">
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :religion %><br>
     <%= f.text_field :religion %>
   </div>
-  <div class="field">
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :interests %><br>
     <%= f.text_field :interests %>
   </div>
-  <div class="field">
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :background %><br>
     <%= f.text_area :background %>
   </div>
-  <div class="field">
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :nursing %><br>
     <%= f.text_area :nursing %>
   </div>
-  <div class="field">
-    <%= f.label :nursing_home_id %><br>
-    <%= f.number_field :nursing_home_id %>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :nursing_home_id, "选择养老院：" %><br />
+    <%= f.select :nursing_home_id, get_all_nursing_homes_as_options %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions col-xs-12 input-group form-group">
+    <%= f.submit "提 交" %>
   </div>
 <% end %>

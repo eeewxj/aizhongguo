@@ -65,10 +65,10 @@ Rails.application.routes.draw do
   post '/user/login' => 'user#login'
   get '/user/logout' => 'user#logout'
   get '/user/manage' => 'user#manage'
-  get '/residents/manage' => 'resident#manage'
-  get '/projects/manage' => 'project#manage'
-  get '/nurses/manage' => 'nurse#manage'
-  get '/users/manage' => 'user#manage'
+  get '/residents/manage' => 'residents#manage'
+  get '/projects/manage' => 'projects#manage'
+  get '/nurses/manage' => 'nurses#manage'
+  get '/users/manage' => 'users#manage'
   root :to => 'user#index'
 
 

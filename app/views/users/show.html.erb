@@ -9,7 +9,7 @@
         <b><%= " "+@user.name %></b>
       </h4>
       <p class="grey">
-        <%= get_gender(@user.gender)+@user.work_unit.to_s %>
+        <%= Constants::GENDER.key(@user.gender)+@user.work_unit.to_s %>
       </p>
       <p class="grey">
         <%= @user.self_description.to_s %>
@@ -101,7 +101,7 @@
                 <td class="col-xs-2"><%= record.resident.room.zone.name %></td>
                 <td><%= record.resident.room.room_number %></td>
                 <td><%= record.resident.name %></td>
-                <td><%= get_gender(record.resident.gender) %></td>
+                <td><%= Constants::GENDER.key(record.resident.gender) %></td>
                 <td><%= record.resident.age %></td>
                 <td><%= link_to '详情', record_path(record) %></td>
               </tr>

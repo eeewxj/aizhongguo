@@ -8,7 +8,7 @@
         <b><%= " "+current_user.name %></b>
       </h4>
       <p class="grey">
-        <%= get_gender(current_user.gender)+"  "+current_user.age.to_s+"岁" %>
+        <%= Constants::GENDER.key(current_user.gender)+"  "+current_user.age.to_s+"岁" %>
       </p>
       <% @nursing_homes.each do |nursing_home| %>
         <p class="grey">

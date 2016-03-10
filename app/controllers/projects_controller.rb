@@ -51,7 +51,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
-  # 代码存在bug，有待修复
+  # 代码存在bug，有待修复 TO DO
   def update 
     respond_to do |format|
       if @project.update(project_params)
@@ -81,6 +81,9 @@ class ProjectsController < ApplicationController
   def notice
   end
 
+  def manage
+
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

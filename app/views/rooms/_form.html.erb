@@ -11,21 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+
+
+  <div class="field col-xs-12 input-group form-group">
     <%= f.label :zone_id, "选择区域：" %><br />
-    <%= f.select :zone_id, get_all_zones_as_options(@nursing_home) %>
+    <%= f.select :zone_id, get_attrs_as_options(@nursing_homes.map(&:zones).flatten, "name") %>
   </div>
 
-  <div class="field">
-    <%= f.label :room_number %><br>
-    <%= f.text_field :room_number %>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :room_number, "房间号：" %><br>
+    <%= f.text_field :room_number, placeholder: "房间号" %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
+  <div class="field col-xs-12 input-group form-group">
+    <%= f.label :description, "房间描述："%><br>
     <%= f.text_area :description %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions col-xs-12 input-group form-group">
+    <%= f.submit "提 交"%>
   </div>
 <% end %>
