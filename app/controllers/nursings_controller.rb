@@ -14,7 +14,8 @@ class NursingsController < ApplicationController
 
   # GET /nursings/new
   def new
-    @nursing = Nursing.new
+    @nursing_home = NursingHome.find(params[:nursing_home_id])
+    @nursing = @nursing_home.nursings.build
   end
 
   # GET /nursings/1/edit
@@ -28,7 +29,7 @@ class NursingsController < ApplicationController
 
     respond_to do |format|
       if @nursing.save
-        format.html { redirect_to @nursing, notice: 'Nursing was successfully created.' }
+        format.html {  render "_ajax_form", layout: false, notice: 'Nursing was successfully created.' }
         format.json { render :show, status: :created, location: @nursing }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class NursingsController < ApplicationController
   def update
     respond_to do |format|
       if @nursing.update(nursing_params)
-        format.html { redirect_to @nursing, notice: 'Nursing was successfully updated.' }
+        format.html {  render "_ajax_form", layout: false, notice: 'Nursing was successfully updated.' }
         format.json { render :show, status: :ok, location: @nursing }
       else
         format.html { render :edit }

@@ -1,4 +1,4 @@
-<!--
+
 <h1>Listing users</h1>
 
 <table class="table table-bordered">
@@ -16,9 +16,9 @@
     <td><%= user.name %></td>
     <td><%= image_tag user.avatar.url(:thumb) %></td>
     <% if user.user_type == User::VOLUNTEER %>
-      <td><%= link_to '志愿者，点击设为组长', "/users/settype/#{user.id}", :remote => true, :class => "remote-settype-#{user.id}" %></td>
+      <td><%= link_to '志愿者，点击设为组长', "/users/settype/#{user.id}", :remote => true, :class => "remote-settype-#{user.id} btn btn-info btn-sm" %></td>
     <% else %>
-      <td><%= link_to '组长，点击设为志愿者', "/users/settype/#{user.id}", :remote => true, :class => "remote-settype-#{user.id}" %></td>
+      <td><%= link_to '组长，点击设为志愿者', "/users/settype/#{user.id}", :remote => true, :class => "remote-settype-#{user.id} btn btn-info btn-sm" %></td>
     <% end %>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
@@ -27,23 +27,7 @@
 <% end %>
 </table>
 
-<br />
 
-<%= link_to 'New User', new_user_path %>
-
-<br />
-<img src="/images/pool.jpg" id="jcrop_target" alt="pool" />
-<form>
-      <div>
-      <label>X1 <input type="text" size="4" id="x1" name="x1" /></label>
-      <label>Y1 <input type="text" size="4" id="y1" name="y1" /></label>
-      <label>X2 <input type="text" size="4" id="x2" name="x2" /></label>
-      <label>Y2 <input type="text" size="4" id="y2" name="y2" /></label>
-      <label>W <input type="text" size="4" id="w" name="w" /></label>
-      <label>H <input type="text" size="4" id="h" name="h" /></label>
-      </div>
-</form>
--->
 
 
 

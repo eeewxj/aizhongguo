@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :nurse_id %><br>
-    <%= f.number_field :nurse_id %>
+    <%= f.select :nurse_id, get_attrs_as_options(@nursing_home.nurses, "name") %>
   </div>
   <div class="field">
     <%= f.label :resident_id %><br>
-    <%= f.number_field :resident_id %>
+    <%= f.select :resident_id, get_attrs_as_options(@nursing_home.residents, "name") %>
   </div>
   <div class="actions">
     <%= f.submit %>

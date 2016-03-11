@@ -14,6 +14,9 @@
       <p class="grey">
         <%= @user.self_description.to_s %>
       </p>
+      <p>
+        <%= link_to "修改个人信息", edit_user_path(@user), class: "btn btn-info" %>
+      </p>
     </div>
     <div>
       <hr class="division">

@@ -1,5 +1,60 @@
   <div class="col-xs-11 row reg_project background_grey">
-    <%= render file: "residents/index.html.erb" %>
+  <div id="project_show" class="">
+    <div class="col-xs-11 row reg_project">
+      <div class="text" style="margin-top:5px;">
+      <% zone = nil %>
+          <% @residents.each do |resident| %>
+            <% if zone != resident.zone %>
+            <% unless zone.nil? %>
+              </table>
+            <% end %>
+              <table class="table table-bordered switch">
+            <% end %>
+                <tr>
+                  <td class=""><%= resident.room.zone.name %></td>
+                  <td><%= resident.room.room_number %></td>
+                  <td><%= resident.name %></td>
+                  <td>
+                    <%= link_to '详情', resident %>
+                    <%= link_to '编辑', edit_resident_path(resident) %>
+                    <%= link_to '删除', resident, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+                    <% unless resident.nursings.empty? %>
+                      <% @nursing = resident.nursings.last %>
+                    <% else %>
+                      <% @nursing = resident.nursings.build %>
+                    <% end %>
+
+                    <%= form_for(@nursing, remote: true, html: {class: "inline_form"}) do |f| %>
+                      <% if @nursing.errors.any? %>
+                        <div id="error_explanation">
+                          <h2><%= pluralize(@nursing.errors.count, "error") %> prohibited this nursing from being saved:</h2>
+                          <ul>
+                          <% @nursing.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                          <% end %>
+                          </ul>
+                        </div>
+                      <% end %>
+
+                      <div class="field" style="display: none">
+                        <%= f.number_field :resident_id %>
+                      </div>
+
+                      <%= f.select :nurse_id, resident.nursing_home.nurses.collect{|n| [n.name, n.id]}, {include_blank: "分配护工"} %>
+                      <%= f.submit (resident.nurses.empty?)? "分配":"更新" %>
+                    <% end %>
+
+                  </td>
+                 </tr>
+            <% if zone != resident.zone %>
+            <% zone = resident.zone %>
+            <% end %>
+          <% end %>
+              </table>
+      </div>
+    </div>
+  </div>
     
 
     <div>

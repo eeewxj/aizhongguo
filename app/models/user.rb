@@ -95,7 +95,7 @@ class User < ActiveRecord::Base
 
 #设置为志愿者后清理管理关系
   def clean_management
-    Management.find_by_user_id(id).destroy
+    Management.where(user_id: id).destroy_all
   end
 
 #查询是否已经申请某个活动

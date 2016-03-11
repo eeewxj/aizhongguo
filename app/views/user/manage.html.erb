@@ -25,7 +25,13 @@
   
 
     <div class="operations">
-      <div class="">
+      <% if current_user.admin? %>
+        <div>
+          <%= link_to '设置/取消组长', "/users", class: "col-xs-12 btn btn-primary" %>
+        </div>
+      <% end %>
+
+      <div>
         <%= link_to '创建/修改活动信息', "/projects/manage", class: "col-xs-12 btn btn-primary" %>
       </div>
       <div>

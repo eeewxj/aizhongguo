@@ -4,7 +4,10 @@ before_action :validate_user_login, only: [:show, :edit, :update]
 before_action :validate_admin_login, only: [:settype, :destroy]
 before_action :validate_set_rights, only: [:show, :edit, :update]
   def index
-    @users = User.where('user_type>?',User::TYPE_ADMIN)
+    @users=[]
+    if current_user.admin?
+      @users = User.where('user_type > ?',User::TYPE_ADMIN)
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json #{ render json: @users }
@@ -113,9 +116,9 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
       flash.now[:success] = 'user user_type set successfully!'
       if @user.user_type == User::VOLUNTEER
         @user.clean_management
-        render :text => "<a href=\"/users/settype/#{@user.id}\" data-remote=\"true\" class = \"remote-settype-#{@user.id}\">志愿者，点击设为组长</a>"
+        render :text => "<a href=\"/users/settype/#{@user.id}\" data-remote=\"true\" class = \"remote-settype-#{@user.id} btn btn-info btn-sm\">志愿者，点击设为组长</a>"
       else
-        render :text => "<a href=\"/users/settype/#{@user.id}\" data-remote=\"true\" class = \"remote-settype-#{@user.id}\">组长，点击设为志愿者</a>"
+        render :text => "<a href=\"/users/settype/#{@user.id}\" data-remote=\"true\" class = \"remote-settype-#{@user.id} btn btn-info btn-sm\">组长，点击设为志愿者</a>"
       end
     else  
       flash.now[:error] = 'fail to change user_type'

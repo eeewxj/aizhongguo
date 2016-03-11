@@ -88,7 +88,7 @@ Rails.application.routes.draw do
   end
 
   resources :nursing_homes do
-    resources :managements, :projects, :zones, :rooms, :residents, :nurses
+    resources :managements, :projects, :zones, :rooms, :residents, :nurses, :nursings
   end
 
   resources :users do
