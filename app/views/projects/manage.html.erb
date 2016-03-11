@@ -1,5 +1,97 @@
-  <div class="col-xs-11 row reg_project background_grey">
 
+<% @projects.each do |project| %>
+  <div class="col-xs-11 row reg_project">
+    <div class="desc">
+      <p>
+        <%= l(project.start_at,format: :date) %>
+        <%= l(project.start_at,format: :week) %>
+      </p>
+      <p>
+        <%=  l(project.start_at,format: :am_pm)+"："+l(project.start_at,format: :day_time)+"-"+l(project.end_at,format: :day_time) %>
+      </p>
+      <p>
+        <%= project.name %>
+      </p>
+      <div class="toggle_btn">
+        <span class="rotate glyphicon glyphicon-backward" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="text" style="display:none">
+      <hr class="division">
+      <p><关怀活动报名></p>
+      <p>时间: <%= l(project.start_at,format: :date_week) %>
+      <p>
+        <%=  l(project.start_at,format: :am_pm)+"："+l(project.start_at,format: :day_time)+"-"+l(project.end_at,format: :day_time) %>
+      </p>
+
+      <p>地点: <%= project.nursing_home.name %></p>
+      <p>报名方式:点击下方按钮报名</p>
+      <p>报名截止时间: <%= l(project.reg_deadline ,format: :short)%></p>
+
+
+      <p>联络人: <%= project.contact.name+' '+project.contact.phone_number %> </p>
+      <p>
+        <%= project.description %>
+      </p>
+    </div>
+
+    <div class="operations">
+      <div>
+        <%= link_to '修改活动', edit_project_path(project), class: "col-xs-5 btn btn-primary" %>
+        <%= link_to '取消活动', project, method: :delete, data: { confirm: '确认取消?' }, class: "col-xs-5 col-xs-offset-2 btn btn-primary" %>
+      </div>
+    </div>
+
+    <div class="operations">
+      <% unless project.applicants.empty? %>
+        <h4>已报名的志愿者：</h4>
+      <% end %>
+      <table class="table table-bordered">
+      <% project.applicants.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.phone_number %></td>
+          <td>
+            <%= link_to '查看', user, class: "btn btn-primary btn-sm" %>
+            <% if user.has_be_assigned?(project) %>
+              <% @assignment = user.assignment_of(project) %>
+            <% else %>
+              <% @assignment = project.assignments.build %>
+              <% @assignment.user_id = user.id %>
+            <% end %>
+
+            <%= form_for(@assignment, remote: true, html: {class: "inline_form"}) do |f| %>
+              <% if @assignment.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
+                  <ul>
+                  <% @assignment.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+              <div class="field" style="display: none">
+                <%= f.number_field :user_id %>
+              </div>
+              <div class="field" style="display: none">
+                <%= f.number_field :project_id %>
+              </div>
+
+              <%= f.select :zone_id, project.nursing_home.zones.collect{|z| [z.name, z.id]}, {include_blank: "分配区域"} %>
+              <%= f.submit (user.has_be_assigned?(project)? "更新":"分配") %>
+            <% end %>
+
+          </td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+  <div class="col-xs-11 row reg_project background_grey">
     <div>
       <hr class="division">
     </div>

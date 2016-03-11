@@ -44,21 +44,21 @@
   </div>
 
     <%= f.fields_for :pickup_sites, @project.pickup_sites do |pickup_site| %>
-    <div class="field col-xs-12 input-group form-group">
-      接车地点:<br> <%= pickup_site.text_field :name %><br>
-      接车时间:<br> <%= pickup_site.datetime_select :meeting_time %><br>
+    <div class="field col-xs-12 input-group form-group background_grey">
+      集合地点:<br> <%= pickup_site.text_field :name %><br>
+      集合时间:<br> <%= pickup_site.datetime_select :meeting_time %><br>
       接站人:<br> <%= pickup_site.text_field :liaison %><br>
       联系电话:<br> <%= pickup_site.text_field :phone_number %><br>
-      <%= pickup_site.label :_destroy, '删除:' %>  
+      <%= pickup_site.label :_destroy, '勾选删除:' %>  
       <%= pickup_site.check_box :_destroy %>  
     </div>
     <% end %>
-
+  <!-- 此处需要添加自动补全 TO DO -->
   <div class="field multiupload col-xs-12 input-group form-group">
     <%= f.fields_for :pickup_sites, @project.pickup_sites.build do |pickup_site| %>
       <%= pickup_site.hidden_field :id %>
-      接车地点:<br> <%= pickup_site.text_field :name %><br>
-      接车时间:<br> <%= pickup_site.datetime_select :meeting_time %><br>
+      集合地点:<br> <%= pickup_site.text_field :name %><br>
+      集合时间:<br> <%= pickup_site.datetime_select :meeting_time %><br>
       接站人:<br> <%= pickup_site.text_field :liaison %><br>
       联系电话:<br> <%= pickup_site.text_field :phone_number %><br>
     <% end %>

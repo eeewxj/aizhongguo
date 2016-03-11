@@ -27,10 +27,10 @@ class RecordsController < ApplicationController
   # POST /records.json
   def create
     @record = Record.new(record_params.merge({user_id: current_user.id}))
-
     respond_to do |format|
       if @record.save
-        format.html { redirect_to @record, notice: 'Record was successfully created.' }
+        @records = current_user.records_of(@record.project)
+        format.html { render :index, notice: 'Record was successfully created.' }
         format.json { render :show, status: :created, location: @record }
       else
         format.html { render :new }

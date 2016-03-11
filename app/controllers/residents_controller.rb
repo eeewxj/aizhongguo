@@ -96,7 +96,7 @@ class ResidentsController < ApplicationController
 
 
   def manage
-
+    @residents = current_user.nursing_homes.map(&:residents).flatten
   end
 
   private

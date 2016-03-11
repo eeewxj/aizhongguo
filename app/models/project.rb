@@ -25,6 +25,7 @@ class Project < ActiveRecord::Base
 #  scope :published
 #  scope :upcoming
   scope :ongoing,    -> { where("start_at < ? AND end_at > ?", Time.now, Time.now) }
+  scope :unfinished, -> { where("end_at > ?", Time.now) }
   scope :finished,   -> { where("end_at < ?", Time.now) }
 
 #已经开始报名但尚未进行的活动

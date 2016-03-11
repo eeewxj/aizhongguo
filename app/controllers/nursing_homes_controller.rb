@@ -74,7 +74,7 @@ class NursingHomesController < ApplicationController
     end
 
     def validate_set_rights
-      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id.to_s==params[:id]) || current_user.admin?))
+      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_homes.nil? && current_user.nursing_homes.map(&:id).include?(params[:id].to_i)) || current_user.admin?))
           respond_to do |format|
             format.html do
               if request.xhr?
