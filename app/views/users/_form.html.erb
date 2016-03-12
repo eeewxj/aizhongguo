@@ -30,7 +30,7 @@
   <div class="field col-xs-9 input-group form-group">
       <%= f.date_select(:birthday, start_year: Date.today.year-100, end_year: Date.today.year-8, prompt: { year: '出生年份' }, default: :prompt).gsub('<select','<select class="form-control sp-sel"' ).html_safe%>
 
-      <%= f.select( :gender, "<option value=1>男</option><option value=0>女</option>".html_safe).sub('<select','<select class="form-control sp-sel"' ).html_safe %>
+      <%= f.select( :gender, Constants::GENDER).sub('<select','<select class="form-control sp-sel"' ).html_safe %>
   </div>
 
   <div class="field col-xs-9 input-group form-group">

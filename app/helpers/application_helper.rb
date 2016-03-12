@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
 
-##以下get_all_*类方法都可以替换为 get_attrs_as_options 或 get_constants_as_options
+##以下get_all_*类方法都可以替换为 get_attrs_as_options
   def get_all_applicants_as_options(project)
     options=''
     project.applicants.each do |applicant|
@@ -73,17 +73,12 @@ module ApplicationHelper
   end
 
 
-#接受hash类参数，转换为下拉选单选项
-  def get_constants_as_options(hash)
-    options = ''
-    hash.each do |key, value|
-      options = options + "<option value=#{value}>#{key}</option>"
-    end
-    options.html_safe
-  end
-
 #该方法不安全，需要注意，arr 是对象数组，attr_name是要调用的对象方法，
 #输出结果将数组中所有对象的对应方法返回结果组成选单选项
+#应该改成输出二维数组或者hash格式，不需要直接生成字符串
+#如：
+#arr.map{|a| [a.send(attr_name), a.id]}
+
   def get_attrs_as_options(arr, attr_name)
     options = ''
     arr.each do |a|

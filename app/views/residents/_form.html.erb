@@ -19,7 +19,7 @@
   <div class="field col-xs-12 input-group form-group">
     <%= f.label :birthday, "出生日期：" %><br>
     <%= f.date_select :birthday, start_year: Date.today.year-120, end_year: Date.today.year-45 %>
-    <%= f.select :gender, get_constants_as_options(Constants::GENDER) %>
+    <%= f.select :gender, Constants::GENDER %>
   </div>
 
   <div class="field col-xs-12 input-group form-group">
@@ -44,7 +44,7 @@
 
   <div class="field col-xs-12 input-group form-group">
     <%= f.label :education, "学历：" %><br>
-    <%= f.select :education, get_constants_as_options(Constants::EDUCATION) %>
+    <%= f.select :education, Constants::EDUCATION %>
   </div>
 
   <div class="field col-xs-12 input-group form-group">
@@ -78,7 +78,7 @@
 
   <div class="field col-xs-12 input-group form-group">
     <%= f.label :nursing_type, "护理分类：" %><br>
-    <%= f.select :nursing_type, get_constants_as_options(Constants::NURSINGTYPE) %>
+    <%= f.select :nursing_type, Constants::NURSINGTYPE %>
   </div>
 
   <div>

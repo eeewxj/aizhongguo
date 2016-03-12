@@ -25,8 +25,8 @@ $(document).on "page:change", ->
             min: 8
             max: 128
             message: '密码长度不对'
-#//用户注册页面
-  $('#new_user').bootstrapValidator
+#//用户注册页面 TO DO 改为#new_user，修改内容
+  $('#new_users').bootstrapValidator
     fields:
       'user[email]':
         validators:
@@ -52,23 +52,22 @@ $(document).on "page:change", ->
           identical:
             field: 'user[password]'
             message: '两次输入的密码不一致，请重新输入'
-      'user[name]':
+#//      'user[name]':
         validators:
           notEmpty:
             message: '请务必填写您的姓名'
-
-      'user[phone_number]':
+#//      'user[phone_number]':
         validators:
           notEmpty:
             message: '请填写手机或电话号码'
           regexp:
             regexp: /^[+,\d][\s,\d,-]{9,20}$/
             message: '请正确输入手机或电话号码！'
-      'user[birthday]':
+#//      'user[birthday]':
         validators:
           notEmpty:
             message: '请选择您的出生年份'
-      'user[avatar]':
+#//      'user[avatar]':
         validators:
           file: 
             extension: 'jpg,jpeg,png,bmp,gif,tif,tiff'
@@ -77,68 +76,6 @@ $(document).on "page:change", ->
             message: '上传图片格式须为jpg、jpeg、png、tiff、gif、bmp之一，且文件小于2MB'
 
 
-
-  $('#sign_up form#new_user').bootstrapValidator
-    fields:
-      'user[email]':
-        validators:
-          remote:
-            message: '该邮箱已被注册！'
-            url: 'users/check_available'
-      'user[password]':
-        validators:
-          stringLength:
-            min: 8
-            max: 128
-          identical:
-            field: 'user[password_confirmation]'
-            message: '两次输入的密码不一致，请重新输入'
-      'user[password_confirmation]':
-        validators:
-          notEmpty:
-            message: '请再次输入以确认密码'
-          identical:
-            field: 'user[password]'
-            message: '两次输入的密码不一致，请重新输入'
-
-  $("form#new_job,form[id^='edit_job_']").bootstrapValidator
-    fields:
-      'job[salary_high]':
-        validators:
-          integer:
-            message: ''
-          notEmpty:
-            message: '请填写最高月薪'
-          lessThan:
-            value: '1000'
-            message: '您填写的月薪太高了！'
-          greaterThan:
-            inclusive: true
-            value: 'job[salary_low]'
-            message: '不能低于最低月薪'
-
-  $("form[id^='edit_graduate_']").bootstrapValidator
-    fields:
-      'graduate[phone]':
-        validators:
-          notEmpty:
-            message: '请填写电话号码'
-          regexp:
-            regexp: /^[+,\d][\s,\d,-]{9,20}$/
-            message: '请正确输入电话号码！'
-
-
-  $("form[id^='edit_company_']").bootstrapValidator
-    fields:
-      'company[avatar]':
-        validators:
-          notEmpty:
-            message: '请上传公司logo'
-          file: 
-            extension: 'jpg,jpeg,png,bmp,gif,tif,tiff'
-            type: 'image/jpeg,image/png,image/tiff,image/gif,image/x-ms-bmp'
-            maxSize: 2048 * 2048
-            message: '上传图片格式须为jpg、jpeg、png、tiff、bmp之一，且小于2048x2048'
 
 
 

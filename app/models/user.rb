@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
             :uniqueness =>{:message => "亲，这个邮箱已经注册过了" },
             :format => { :with => /\A\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-z]+\Z/, :message => "您这是邮箱吗?" }
   validates :password, :presence => { :message => '亲，密码可不能为空' },
-            :length => { :in => 6..32, :too_short => '不要这么短哦', :too_long  => '不要这么长哦'},
+            :length => { :in => 8..128, :too_short => '不要这么短哦', :too_long  => '不要这么长哦'},
             :confirmation => {:message => '亲，要一样哦'}
   validates :phone_number, :presence => { :message => '电话一定要填的' }
 
