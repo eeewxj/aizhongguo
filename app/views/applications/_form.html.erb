@@ -14,7 +14,7 @@
 
   <div class="field">
     <%= f.label :project_id, "选择活动：" %><br />
-    <%= f.select :project_id, get_all_projects_as_options %>
+    <%= f.select :project_id, get_attrs_as_options(Project.published, "name") %>
   </div>
 
 <!--

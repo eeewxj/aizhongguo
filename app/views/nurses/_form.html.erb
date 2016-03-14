@@ -14,7 +14,7 @@
 
   <div class="field col-xs-12 input-group form-group">
     <%= f.label :nursing_home_id, "选择养老院：" %><br />
-    <%= f.select :nursing_home_id, get_all_nursing_homes_as_options %>
+    <%= f.select :nursing_home_id, get_attrs_as_options(current_user.nursing_homes, "name") %>
   </div>
   <div class="field col-xs-12 input-group form-group">
     <%= f.label :name, "护工姓名：" %><br>

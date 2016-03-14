@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   end
 #已经完成，但是尚处在修改期的活动,即完成后三天之内
   def modifiable_projects
-    #这段代码需要修改，效率低 *TO DO*
+    #这段代码需要修改，效率低，不能直接用group，rails默认选出id最大的作为代表，而此处需要id最小的。SQL中与rails中group选出的恰好相反。 *TO DO*
     Project.find_by_sql("select projects.* from projects left join (select * from records group by project_id) as records on projects.id = records.project_id where records.user_id = #{id} AND records.created_at > '#{Time.now-3.days}' ")
   end
 

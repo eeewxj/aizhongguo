@@ -1,5 +1,5 @@
-#for bootstrapValidator
-#客户端表单验证
+#客户端输入数据验证，配置不需要更改。使用0.5.4版本和jquery 1.9+
+#注意jquery选择器要form#id,精确选出要验证的form元素
 $(document).on "page:change", ->
   $.fn.bootstrapValidator.DEFAULT_OPTIONS = $.extend null, $.fn.bootstrapValidator.DEFAULT_OPTIONS,
     message: 'The field is not valid'
@@ -7,8 +7,10 @@ $(document).on "page:change", ->
       valid: 'glyphicon glyphicon-ok'
       invalid: 'glyphicon glyphicon-remove'
       validating: 'glyphicon glyphicon-refresh'
+
+
 #用户登录页面
-  $('#user_login').bootstrapValidator
+  $('form#user_login').bootstrapValidator
     fields:
       'email':
         validators:
@@ -24,8 +26,8 @@ $(document).on "page:change", ->
             min: 8
             max: 128
             message: '密码长度不对'
-#用户注册页面 TO DO 改为#new_user，修改内容
-  $('#new_user').bootstrapValidator
+#用户注册页面
+  $('form#new_user').bootstrapValidator
     fields:
       'user[email]':
         validators:

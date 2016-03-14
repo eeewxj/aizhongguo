@@ -66,7 +66,7 @@
                 <div class="modal-body">
                   <div class="field">
                     <%= f.hidden_field :project_id, value: @project.id%>
-                    <%= f.select :pickup_site_id, get_all_pickup_sites_as_options(@project) %>
+                    <%= f.select :pickup_site_id, get_attrs_as_options(@project.pickup_sites, "name") %>
                   </div>
                 </div>
                 <div class="modal-footer">

@@ -96,8 +96,7 @@
 
   <div class="field col-xs-12 input-group form-group">
     <%= f.label :room_id, "选择房间号：" %><br />
-    <%= f.select :room_id, get_attrs_as_options(current_user.nursing_homes.map(&:rooms).flatten, "room_number") %>
-
+    <%= f.grouped_collection_select :room_id, current_user.nursing_homes, :rooms, :name, :id, :room_number %>
 
   </div>
 

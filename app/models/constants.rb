@@ -10,6 +10,7 @@ module Constants
   NURSINGTYPE = { "不能自理" => 0, "半自理" => 1, "完全自理" => 2}
   MAX_NUMBER_OF_LIST_LINE = 12
 #定义用户类型
+  USER_TYPE = {"admin" => 0, "director" => 1, "volunteer" => 2}
   TYPE_ADMIN = 0 #超级管理员
   TYPE_DIRECTOR = 1 #组长，管理单个养老院
   TYPE_VOLUNTEER = 2 #志愿者，权限最低

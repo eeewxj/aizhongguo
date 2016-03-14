@@ -18,6 +18,6 @@
 //= require jquery.turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
-//= require bootstrapValidator.min
+//= require bootstrapValidator
 //= require input-validator
 //= require_tree .

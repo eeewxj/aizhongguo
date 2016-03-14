@@ -24,7 +24,7 @@
 -->
   <div class="field">
     <%= f.label :zone_id, "选择区域：" %><br />
-    <%= f.select :zone_id, get_all_zones_as_options(@assignment.project.nursing_home) %>
+    <%= f.select :zone_id, get_attrs_as_options(@assignment.project.nursing_home.zones, "name") %>
   </div>
 
   <div class="field" style="display: none">

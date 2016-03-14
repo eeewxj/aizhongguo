@@ -47,24 +47,6 @@ $(document).on "page:change", ->
       alert((xhr.responseText).substr(21)))
 
 
-#自动填写表单
-  if ($.cookie("rmbUser") == "true") 
-    $("#rmbUser").attr("checked", true)
-    $("#name").val($.cookie("name"))
-    $("#password").val($.cookie("password"))  
-#绑定保存用户信息函数
-  $("form").submit(-> 
-    if ($("#rmbUser").attr("checked") == "checked")
-      name = $("#name").val()
-      password = $("#password").val()
-      $.cookie("rmbUser", "true", { expires: 7 })  
-      $.cookie("name", name, { expires: 7 }) 
-      $.cookie("password", password, { expires: 7 })
-    else 
-      $.cookie("rmbUser", "false", { expires: -1 })
-      $.cookie("name", '', { expires: -1 })
-      $.cookie("password", '', { expires: -1 }))
-
 #图片裁剪测试
   showCoords = (c) ->
     $('#x1').val(c.x)

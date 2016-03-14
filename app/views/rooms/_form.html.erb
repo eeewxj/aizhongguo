@@ -15,7 +15,7 @@
 
   <div class="field col-xs-12 input-group form-group">
     <%= f.label :zone_id, "选择区域：" %><br />
-    <%= f.select :zone_id, get_attrs_as_options(@nursing_homes.map(&:zones).flatten, "name") %>
+    <%= f.grouped_collection_select :zone_id, current_user.nursing_homes, :zones, :name, :id, :name %>
   </div>
 
   <div class="field col-xs-12 input-group form-group">
