@@ -61,4 +61,5 @@ gem "pry-nav"
 gem "mina"
 gem "puma"
 gem 'mina-puma', :require => false
+gem 'mina-nginx', :require => false
 
