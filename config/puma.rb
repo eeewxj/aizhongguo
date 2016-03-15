@@ -1,6 +1,6 @@
 
 #rails的运行环境
-environment 'development'
+environment 'production'
 threads 2, 64
 workers 4
 
