@@ -28,15 +28,15 @@
         <td><%= link_to '删除', nursing_home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% nursing_home.managements.each do |management| %>
-        <tr style="font-size:12px;">
+        <tr style="color:blue;">
           <td>组长：</td>
           <td><%= management.user.name %></td>
           <td><%= link_to '取消', management, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr style="font-size:12px;">
-      <% end %>
-        <tr>
-          <td><%= link_to '添加组长', new_nursing_home_management_path(nursing_home) %></td>
         </tr>
+      <% end %>
+      <tr style="font-size:12px;">
+        <td><%= link_to '添加组长', new_nursing_home_management_path(nursing_home) %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
