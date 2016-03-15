@@ -13,7 +13,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 set :domain, 'root@123.56.159.135'
 set :deploy_to, '/root/aizhongguo'
 set :repository, 'https://github.com/wxjaqy/aizhongguo.git'
-set :branch, 'test_config'
+set :branch, 'master'
 set :term_mode, nil
 
 # For system-wide RVM install.
@@ -36,7 +36,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use[ruby-2.1@default]'
+  invoke :'rvm:use[ruby-2.1.2@default]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
