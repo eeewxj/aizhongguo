@@ -7,7 +7,7 @@ workers 4
 #项目名
 app_name = "aizhongguo"
 #项目路径
-application_path = "~/#{app_name}"
+application_path = "/root/#{app_name}"
 #这里一定要配置为项目路径下地current
 directory "#{application_path}/current"
 
