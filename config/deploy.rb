@@ -13,7 +13,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 set :domain, 'root@123.56.159.135'
 set :deploy_to, '/root/aizhongguo'
 set :repository, 'https://github.com/wxjaqy/aizhongguo.git'
-set :branch, 'master'
+set :branch, 'test_config'
 set :term_mode, nil
 
 # For system-wide RVM install.
