@@ -14,6 +14,7 @@ set :domain, 'root@123.56.159.135'
 set :deploy_to, '/root/aizhongguo'
 set :repository, 'https://github.com/wxjaqy/aizhongguo.git'
 set :branch, 'master'
+set :term_mode, nil
 
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
@@ -72,7 +73,7 @@ task :deploy => :environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
-    invoke :'git:pull'
+    invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
