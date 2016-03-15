@@ -12,6 +12,8 @@ require 'mina/nginx'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :domain, 'root@123.56.159.135'
+set :application, 'aizhongguo'
+set :server_name, '123.56.159.135'
 set :deploy_to, '/root/aizhongguo'
 set :repository, 'https://github.com/wxjaqy/aizhongguo.git'
 set :branch, 'master'
