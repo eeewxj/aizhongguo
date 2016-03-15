@@ -1,14 +1,15 @@
-<h1>Listing nursing_homes</h1>
+
+<h4>养老院列表</h4>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Contact</th>
-      <th>Phone number</th>
-      <th>Description</th>
-      <th>Website</th>
+      <th>名称</th>
+      <th>地址</th>
+      <th>养老院联系人</th>
+      <th>联系电话</th>
+      <th>介绍</th>
+      <th>网站</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,14 +23,22 @@
         <td><%= nursing_home.phone_number %></td>
         <td><%= nursing_home.description %></td>
         <td><%= nursing_home.website %></td>
-        <td><%= link_to 'Show', nursing_home %></td>
-        <td><%= link_to 'Edit', edit_nursing_home_path(nursing_home) %></td>
-        <td><%= link_to 'Destroy', nursing_home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '查看', nursing_home %></td>
+        <td><%= link_to '编辑', edit_nursing_home_path(nursing_home) %></td>
+        <td><%= link_to '删除', nursing_home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% nursing_home.managements.each do |management| %>
+        <tr style="font-size:12px;">
+          <td>组长：</td>
+          <td><%= management.user.name %></td>
+          <td><%= link_to '取消', management, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to '添加组长', new_nursing_home_management_path(nursing_home) %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Nursing home', new_nursing_home_path %>
+<%= link_to '创建养老院', new_nursing_home_path %>
