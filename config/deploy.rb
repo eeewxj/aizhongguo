@@ -108,6 +108,7 @@ task :deploy => :environment do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
       invoke :'puma:phased_restart'
+      invoke :'nginx:reload'
     end
   end
 end
