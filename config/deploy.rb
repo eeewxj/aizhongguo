@@ -3,7 +3,7 @@ require 'mina/rails'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/rvm'    # for rvm support. (http://rvm.io)
-
+require 'mina/puma'
 # Basic settings:
 #   domain       - The hostname to SSH to.
 #   deploy_to    - Path to deploy into.
@@ -21,7 +21,7 @@ set :rvm_path, '/usr/local/rvm/bin/rvm'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
+set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log', 'tmp/pids', 'tmp/sockets']
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -52,7 +52,7 @@ task :setup => :environment do
   queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
   queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml' and 'secrets.yml'."]
-  # puma.rb 配置puma必须得文件夹及文件
+  # puma.rb 
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/pids"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/pids"]
 
@@ -70,7 +70,7 @@ task :setup => :environment do
   queue! %[touch "#{deploy_to}/shared/log/puma.stdout.log"]
   queue  %[echo "-----> Be sure to edit 'shared/log/puma.stdout.log'."]
 
-  # log/puma.stdout.log
+  # log/puma.stderr.log
   queue! %[touch "#{deploy_to}/shared/log/puma.stderr.log"]
   queue  %[echo "-----> Be sure to edit 'shared/log/puma.stderr.log'."]
 
@@ -104,6 +104,7 @@ task :deploy => :environment do
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      invoke :'puma:phased_restart'
     end
   end
 end
