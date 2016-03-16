@@ -3,26 +3,11 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+服务器正常运行情况下push代码到github，在本地运行:
+$ mina deploy
+即可重启服务器
+如果服务器宕机，需要先执行：
+$ mina puma:start 
+开启puma，然后再执行：
+$ mina deploy
