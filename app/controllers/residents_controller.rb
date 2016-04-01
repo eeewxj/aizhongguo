@@ -111,7 +111,7 @@ class ResidentsController < ApplicationController
     end
 
     def validate_set_rights
-      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_home.nil? && current_user.nursing_home.id.to_s==(@resident.nil?? Room.find(params[:resident][:room_id]).zone.nursing_home_id.to_s : @room.nursing_home_id.to_s)) || current_user.admin?))
+      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_homes.empty? && current_user.nursing_homes.map(&:id).include?(@resident.nil?? Room.find(params[:resident][:room_id]).zone.nursing_home_id : @room.nursing_home_id)) || current_user.admin?))
           respond_to do |format|
             format.html do
               if request.xhr?

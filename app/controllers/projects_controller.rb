@@ -97,7 +97,7 @@ class ProjectsController < ApplicationController
     end
 
     def validate_set_rights
-      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_homes.nil? && current_user.nursing_homes.map(&:id).include?(@project.nil?? params[:project][:nursing_home_id].to_i : @project.nursing_home_id) ) || current_user.admin?))
+      unless (!current_user.nil? && ((current_user.director? && !current_user.nursing_homes.empty? && current_user.nursing_homes.map(&:id).include?(@project.nil?? params[:project][:nursing_home_id].to_i : @project.nursing_home_id) ) || current_user.admin?))
           respond_to do |format|
             format.html do
               if request.xhr?
