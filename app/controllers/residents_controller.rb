@@ -107,7 +107,9 @@ class ResidentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resident_params
-      params.require(:resident).permit(:name, :gender, :birthday, :condition, :phone_number, :contact, :contact_phone_number, :room_id, :avatar, :crop_x, :crop_y, :crop_w, :crop_h)
+      params.require(:resident).permit(:name, :gender, :birthday, :condition, :phone_number, :contact, :contact_phone_number, :room_id, :avatar,
+ :crop_x, :crop_y, :crop_w, :crop_h, :religion, :nursing_type, :mental_state, :interests, :tastes, :ethnic,
+ :education, :previous_job, :characters, :remark, :hometown, :home)
     end
 
     def validate_set_rights
