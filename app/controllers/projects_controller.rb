@@ -83,6 +83,7 @@ class ProjectsController < ApplicationController
 
   def manage
     @projects = Project.unfinished.where(:nursing_home_id => current_user.nursing_homes)
+    @finished_projects = Project.finished.where(:nursing_home_id => current_user.nursing_homes)
   end
 
   private

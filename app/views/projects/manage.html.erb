@@ -1,4 +1,31 @@
 
+
+<% @finished_projects.each do |project| %>
+  <div class="col-xs-11 row reg_project">
+    <div class="desc">
+      <p>
+        <%= l(project.start_at,format: :date) %>
+        <%= l(project.start_at,format: :week) %>
+      </p>
+      <p>
+        <%=  l(project.start_at,format: :am_pm)+"："+l(project.start_at,format: :day_time)+"-"+l(project.end_at,format: :day_time) %>
+      </p>
+      <p>
+        <%= project.name %>
+      </p>
+    </div>
+
+    <div class="operations">
+      <div>
+        <%= link_to '处理签到', project_applications_path(project), class: "col-xs-12 btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+
+
 <% @projects.each do |project| %>
   <div class="col-xs-11 row reg_project">
     <div class="desc">
@@ -37,9 +64,15 @@
 
     <div class="operations">
       <div>
-        <%= link_to '修改活动', edit_project_path(project), class: "col-xs-5 btn btn-primary" %>
-        <%= link_to '取消活动', project, method: :delete, data: { confirm: '确认取消?' }, class: "col-xs-5 col-xs-offset-2 btn btn-primary" %>
+        <% if project.ongoing? %>
+          <%= link_to '处理签到', project_applications_path(project), class: "col-xs-12 btn btn-primary" %>
+        <% else %>
+          <%= link_to '修改活动', edit_project_path(project), class: "col-xs-5 btn btn-primary" %>
+          <%= link_to '取消活动', project, method: :delete, data: { confirm: '确认取消?' }, class: "col-xs-5 col-xs-offset-2 btn btn-primary" %>
+        <% end %>
       </div>
+
+
     </div>
 
     <div class="operations">

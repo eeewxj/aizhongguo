@@ -49,6 +49,10 @@ class Project < ActiveRecord::Base
     start_at.beginning_of_day.ago(7200)
   end
 
+  def ongoing?
+    start_at < Time.now && end_at > Time.now
+  end
+
 
 
 end

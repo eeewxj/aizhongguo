@@ -32,6 +32,7 @@ $(document).on "page:change", ->
         arr[arr.length-1] = arr[arr.length-1].substring(0,arr[arr.length-1].indexOf('?'))
       $("a.remote-"+arr[arr.length-2]+"-"+arr[arr.length-1]).replaceWith(xhr.responseText)
       $("a.remote_all-"+arr[arr.length-2]).parent().replaceWith(xhr.responseText)
+      $("form[data-remote='true']").replaceWith(xhr.responseText)
       #下面if语句专门用来处理为志愿者分配区域的ajax返回结果
       if xhr.responseText.indexOf("assignment_user_id") != -1
         re = new RegExp(/name="assignment\[user_id\]" type="number" value="(\d+)"/)

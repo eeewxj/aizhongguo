@@ -23,9 +23,9 @@
         <% end %>
 
         <% if application.attended == false %>
-          <td><%= link_to '未签到，点击完成签到', "/applications/setattended/#{application.id}", :remote => true, :class => "remote-setattended" %></td>
+          <td><%= link_to '未签到，点击完成签到', "/applications/setattended/#{application.id}", :remote => true, :class => "remote-setattended-#{application.id}" %></td>
         <% else %>
-          <td><%= link_to '已签到，点击取消签到', "/applications/setattended/#{application.id}", :remote => true, :class => "remote-setattended" %></td>
+          <td><%= link_to '已签到，点击取消签到', "/applications/setattended/#{application.id}", :remote => true, :class => "remote-setattended-#{application.id}" %></td>
         <% end %>
 
         <td><%= link_to 'Show', application %></td>
