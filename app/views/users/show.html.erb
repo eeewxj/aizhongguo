@@ -29,7 +29,7 @@
           关怀老人<%= @user.records.count %>人次,
       </p>
       <p>
-          参加关怀活动累计<%= number_with_precision((@user.attended_projects.sum("end_at")-@user.attended_projects.sum("start_at"))/7200, precision: 1) %>小时
+          参加关怀活动累计<%= number_with_precision(@user.attended_projects.map{|p| (p.end_at-p.start_at)/3600}.sum, precision: 1) %>小时
       </p>
       <p>
           感恩您的爱心行动!
