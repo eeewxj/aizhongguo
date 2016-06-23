@@ -14,7 +14,7 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
     end
   end
 
-  def check_available
+  def check_availble
     #binding.pry
     render json: {valid: User.check_email_available(params[:user][:email])}
   end
@@ -24,7 +24,7 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
     @user = User.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
-      format.json 
+      format.json
     end
   end
 
@@ -33,7 +33,7 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
     @user = User.new
     respond_to do |format|
       format.html {render layout: "user"}
-      format.json 
+      format.json
     end
   end
 
@@ -72,7 +72,7 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
 
   def update
     @user = User.find(params[:id])
-    
+
     if @user.update(update_user_params)
       flash[:notice] = 'User was successfully updated.'
       if (!@user.crop_x.blank? && !@user.crop_y.blank? && !@user.crop_w.blank? && !@user.crop_h.blank?)
@@ -120,7 +120,7 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
       else
         render :text => "<a href=\"/users/settype/#{@user.id}\" data-remote=\"true\" class = \"remote-settype-#{@user.id} btn btn-info btn-sm\">组长，点击设为志愿者</a>"
       end
-    else  
+    else
       flash.now[:error] = 'fail to change user_type'
       render :text => "error_message_return:#{flash.now[:error]}"
     end
@@ -135,14 +135,14 @@ before_action :validate_set_rights, only: [:show, :edit, :update]
   private
     def create_user_params
       params.require(:user).permit(
-        :email, :password, :password_confirmation, :name, :birthday, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address, 
+        :email, :password, :password_confirmation, :name, :birthday, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address,
         :work_unit, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
       )
     end
 
     def update_user_params
       params.require(:user).permit(
-        :email, :password, :password_confirmation, :name, :birthday, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address, 
+        :email, :password, :password_confirmation, :name, :birthday, :phone_number, :user_type, :gender, :age, :self_description, :avatar, :address,
         :work_unit, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
       )
     end

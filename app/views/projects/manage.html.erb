@@ -93,7 +93,7 @@
               <% @assignment.user_id = user.id %>
             <% end %>
 
-            <%= form_for(@assignment, remote: true, html: {class: "inline_form"}) do |f| %>
+            <%= form_for(@assignment, html: {class: "inline_form"}) do |f| %>
               <% if @assignment.errors.any? %>
                 <div id="error_explanation">
                   <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>

@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def redirect_back_or_default(default = root_path, options = {})
-    #binding.pry
     redirect_to (request.referer.present? ? :back : default), options
   end
 
